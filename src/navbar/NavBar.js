@@ -28,9 +28,9 @@ export default function NavBar(props) {
                     <li>
                         <Link to="/trips">Trips</Link>
                     </li>
-                    <li>
+                    {/* <li>
                         <Link to="/tasks">Tasks</Link>
-                    </li>
+                    </li> */}
                     <li>
                         <Link to="/profile">Profile</Link>
                     </li>

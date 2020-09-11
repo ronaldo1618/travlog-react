@@ -3,7 +3,7 @@ import React from 'react'
 export default function TripCard(props) {
     return (
         <div>
-            <p>{props.trip.id}</p>
+            <a href={`/trips/${props.tripId}`}>{props.trip.id}</a>
             <p>{props.trip.creator_id}</p>
             <p>{props.trip.title}</p>
             <p>{props.trip.description}</p>
