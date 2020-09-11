@@ -82,6 +82,5 @@ export default function TripForm(props) {
                 </fieldset>
             </form>
         </main>
-
     )
 }

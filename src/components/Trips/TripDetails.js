@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import apiManager from '../../modules/apiManager';
 import ItineraryList from './Itinerary/ItineraryList';
+import TransportationForm from './Itinerary/TransportationForm';
 
 export default function TripDetails(props) {
 
@@ -8,7 +9,7 @@ export default function TripDetails(props) {
     const [ itinerary, setItinerary ] = useState([{all_activities: []}])
 
     const getTrip = () => {
-        apiManager.getTrip(props.tripId).then(setTrip)
+        apiManager.getTrip(props.tripId).then(setTrip).then(getItinerary)
     }
     
     const getItinerary = () => {
@@ -22,13 +23,18 @@ export default function TripDetails(props) {
     }
 
     useEffect(getTrip, [])
-    useEffect(getItinerary, [])
-
-    console.log(itinerary)
+    // useEffect(getItinerary, [])
 
     return (
         <>
-            {itinerary.map((itinerary_day, index) => <ItineraryList key={index} itinerary_day={itinerary_day} {...props}/>)}
+            <div className="budget-container">
+                <input type="button" value="Add Transportation" onClick={() => {props.history.push(`/transportations/form/${props.tripId}`)}}/>
+                <input type="button" value="Add Food" onClick={() => {props.history.push("/foods/form")}}/>
+                <input type="button" value="Add Activity" onClick={() => {props.history.push("/activitys/form")}}/>
+                <input type="button" value="Add Lodging" onClick={() => {props.history.push("/lodgings/form")}}/>
+                <input type="button" value="Add New Day" onClick={() => {props.history.push(`/day_itinerarys/form/${props.tripId}`)}}/>
+            </div>
+            {itinerary.map((itinerary_day, index) => <ItineraryList key={index} itinerary_day={itinerary_day} getTrip={getTrip} {...props}/>)}
             {/* {itinerary.map(day_itinerary => { */}
                 {/* <div>{day_itinerary.title}</div> */}
                 {/* let itinerary_arr = [...day_itinerary.activities,...day_itinerary.food,...day_itinerary.lodging,...day_itinerary.transportation]
