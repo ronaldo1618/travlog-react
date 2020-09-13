@@ -1,0 +1,10 @@
+{
+    "sqltools.connections": [
+        {
+            "database": "db.sqlite3",
+            "driver": "SQLite",
+            "name": "travlogapi",
+            "previewLimit": 50
+        }
+    ]
+}
