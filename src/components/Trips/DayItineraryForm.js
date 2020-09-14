@@ -1,4 +1,5 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
+// import { useState } from 'react';
 import apiManager from '../../modules/apiManager';
 
 export default function DayItineraryForm(props) {
@@ -12,8 +13,7 @@ export default function DayItineraryForm(props) {
             description: description.current.value,
             trip_id: props.tripId
         }
-        apiManager.postDayItinerary(day_itinerary)
-        props.history.push(`/trips/${props.tripId}`)
+        apiManager.postDayItinerary(day_itinerary).then(() => props.history.push(`/trips/${props.tripId}`))
     }
 
     return (

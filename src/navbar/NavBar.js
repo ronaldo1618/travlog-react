@@ -43,12 +43,20 @@ export default function NavBar(props) {
                 : null}
         {!isAuthenticated() ?
             <>
-                <li >
-                    <Link className="nav-link" to="/login">Login</Link>
-                </li>
-                <li >
-                    <Link className="nav-link" to="/register">Register</Link>
-                </li>
+                {props.location.pathname === '/Login' || props.location.pathname === '/login' ? 
+                    <></>
+                    :
+                    <li >
+                        <Link className="nav-link" to="/login">Login</Link>
+                    </li>
+                }
+                {props.location.pathname === '/register' ?
+                    <></>
+                    :
+                    <li >
+                        <Link className="nav-link" to="/register">Register</Link>
+                    </li>
+                }
             </>
             : null}
         </ul>

@@ -4,29 +4,31 @@ import apiManager from '../../modules/apiManager';
 
 export default function TripList(props) {
 
-    const [ traveler, setTraveler ] = useState([])
+    const [user, setUser] = useState(Number)
     const [ trips, setTrips ] = useState([])
-
-    const getTraveler = () => {
-        apiManager.getTraveler().then(traveler => setTraveler(traveler[0]))
-    }
 
     const getTrips = () => {
         apiManager.getTrips().then(setTrips)
     }
-    
-    useEffect(getTraveler, [])
-    useEffect(getTrips, [])
 
-    console.log('hello', trips)
+    const deleteObj = (type, id) => {
+        apiManager.deleteObj(type, id).then(getTrips)
+    }
+
+    const getUser = () => {
+        apiManager.getTraveler().then(user => setUser(user[0].id))
+    }
+
+    useEffect(getUser, [])
+    useEffect(getTrips, [])
 
     return (
         <>
-            <div className="budget-container">
-                <input type="button" value="New Entry" onClick={() => {props.history.push("./trips/form")}}/>
+            <div>
+                <input type="button" value="New Entry" onClick={() => {props.history.push("/trips/form")}}/>
             </div>
             <div>
-                {trips.map(trip => <TripCard key={trip.id} tripId={trip.id} trip={trip} {...props}/>)}
+                {trips.map(trip => <TripCard key={trip.id} userId={user} tripId={trip.id} trip={trip} deleteObj={deleteObj} {...props}/>)}
             </div>
         </>
     )
