@@ -59,15 +59,26 @@ export default {
             body: JSON.stringify(day_itinerary)
         })
     },
-    postTransportation(transportation) {
-        return fetch(`${remoteURL}/transportations`, {
+    postObj(type, obj) {
+        return fetch(`${remoteURL}/${type}`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json',
                 'Accept': 'application/json',
                 'Authorization': `Token ${localStorage.getItem('travlogapi_token')}`
             },
-            body: JSON.stringify(transportation)
+            body: JSON.stringify(obj)
+        })
+    },
+    putObj(type, obj) {
+        return fetch(`${remoteURL}/${type}/${obj.id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Token ${localStorage.getItem('travlogapi_token')}`
+            },
+            body: JSON.stringify(obj)
         })
     },
     getItinerary(tripId) {
@@ -88,8 +99,8 @@ export default {
             }
         }).then(res => res.json())
     },
-    deleteTransportation(id) {
-        return fetch(`${remoteURL}/transportations/${id}`, {
+    deleteObj(type, id) {
+        return fetch(`${remoteURL}/${type}/${id}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Token ${localStorage.getItem('travlogapi_token')}`
