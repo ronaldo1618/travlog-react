@@ -1,4 +1,7 @@
+import key from '../apiKeys';
 const remoteURL = 'http://localhost:8000';
+const googlePlacesKey = key.googlePlacesKey
+const proxyUrl = 'https://cors-anywhere.herokuapp.com/'
 
 export default {
     getTripsForHomepage() {
@@ -68,7 +71,7 @@ export default {
                 'Authorization': `Token ${localStorage.getItem('travlogapi_token')}`
             },
             body: JSON.stringify(obj)
-        })
+        }).then(res => res.json())
     },
     putObj(type, obj) {
         return fetch(`${remoteURL}/${type}/${obj.id}`, {
@@ -115,5 +118,18 @@ export default {
                 'Authorization': `Token ${localStorage.getItem('travlogapi_token')}`
             }
         }).then(res => res.json())
+    },
+    getUserTripForHomePage() {
+        return fetch(`${remoteURL}/trips?user_homepage`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Authorization': `Token ${localStorage.getItem('travlogapi_token')}`
+            }
+        }).then(res => res.json())
+    },
+    search(city, value) {
+        const url = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${value}+in+${city}&key=${googlePlacesKey}`
+        return fetch(proxyUrl + url).then(res => res.json())
     }
 }

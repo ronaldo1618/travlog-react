@@ -8,6 +8,8 @@ export default function ActivityForm(props) {
     const cost = useRef()
     const address = useRef()
     const datetime = useRef()
+    // const searchValue = useRef()
+    // const city = useRef()
     const [ dayItinerary, setDayItinerary ] = useState({})
     const [ itinerary, setItinerary ] = useState([])
     const [ oldActivity, setActivity ] = useState({day_itinerary: {}})
@@ -51,6 +53,12 @@ export default function ActivityForm(props) {
         setDayItinerary(itinerary_day[0])
     }
 
+    // const search = () => {
+    //     apiManager.search(city.current.value, searchValue.current.value).then(result => {
+    //         console.log(result)
+    //     })
+    // }
+
     useEffect(getItinerary, [])
     useEffect(() => {
         if(props.activityId){
@@ -63,6 +71,15 @@ export default function ActivityForm(props) {
 
     return (
          <main>
+            {/* <div>
+                <input ref={searchValue} type="text"
+                    name="search"
+                    placeholder="search"/>
+                <input ref={city} type="text"
+                    name="search"
+                    placeholder="search"/>
+                <button type="button" onClick={search}/>
+            </div> */}
             <form>
                 <h1>Activity Form</h1>
                 <fieldset>

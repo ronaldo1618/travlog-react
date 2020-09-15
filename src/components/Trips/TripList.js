@@ -8,7 +8,10 @@ export default function TripList(props) {
     const [ trips, setTrips ] = useState([])
 
     const getTrips = () => {
-        apiManager.getTrips().then(setTrips)
+        apiManager.getTrips().then(trips => {
+            trips.sort((a,b) => b.id - a.id)
+            setTrips(trips)
+        })
     }
 
     const deleteObj = (type, id) => {
@@ -25,6 +28,7 @@ export default function TripList(props) {
     return (
         <>
             <div>
+                <h1>Trips</h1>
                 <input type="button" value="New Entry" onClick={() => {props.history.push("/trips/form")}}/>
             </div>
             <div>

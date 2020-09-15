@@ -26,6 +26,7 @@ export default function FoodForm(props) {
     }
 
     const editFood = (oldFood) => {
+        console.log(oldFood)
         if (!dayItinerary.id) dayItinerary.id = oldFood.day_itinerary_id
         const food = {
             id: props.foodId,

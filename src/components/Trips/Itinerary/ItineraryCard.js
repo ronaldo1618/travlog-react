@@ -94,6 +94,7 @@ export default function ItineraryCard(props) {
                 </div>
             : null
             }
+            <hr/>
         </>
     )
 }

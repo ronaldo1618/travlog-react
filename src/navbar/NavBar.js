@@ -26,6 +26,9 @@ export default function NavBar(props) {
             isAuthenticated() ?
                 <>
                     <li>
+                        <Link to="/">Home</Link>
+                    </li>
+                    <li>
                         <Link to="/trips">Trips</Link>
                     </li>
                     {/* <li>

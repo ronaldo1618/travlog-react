@@ -1,5 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import apiManager from '../../modules/apiManager';
+import { Modal, ModalHeader } from 'reactstrap';
+
 
 export default function TripForm(props) {
 
@@ -9,9 +11,11 @@ export default function TripForm(props) {
     const start_date = useRef()
     const end_date = useRef()
     const [is_public, setIsPublic] = useState(false)
-    const [user, setUser] = useState(Number)
+    const [homepage_trip, setHomePageTrip] = useState(false)
     const [trip, setTrip] = useState({})
+    const [newTrip, setNewTrip] = useState({})
     const handleClick = () => setIsPublic(!is_public)
+    const handleHomePageTrip = () => setHomePageTrip(!homepage_trip)
 
     const onSubmitHandler = e => {
         const trip = {
@@ -20,10 +24,13 @@ export default function TripForm(props) {
             trip_length: trip_length.current.value,
             start_date: start_date.current.value,
             end_date: end_date.current.value,
-            is_public: is_public
+            is_public: is_public,
+            homepage_trip: homepage_trip
         }
-        apiManager.postObj('trips', trip)
-        props.history.push('/trips')
+        apiManager.postObj('trips', trip).then(trip => {
+            setNewTrip(trip)
+            toggle()
+        })
     }
 
     const editTrip = () => {
@@ -34,28 +41,74 @@ export default function TripForm(props) {
             trip_length: trip_length.current.value,
             start_date: start_date.current.value,
             end_date: end_date.current.value,
-            is_public: is_public
+            is_public: is_public,
+            homepage_trip: homepage_trip
         }
         apiManager.putObj('trips', trip)
         props.history.push(`/trips/${props.tripId}`)
     }
 
-    const getUser = () => {
-        apiManager.getTraveler().then(user => setUser(user[0].id))
-    }
-
-    useEffect(getUser, [])
     useEffect(() => {
         if(props.tripId){
             apiManager.getById('trips', props.tripId).then(obj => {
-                setTrip(obj)
+                apiManager.getTraveler().then(user => {
+                    if(user[0].id !== obj.creator_id) return props.history.push('/')
+                    setTrip(obj)
+                })
             })
         }
-    },[props.tripId])
+    },[props.tripId, props.history])
+
+    const [modal, setModal] = useState(false);
+
+    const toggle = () => {
+        setModal(!modal);
+    }
+
+    async function createForEachDay() {
+        for (let i = 0; i < newTrip.trip_length; i++) {
+            const day_itinerary = {
+                name: `Day ${i + 1}`,
+                description: `Day ${i + 1} of ${newTrip.title}`,
+                trip_id: newTrip.id
+            }   
+            try {
+                await apiManager.postDayItinerary(day_itinerary)
+            } catch (error) {
+                console.error(error.message)
+            }
+        }
+        toggle()
+        props.history.push(`/trips/${newTrip.id}`)
+    }
+
+    async function createForEachActivity() {
+        const day_itinerary_arr = [
+            {title: 'Food', description: `Food to try while on trip`}, 
+            {title: 'Lodging', description: `Places to stay while on trip`}, 
+            {title: 'Activity', description: `Things to do while on trip`}, 
+            {title: 'Transportation', description: `How to get around while on trip`}
+        ]
+        for (let i = 0; i < day_itinerary_arr.length; i++) {
+            const day_itinerary = {
+                name: day_itinerary_arr[i].title,
+                description: day_itinerary_arr[i].description,
+                trip_id: newTrip.id
+            }   
+            try {
+                await apiManager.postDayItinerary(day_itinerary)
+            } catch (error) {
+                console.error(error.message)
+            }
+        }
+        toggle()
+        props.history.push(`/trips/${newTrip.id}`)
+    }
+
+
 
     return (
         <>
-        {user === trip.creator_id ?
             <main>
                 <form>
                     <h1>Trip Form</h1>
@@ -113,22 +166,39 @@ export default function TripForm(props) {
                         />
                     </fieldset>
                     <fieldset>
+                        <label htmlFor="homepage_trip"> Display Trip On Homepage? </label>
+                        <input onChange={handleHomePageTrip} type="checkbox"
+                            name="homepage_trip"
+                            className="form-control"
+                            placeholder="homepage_trip"
+                            defaultValue={trip.homepage_trip}
+                        />
+                    </fieldset>
+                    <fieldset>
                         {
                             props.tripId ?
                             <button type="button" onClick={editTrip}>
                                 Update Trip
                             </button>
                             :
-                            <button type="button" onClick={onSubmitHandler}>
-                                Create Trip
-                            </button>
+                            <>
+                                <button type="button" onClick={onSubmitHandler}>
+                                    Create Trip
+                                </button>
+                            </>
                         }
                     </fieldset>
                 </form>
+                <Modal isOpen={modal} toggle={toggle}>
+                    <ModalHeader toggle={toggle}>Would you like to plan out each day for your trip?</ModalHeader>
+                    <form>
+                        <div>
+                            <button type="button" onClick={createForEachDay}>Yes</button>
+                            <button type="button" onClick={createForEachActivity}>No</button>
+                        </div>
+                    </form>
+                </Modal>
             </main>
-            :
-            null
-        }
         </>
     )
 }
