@@ -21,14 +21,30 @@ export default function ApplicationViews(props) {
     const isAuthenticated = () =>
         false || localStorage.getItem('travlogapi_token') !== null
 
-    const isCreator = (tripId) => {
-        apiManager.getTraveler().then(user => {
-            apiManager.getTrip(parseInt(tripId)).then(trip => {
-                if(user[0].id === trip.creator_id) return true;
-                else return false;
+    async function isCreator(tripId) {
+        try {
+            apiManager.getTraveler().then(user => {
+                apiManager.getTrip(parseInt(tripId)).then(trip => {
+                    if(user[0].id === trip.creator_id) return true;
+                    return false;
+                })
             })
-        })
+        } catch (e) {
+            console.error(e.message);
+        }
     }
+
+    // const isCreator = (tripId) => {
+    //     apiManager.getTraveler().then(user => {
+    //         apiManager.getTrip(parseInt(tripId)).then(trip => {
+    //             console.log('user', user)
+    //             console.log('trip', trip)
+    //             console.log('trip_id', tripId)
+    //             if(user[0].id === trip.creator_id) return true;
+    //             else return false;
+    //         })
+    //     })
+    // }
 
     const setCurrentUser = props.setCurrentUser
 
@@ -103,6 +119,15 @@ export default function ApplicationViews(props) {
             <Route exact path='/day_itinerarys/form/:tripId' render={props => {
                 if(isAuthenticated()) {
                     if(isCreator(props.match.params.tripId)) return <DayItineraryForm tripId={parseInt(props.match.params.tripId)} {...props} />
+                    else return <Redirect to="/"/>
+                } else {
+                    return <Redirect to="Login"/>
+                }
+            }}
+            />
+            <Route exact path='/day_itinerarys/form/:tripId/:day_itinerary_id(\d+)' render={props => {
+                if(isAuthenticated()) {
+                    if(isCreator(props.match.params.tripId)) return <DayItineraryForm tripId={parseInt(props.match.params.tripId)} day_itinerary_id={parseInt(props.match.params.day_itinerary_id)} {...props} />
                     else return <Redirect to="/"/>
                 } else {
                     return <Redirect to="Login"/>

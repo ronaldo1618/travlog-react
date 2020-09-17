@@ -16,6 +16,9 @@ export default function LodgingForm(props) {
     const [ oldLodging, setLodging ] = useState({day_itinerary: {}})
 
     const onSubmitHandler = e => {
+        if (name.current.value === '') return alert('Please fill out the name field!')
+        if (datetime.current.value === '') datetime.current.value = new Date().toISOString().slice(0, 16)
+        if (check_in.current.value === '') check_in.current.value = new Date().toISOString().slice(0, 16)
         const lodging = {
             name: name.current.value,
             notes: notes.current.value,
@@ -32,6 +35,9 @@ export default function LodgingForm(props) {
     }
 
     const editLodging = (oldLodging) => {
+        if (name.current.value === '') return alert('Please fill out the name field!')
+        if (datetime.current.value === '') datetime.current.value = new Date().toISOString().slice(0, 16)
+        if (check_in.current.value === '') check_in.current.value = new Date().toISOString().slice(0, 16)
         if (!dayItinerary.id) dayItinerary.id = oldLodging.day_itinerary_id
         const lodging = {
             id: props.lodgingId,
@@ -50,7 +56,21 @@ export default function LodgingForm(props) {
     }
 
     const getItinerary = () => {
-        apiManager.getItinerary(props.tripId).then(setItinerary)
+        apiManager.getItinerary(props.tripId).then(itinerary => {
+            if (itinerary.length === 0) {
+                const day_itinerary = {
+                    name: 'Day 1',
+                    description: 'Dont forget to add a description!',
+                    trip_id: props.tripId
+                }
+                apiManager.postObj('day_itinerarys', day_itinerary).then(itinerary => {
+                    setItinerary([itinerary])
+                })
+            }
+            else {
+                setItinerary(itinerary)
+            }
+        })
     }
 
     const handleChange = e => {
@@ -99,7 +119,7 @@ export default function LodgingForm(props) {
                         name="cost"
                         className="form-control"
                         placeholder="cost"
-                        defaultValue={oldLodging.cost || ''}
+                        defaultValue={oldLodging.cost || 0}
                         required />
                 </fieldset>
                 <fieldset>
@@ -131,7 +151,7 @@ export default function LodgingForm(props) {
                     <input ref={check_in} type="datetime-local"
                         name="check_in"
                         className="form-control"
-                        placeholder="check_in"
+                        placeholder="check-in"
                         defaultValue={oldLodging.check_in || ""}
                     />
                 </fieldset>
@@ -140,7 +160,7 @@ export default function LodgingForm(props) {
                     <input ref={datetime} type="datetime-local"
                         name="datetime"
                         className="form-control"
-                        placeholder="datetime"
+                        placeholder="check-out"
                         defaultValue={oldLodging.datetime || ""}
                     />
                 </fieldset>

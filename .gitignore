@@ -26,3 +26,4 @@ package.json
 package-lock.json
 travlogapi.session.sql
 db.sqlite3
+apiKeys.js

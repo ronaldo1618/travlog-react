@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import apiManager from '../../../modules/apiManager';
+import { Form } from 'reactstrap';
 
 export default function TransportationForm(props) {
 
@@ -15,6 +16,11 @@ export default function TransportationForm(props) {
     const [ oldTransportation, setTransportation ] = useState({day_itinerary: {}})
 
     const onSubmitHandler = e => {
+        console.log(name.current.value)
+        if (name.current.value === '') return alert('Please fill out the name field!')
+        if (!dayItinerary.id) return alert('Please select a day itinerary!')
+        if (dep_datetime.current.value === '') dep_datetime.current.value = new Date().toISOString().slice(0, 16)
+        if (datetime.current.value === '') datetime.current.value = new Date().toISOString().slice(0, 16)
         const transportation = {
             name: name.current.value,
             notes: notes.current.value,
@@ -31,6 +37,10 @@ export default function TransportationForm(props) {
 
     const editTransportation = (oldTransportation) => {
         if (!dayItinerary.id) dayItinerary.id = oldTransportation.day_itinerary_id
+        if (name.current.value === '') return alert('Please fill out the name field!')
+        if (!dayItinerary.id) return alert('Please select a day itinerary!')
+        if (dep_datetime.current.value === '') dep_datetime.current.value = new Date().toISOString().slice(0, 16)
+        if (datetime.current.value === '') datetime.current.value = new Date().toISOString().slice(0, 16)
         const transportation = {
             id: props.transportationId,
             name: name.current.value,
@@ -47,7 +57,21 @@ export default function TransportationForm(props) {
     }
 
     const getItinerary = () => {
-        apiManager.getItinerary(props.tripId).then(setItinerary)
+        apiManager.getItinerary(props.tripId).then(itinerary => {
+            if (itinerary.length === 0) {
+                const day_itinerary = {
+                    name: 'Day 1',
+                    description: 'Dont forget to add a description!',
+                    trip_id: props.tripId
+                }
+                apiManager.postObj('day_itinerarys', day_itinerary).then(itinerary => {
+                    setItinerary([itinerary])
+                })
+            }
+            else {
+                setItinerary(itinerary)
+            }
+        })
     }
 
     const handleChange = e => {
@@ -70,7 +94,7 @@ export default function TransportationForm(props) {
 
     return (
          <main>
-            <form>
+            <Form>
                 <h1>Transportation Form</h1>
                 <fieldset>
                     <label htmlFor="name"> Name </label>
@@ -79,7 +103,7 @@ export default function TransportationForm(props) {
                         className="form-control"
                         placeholder="name"
                         defaultValue={oldTransportation.name || ''}
-                        required />
+                        required autoFocus/>
                 </fieldset>
                 <fieldset>
                     <label htmlFor="notes"> Notes </label>
@@ -96,7 +120,7 @@ export default function TransportationForm(props) {
                         name="cost"
                         className="form-control"
                         placeholder="cost"
-                        defaultValue={oldTransportation.cost || ''}
+                        defaultValue={oldTransportation.cost || 0}
                         required />
                 </fieldset>
                 <fieldset>
@@ -104,7 +128,7 @@ export default function TransportationForm(props) {
                     <input ref={dep_datetime} type="datetime-local"
                         name="dep_datetime"
                         className="form-control"
-                        defaultValue={oldTransportation.dep_datetime || ''}
+                        defaultValue={oldTransportation.dep_datetime || 'yyyy-mm-dd'}
                         required />
                 </fieldset>
                 <fieldset>
@@ -112,7 +136,7 @@ export default function TransportationForm(props) {
                     <input ref={dep_info} type="text"
                         name="dep_info"
                         className="form-control"
-                        placeholder="dep_info"
+                        placeholder="departure info"
                         defaultValue={oldTransportation.dep_info || ''}
                         required />
                 </fieldset>
@@ -130,7 +154,7 @@ export default function TransportationForm(props) {
                     <input ref={arr_info} type="text"
                         name="arr_info"
                         className="form-control"
-                        placeholder="arr_info"
+                        placeholder="arrival info"
                         defaultValue={oldTransportation.arr_info || ''}
                         required />
                 </fieldset>
@@ -151,7 +175,7 @@ export default function TransportationForm(props) {
                         </button>
                     }
                 </fieldset>
-            </form>
+            </Form>
         </main>
     )
 }

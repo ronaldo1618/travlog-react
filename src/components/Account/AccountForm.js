@@ -13,23 +13,26 @@ export default function AccountForm(props) {
         apiManager.getTraveler().then(traveler => setTraveler(traveler[0]))
     }
 
-    const editTraveler = user => {
-        // console.log(props.match.params.travelerId)
-        const traveler = {
-            id: user.id,
+    const editTraveler = (e) => {
+        e.preventDefault()
+        const newTraveler = {
+            id: traveler.id,
             bio: bio.current.value,
             first_name: first_name.current.value,
             last_name: last_name.current.value,
             username: username.current.value
         }
-        apiManager.putObj('travelers', traveler).then(props.history.push(`/profile`))
+        apiManager.putObj('travelers', newTraveler).then(res => {
+            if(res.status === 500) return alert('username is taken!')
+            props.history.push(`/profile`)
+        })
     }
 
     useEffect(getTraveler, [])
 
     return (
-        <>
-            <form className="col-8 offset-2 text-left">
+        <>  
+            <form className="col-8 offset-2 text-left" onSubmit={editTraveler}>
                 <div className="form-group">
                 <label htmlFor="username"><strong>Username</strong></label>
                 <input
@@ -70,7 +73,7 @@ export default function AccountForm(props) {
                     defaultValue={traveler.bio}
                 />
                 </div>
-                <button color="primary" onClick={() => editTraveler(traveler)}>Update Profile</button>
+                <button type="submit" color="primary">Update Profile</button>
             </form>
         </>
     )

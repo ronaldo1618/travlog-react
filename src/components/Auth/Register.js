@@ -16,6 +16,10 @@ function Register(props) {
     const handleRegister = (e) => {
         e.preventDefault()
         props.setIsCurrentUser(false)
+        if (userName.current.value === '') return alert('Please fill out the username field!')
+        if (password.current.value === '') return alert('Please fill out the password field!')
+        if (password.current.value !== verifyPassword.current.value) return alert('Passwords do not match!')
+
         const newUser = {
             "username": userName.current.value,
             "first_name": firstName.current.value,
@@ -24,10 +28,14 @@ function Register(props) {
             "password": password.current.value,
             "bio": bio.current.value
         }
-
-        register(newUser).then(() => {
-            props.setIsCurrentUser(true)
-            props.history.push('/')
+        register(newUser).then(res => {
+            if(res) {
+                localStorage.setItem("travlogapi_token", res.token)
+                props.setIsCurrentUser(true)
+                props.history.push('/')
+            } else {
+                return alert('Username is taken!')
+            }
         })
     }
 
@@ -67,7 +75,7 @@ function Register(props) {
                     required />
             </fieldset>
             <fieldset>
-                <label htmlFor="bio"> Address </label>
+                <label htmlFor="bio"> Bio </label>
                 <input ref={bio} type="text"
                     name="bio"
                     className="form-control"

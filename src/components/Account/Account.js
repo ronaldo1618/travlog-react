@@ -26,7 +26,8 @@ export default function Account(props) {
         <>
         <h2>{traveler.user.username}</h2>
         <p>{traveler.bio}</p>
-        <button onClick={() => props.history.push(`/profile/form`)}>Edit Account</button>
+        <button type="button" onClick={() => props.history.push(`/profile/form`)}>Edit Account</button>
+        <h4>Trip History</h4>
         <div>
             {trips.map(trip => <TripCard key={trip.id} tripId={trip.id} trip={trip} deleteObj={deleteObj} {...props}/>)}
         </div>
