@@ -15,6 +15,8 @@ export default function ActivityForm(props) {
     const [ oldActivity, setActivity ] = useState({day_itinerary: {}})
 
     const onSubmitHandler = e => {
+        if (name.current.value === '') return alert('Please fill out the name field!')
+        if (datetime.current.value === '') datetime.current.value = new Date().toISOString().slice(0, 16)
         const activity = {
             name: name.current.value,
             notes: notes.current.value,
@@ -28,6 +30,8 @@ export default function ActivityForm(props) {
     }
 
     const editActivity = (oldActivity) => {
+        if (name.current.value === '') return alert('Please fill out the name field!')
+        if (datetime.current.value === '') datetime.current.value = new Date().toISOString().slice(0, 16)
         if (!dayItinerary.id) dayItinerary.id = oldActivity.day_itinerary_id
         const activity = {
             id: props.activityId,
@@ -43,7 +47,21 @@ export default function ActivityForm(props) {
     }
 
     const getItinerary = () => {
-        apiManager.getItinerary(props.tripId).then(setItinerary)
+        apiManager.getItinerary(props.tripId).then(itinerary => {
+            if (itinerary.length === 0) {
+                const day_itinerary = {
+                    name: 'Day 1',
+                    description: 'Dont forget to add a description!',
+                    trip_id: props.tripId
+                }
+                apiManager.postObj('day_itinerarys', day_itinerary).then(itinerary => {
+                    setItinerary([itinerary])
+                })
+            }
+            else {
+                setItinerary(itinerary)
+            }
+        })
     }
 
     const handleChange = e => {
@@ -106,7 +124,7 @@ export default function ActivityForm(props) {
                         name="cost"
                         className="form-control"
                         placeholder="cost"
-                        defaultValue={oldActivity.cost || ''}
+                        defaultValue={oldActivity.cost || 0}
                         required />
                 </fieldset>
                 <fieldset>

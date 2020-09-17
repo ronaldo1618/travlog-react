@@ -1,11 +1,5 @@
 import React from 'react';
 
-// tomorrows to do list
-// conditional rendering for itinerary card
-// add to itinerary can be handled seperately. Direct them to the proper form depending on which they choose
-// handle delete, edit functionality conditonally
-//   - before edit or delete will need to decide which activity it is since they have the same id
-
 export default function ItineraryCard(props) {
 
     const type = props.activity.url.split('8000/')[1].split('/')[0]
@@ -15,13 +9,13 @@ export default function ItineraryCard(props) {
             {type === 'transportations' ? 
                 <div>
                     <h2>Transportation Icon</h2>
-                    <p>{props.activity.name}</p>
-                    <p>{props.activity.notes}</p>
-                    <p>{props.activity.cost}</p>
-                    <p>{props.activity.dep_datetime}</p>
-                    <p>{props.activity.dep_info}</p>
-                    <p>{props.activity.datetime}</p>
-                    <p>{props.activity.arr_info}</p>
+                    <p>Name: {props.activity.name}</p>
+                    <p>Notes: {props.activity.notes}</p>
+                    <p>Cost: ${props.activity.cost}</p>
+                    <p>Departure Date: {props.activity.dep_datetime.slice(0, 10)}</p>
+                    <p>Departure Info: {props.activity.dep_info}</p>
+                    <p>Arrival Date: {props.activity.datetime.slice(0, 10)}</p>
+                    <p>Arrival Info: {props.activity.arr_info}</p>
                     {props.userId === props.creatorId ?
                         <>
                             <button type='button' onClick={() => props.deleteObj(type, props.activity.id)}>Delete</button>
@@ -36,11 +30,11 @@ export default function ItineraryCard(props) {
             {type === 'activitys' ? 
                 <div>
                     <h2>Activity Icon</h2>
-                    <p>{props.activity.name}</p>
-                    <p>{props.activity.notes}</p>
-                    <p>{props.activity.cost}</p>
-                    <p>{props.activity.address}</p>
-                    <p>{props.activity.datetime}</p>
+                    <p>Name: {props.activity.name}</p>
+                    <p>Notes: {props.activity.notes}</p>
+                    <p>Cost: ${props.activity.cost}</p>
+                    <p>Address: {props.activity.address}</p>
+                    <p>Date: {props.activity.datetime.slice(0, 10)}</p>
                     {props.userId === props.creatorId ?
                         <>
                             <button type='button' onClick={() => props.deleteObj(type, props.activity.id)}>Delete</button>
@@ -55,11 +49,11 @@ export default function ItineraryCard(props) {
             {type === 'foods' ? 
                 <div>
                     <h2>Food Icon</h2>
-                    <p>{props.activity.name}</p>
-                    <p>{props.activity.notes}</p>
-                    <p>{props.activity.cost}</p>
-                    <p>{props.activity.address}</p>
-                    <p>{props.activity.datetime}</p>
+                    <p>Name: {props.activity.name}</p>
+                    <p>Notes: {props.activity.notes}</p>
+                    <p>Cost: ${props.activity.cost}</p>
+                    <p>Address: {props.activity.address}</p>
+                    <p>Date: {props.activity.datetime.slice(0, 10)}</p>
                     {props.userId === props.creatorId ?
                         <>
                             <button type='button' onClick={() => props.deleteObj(type, props.activity.id)}>Delete</button>
@@ -74,15 +68,15 @@ export default function ItineraryCard(props) {
             {type === 'lodgings' ? 
                 <div>
                     <h2>Lodging Icon</h2>
-                    <p>{props.activity.name}</p>
-                    <p>{props.activity.notes}</p>
-                    <p>{props.activity.cost}</p>
-                    <p>{props.activity.address}</p>
-                    <p>{props.activity.check_in}</p>
-                    <p>{props.activity.datetime}</p>
-                    <p>{props.activity.phone_number}</p>
-                    <p>{props.activity.website}</p>
-                    <p>{props.activity.address}</p>
+                    <p>Name: {props.activity.name}</p>
+                    <p>Notes: {props.activity.notes}</p>
+                    <p>Cost: ${props.activity.cost}</p>
+                    <p>Address: {props.activity.address}</p>
+                    <p>Check-in: {props.activity.check_in.slice(0, 10)}</p>
+                    <p>Check-out: {props.activity.datetime.slice(0, 10)}</p>
+                    <p>Phone-number: {props.activity.phone_number}</p>
+                    <p>Website: {props.activity.website}</p>
+                    <p>Address: {props.activity.address}</p>
                     {props.userId === props.creatorId ?
                         <>
                             <button type='button' onClick={() => props.deleteObj(type, props.activity.id)}>Delete</button>

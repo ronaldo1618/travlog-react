@@ -8,15 +8,19 @@ export default function DayItineraryForm(props) {
     const [day_itinerary, setDayItinerary] = useState({})
 
     const onSubmitHandler = e => {
+        if (name.current.value === '') return alert('Please fill out the name field!')
+        if (description.current.value === '') return alert('Please fill out the description field!')
         const day_itinerary = {
             name: name.current.value,
             description: description.current.value,
             trip_id: props.tripId
         }
-        apiManager.postDayItinerary(day_itinerary).then(() => props.history.push(`/trips/${props.tripId}`))
+        apiManager.postObj('day_itinerarys', day_itinerary).then(() => props.history.push(`/trips/${props.tripId}`))
     }
 
     const editDayItinerary = () => {
+        if (name.current.value === '') return alert('Please fill out the name field!')
+        if (description.current.value === '') return alert('Please fill out the description field!')
         const day_itinerary = {
             id: props.day_itinerary_id,
             name: name.current.value,
@@ -34,7 +38,7 @@ export default function DayItineraryForm(props) {
                 setDayItinerary(obj)
             })
         }
-    },[props.transportationId])
+    },[props.transportationId, props.day_itinerary_id])
 
     return (
          <main>

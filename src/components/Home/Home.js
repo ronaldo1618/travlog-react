@@ -2,18 +2,21 @@ import React, { useState, useEffect } from 'react';
 import apiManager from '../../modules/apiManager';
 import TripCard from '../Trips/TripCard';
 import ItineraryList from '../Trips/Itinerary/ItineraryList';
+import { Icon } from 'semantic-ui-react';
 
 export default function Home(props) {
 
     const [user, setUser] = useState(Number)
     const [trips, setTrips] = useState([])
-    // const [type, setType] = useState('')
     const [userHomePageTrip, setUserHomePageTrip] = useState({})
     const [totalCost, setTotalCost] = useState(Number)
     const [itinerary, setItinerary] = useState([{all_activities: []}])
+    const [showItinerary, setShowItinerary] = useState(false)
+    const toggle = () => setShowItinerary(!showItinerary)
 
     const getTrips = () => {
         apiManager.getTripsForHomepage().then(trip => {
+            trips.sort((a,b) => b.id - a.id)
             setTrips(trip)
         })
     }
@@ -25,7 +28,6 @@ export default function Home(props) {
                 if (trip.length === 0) return
                 setUserHomePageTrip(trip[0])
                 getItinerary(trip[0].id)
-                // setType(trip[0].url.split('8000/')[1].split('/')[0])
             })
         })
     }
@@ -51,10 +53,6 @@ export default function Home(props) {
         setTotalCost(totalCost.toFixed(2))
     }
 
-    // const deleteObj = (type, id) => {
-    //     apiManager.deleteObj(type, id).then(props.history.push('/'))
-    // }
-
     useEffect(getTrip, [])
     useEffect(getTrips, [])
 
@@ -67,31 +65,51 @@ export default function Home(props) {
                 <h3>Trip Cost: ${totalCost}</h3>
                 <div>
                     {user === userHomePageTrip.creator_id ?
-                        <div className="budget-container">
-                            <input type="button" value="Add Transportation" onClick={() => {props.history.push(`/transportations/form/${userHomePageTrip.id}`)}}/>
-                            <input type="button" value="Add Food" onClick={() => {props.history.push(`/foods/form/${userHomePageTrip.id}`)}}/>
-                            <input type="button" value="Add Activity" onClick={() => {props.history.push(`/activitys/form/${userHomePageTrip.id}`)}}/>
-                            <input type="button" value="Add Lodging" onClick={() => {props.history.push(`/lodgings/form/${userHomePageTrip.id}`)}}/>
-                            {/* <input type="button" value="Add New Day" onClick={() => {props.history.push(`/day_itinerarys/form/${userHomePageTrip.id}`)}}/>
-                            <button type='button' onClick={() => deleteObj(type, userHomePageTrip.id)}>Delete</button>
-                            <button type='button' onClick={() => props.history.push(`/trips/form/${userHomePageTrip.id}`)}>Edit</button> */}
-                        </div>
+                        <div className="">
+                        <Icon.Group size="big">
+                            <Icon circular link onClick={() => {props.history.push(`/transportations/form/${props.tripId}`)}} className="car"></Icon>
+                            <Icon corner name='add'/>
+                        </Icon.Group>
+                        <Icon.Group size="big">
+                            <Icon circular link onClick={() => {props.history.push(`/foods/form/${props.tripId}`)}} className="food"></Icon>
+                            <Icon corner name='add'/>
+                        </Icon.Group>
+                        <Icon.Group size="big">
+                            <Icon circular link onClick={() => {props.history.push(`/activitys/form/${props.tripId}`)}} className="bicycle"></Icon>
+                            <Icon corner name='add'/>
+                        </Icon.Group>
+                        <Icon.Group size="big">
+                            <Icon circular link onClick={() => {props.history.push(`/lodgings/form/${props.tripId}`)}} className="hotel"></Icon>
+                            <Icon corner name='add'/>
+                        </Icon.Group>
+                    </div>
                         :
                         <input type="button" value="Copy Trip" onClick={() => {props.history.push(`/day_itinerarys/form/${userHomePageTrip.id}`)}}/>
                     }
                 </div>
+                
                 {itinerary.length === 0 ?
                     null
                     :
                     <>
-                        <hr/>
-                        <h4>Itinerary</h4>
-                        <hr/>
+                        {showItinerary ?
+                            <div>
+                                <div onClick={toggle} className="itinerary-toggle">
+                                    <hr/>
+                                    <h2 className=""><Icon className="angle down"></Icon>Itinerary</h2>
+                                    <hr/>
+                                </div>
+                                {itinerary.map((itinerary_day, index) => <ItineraryList key={index} userId={user} itinerary_day={itinerary_day} getTrip={getTrip} creatorId={userHomePageTrip.creator_id} {...props}/>)}
+                            </div>
+                            :
+                            <div onClick={toggle} className="itinerary-toggle">
+                                <hr/>
+                                <h2 className=""><Icon className="angle right"></Icon>Itinerary</h2>
+                                <hr/>
+                            </div>
+                        }
                     </>
                 }
-                <div>
-                    {itinerary.map((itinerary_day, index) => <ItineraryList key={index} userId={user} itinerary_day={itinerary_day} getTrip={getTrip} creatorId={userHomePageTrip.creator_id} {...props}/>)}
-                </div>
                 </>
                 :
                 null

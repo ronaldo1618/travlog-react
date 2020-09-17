@@ -18,6 +18,7 @@ export default function TripForm(props) {
     const handleHomePageTrip = () => setHomePageTrip(!homepage_trip)
 
     const onSubmitHandler = e => {
+        if (title.current.value === '') return alert('Please fill out the title field!')
         const trip = {
             title: title.current.value,
             description: description.current.value,
@@ -27,6 +28,7 @@ export default function TripForm(props) {
             is_public: is_public,
             homepage_trip: homepage_trip
         }
+        console.log(trip)
         apiManager.postObj('trips', trip).then(trip => {
             setNewTrip(trip)
             toggle()
@@ -34,6 +36,7 @@ export default function TripForm(props) {
     }
 
     const editTrip = () => {
+        if (title.current.value === '') return alert('Please fill out the title field!')
         const trip = {
             id: props.tripId,
             title: title.current.value,
@@ -73,7 +76,7 @@ export default function TripForm(props) {
                 trip_id: newTrip.id
             }   
             try {
-                await apiManager.postDayItinerary(day_itinerary)
+                await apiManager.postObj('day_itinerarys', day_itinerary)
             } catch (error) {
                 console.error(error.message)
             }
@@ -96,7 +99,7 @@ export default function TripForm(props) {
                 trip_id: newTrip.id
             }   
             try {
-                await apiManager.postDayItinerary(day_itinerary)
+                await apiManager.postObj('day_itinerarys', day_itinerary)
             } catch (error) {
                 console.error(error.message)
             }
@@ -135,7 +138,7 @@ export default function TripForm(props) {
                         <input ref={trip_length} type="number"
                             name="trip_length"
                             className="form-control"
-                            placeholder="trip_length"
+                            placeholder="trip length"
                             defaultValue={trip.trip_length}
                             required />
                     </fieldset>
@@ -153,15 +156,15 @@ export default function TripForm(props) {
                             name="end_date"
                             className="form-control"
                             defaultValue={trip.end_date}
-                            placeholder="end_date"
+                            placeholder="end date"
                         />
                     </fieldset>
                     <fieldset>
-                        <label htmlFor="is_public"> Make Trip Public</label>
+                        <label htmlFor="is_public"> Make Trip Public?</label>
                         <input onChange={handleClick} type="checkbox"
                             name="is_public"
                             className="form-control"
-                            placeholder="is_public"
+                            placeholder="is public"
                             defaultValue={trip.is_public}
                         />
                     </fieldset>
@@ -170,7 +173,7 @@ export default function TripForm(props) {
                         <input onChange={handleHomePageTrip} type="checkbox"
                             name="homepage_trip"
                             className="form-control"
-                            placeholder="homepage_trip"
+                            placeholder="homepage trip"
                             defaultValue={trip.homepage_trip}
                         />
                     </fieldset>

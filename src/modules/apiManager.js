@@ -51,17 +51,6 @@ export default {
             body: JSON.stringify(trip)
         })
     },
-    postDayItinerary(day_itinerary) {
-        return fetch(`${remoteURL}/day_itinerarys`, {
-            method: 'POST',
-            headers: {
-                'Content-type': 'application/json',
-                'Accept': 'application/json',
-                'Authorization': `Token ${localStorage.getItem('travlogapi_token')}`
-            },
-            body: JSON.stringify(day_itinerary)
-        })
-    },
     postObj(type, obj) {
         return fetch(`${remoteURL}/${type}`, {
             method: 'POST',

@@ -22,7 +22,10 @@ export default function AccountForm(props) {
             last_name: last_name.current.value,
             username: username.current.value
         }
-        apiManager.putObj('travelers', newTraveler).then(props.history.push(`/profile`))
+        apiManager.putObj('travelers', newTraveler).then(res => {
+            if(res.status === 500) return alert('username is taken!')
+            props.history.push(`/profile`)
+        })
     }
 
     useEffect(getTraveler, [])

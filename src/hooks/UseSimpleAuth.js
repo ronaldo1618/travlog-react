@@ -16,13 +16,14 @@ function UseSimpleAuth() {
             },
             body: JSON.stringify(user)
         })
-            .then(res => res.json())
             .then(res => {
-                if ("token" in res) {
-                    localStorage.setItem("travlogapi_token", res.token)
+                if (res.status === 500) return false
+                if (res.status === 200) {
                     setIsLoggedIn(true)
+                    return res.json()
                 }
             })
+            
     }
 
     const login = credentials => {
