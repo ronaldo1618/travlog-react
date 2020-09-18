@@ -10,34 +10,42 @@ export default function TripForm(props) {
     const trip_length = useRef()
     const start_date = useRef()
     const end_date = useRef()
+
     const [is_public, setIsPublic] = useState(false)
     const [homepage_trip, setHomePageTrip] = useState(false)
     const [trip, setTrip] = useState({})
     const [newTrip, setNewTrip] = useState({})
+    const [image, setImage] = useState('')
+    const [loading, setLoading] = useState(false)
+
     const handleClick = () => setIsPublic(!is_public)
     const handleHomePageTrip = () => setHomePageTrip(!homepage_trip)
 
     const onSubmitHandler = e => {
         if (title.current.value === '') return alert('Please fill out the title field!')
-        const trip = {
-            title: title.current.value,
-            description: description.current.value,
-            trip_length: trip_length.current.value,
-            start_date: start_date.current.value,
-            end_date: end_date.current.value,
-            is_public: is_public,
-            homepage_trip: homepage_trip
+        if(!loading) {
+            const trip = {
+                title: title.current.value,
+                description: description.current.value,
+                trip_length: trip_length.current.value,
+                start_date: start_date.current.value,
+                end_date: end_date.current.value,
+                is_public: is_public,
+                homepage_trip: homepage_trip,
+                overlay_image: image
+            }
+            apiManager.postObj('trips', trip).then(trip => {
+                setNewTrip(trip)
+                toggle()
+            })
         }
-        console.log(trip)
-        apiManager.postObj('trips', trip).then(trip => {
-            setNewTrip(trip)
-            toggle()
-        })
     }
 
-    const editTrip = () => {
+    const editTrip = (trip) => {
         if (title.current.value === '') return alert('Please fill out the title field!')
-        const trip = {
+        let img = image
+        if(image === '' && trip.overlay_image !== null) img = trip.overlay_image
+        const newTrip = {
             id: props.tripId,
             title: title.current.value,
             description: description.current.value,
@@ -45,10 +53,10 @@ export default function TripForm(props) {
             start_date: start_date.current.value,
             end_date: end_date.current.value,
             is_public: is_public,
-            homepage_trip: homepage_trip
+            homepage_trip: homepage_trip,
+            overlay_image: img
         }
-        apiManager.putObj('trips', trip)
-        props.history.push(`/trips/${props.tripId}`)
+        apiManager.putObj('trips', newTrip).then(() => props.history.push(`/trips/${props.tripId}`))
     }
 
     useEffect(() => {
@@ -108,7 +116,17 @@ export default function TripForm(props) {
         props.history.push(`/trips/${newTrip.id}`)
     }
 
-
+    const uploadImage = async e => {
+        const files = e.target.files
+        const data = new FormData()
+        data.append('file', files[0])
+        data.append('upload_preset', 'travlog')
+        setLoading(true)
+        apiManager.postPhoto(data).then(img => {
+            setImage(img.url)
+            setLoading(false)
+        })
+    }
 
     return (
         <>
@@ -178,16 +196,29 @@ export default function TripForm(props) {
                         />
                     </fieldset>
                     <fieldset>
+                        <label htmlFor="upload_image"> Upload Image</label>
+                        <input onChange={uploadImage} type="file"
+                            name="file"
+                            className="form-control"
+                            placeholder="Upload Image"
+                            defaultValue={trip.overlay_image}
+                        />
+                    </fieldset>
+                    <fieldset>
                         {
                             props.tripId ?
-                            <button type="button" onClick={editTrip}>
+                            <>
+                            <button disabled={loading} type="button" onClick={() => editTrip(trip)}>
                                 Update Trip
                             </button>
+                            {loading ? <p>Loading image...</p>:null}
+                            </>
                             :
                             <>
-                                <button type="button" onClick={onSubmitHandler}>
+                                <button disabled={loading} type="button" onClick={onSubmitHandler}>
                                     Create Trip
                                 </button>
+                                {loading ? <p>Loading image...</p>:null}
                             </>
                         }
                     </fieldset>

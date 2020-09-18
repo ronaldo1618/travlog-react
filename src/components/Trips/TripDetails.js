@@ -134,12 +134,14 @@ export default function TripDetails(props) {
                     </>
                 }
             </div>
+            <img alt="" src={trip.overlay_image}/>
             <br/>
             {!showItinerary ?
                 <div>
                     <div onClick={toggle} className="itinerary-toggle">
                         <hr/>
                         <h2 className=""><Icon className="angle down"></Icon>Itinerary</h2>
+                        <button type='button' onClick={() => props.history.push(`/day_itinerarys/form/${trip.id}`)}>Add Itinerary Category</button>
                         <hr/>
                     </div>
                     {itinerary.map((itinerary_day, index) => <ItineraryList key={index} userId={user} itinerary_day={itinerary_day} getTrip={getTrip} creatorId={trip.creator_id} {...props}/>)}
@@ -148,6 +150,7 @@ export default function TripDetails(props) {
                 <div onClick={toggle} className="itinerary-toggle">
                     <hr/>
                     <h2 className=""><Icon className="angle right"></Icon>Itinerary</h2>
+                    <button type='button' onClick={() => props.history.push(`/day_itinerarys/form/${trip.id}`)}>Add Itinerary Category</button>
                     <hr/>
                 </div>
             }

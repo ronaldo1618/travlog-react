@@ -118,7 +118,13 @@ export default {
         }).then(res => res.json())
     },
     search(city, value) {
-        const url = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${value}+in+${city}&key=${googlePlacesKey}`
+        const url = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${city}&key=${googlePlacesKey}`
         return fetch(proxyUrl + url).then(res => res.json())
+    },
+    postPhoto(data){
+        return fetch('https://api.cloudinary.com/v1_1/ddxpoaice/image/upload', {
+            method: 'POST',
+            body: data
+        }).then(res => res.json())
     }
 }

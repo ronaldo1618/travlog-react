@@ -41,7 +41,7 @@ function Register(props) {
 
     return (
         <form className="form--login" onSubmit={handleRegister}>
-            <h1 className="h3 mb-3 font-weight-normal">Register to use Bangazon</h1>
+            <h1 className="h3 mb-3 font-weight-normal">Register to use TravLog</h1>
             <fieldset>
                 <label htmlFor="userName"> Username </label>
                 <input ref={userName} type="text"
@@ -98,6 +98,7 @@ function Register(props) {
                     placeholder="Verify password"
                     required />
             </fieldset>
+            <p>Already a user? <a href={`/login`}>Login Here.</a></p>
             <fieldset>
                 <button type="submit">
                     Register

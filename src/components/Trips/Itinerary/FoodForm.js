@@ -129,7 +129,7 @@ export default function FoodForm(props) {
                 </fieldset>
                 <fieldset>
                     <select required onChange={handleChange} id="day_itinerary">
-                        <option>{oldFood.day_itinerary.name || 'Select Itinerary Day'}</option>
+                        <option>{oldFood.day_itinerary.name || 'Select Itinerary Category'}</option>
                         {itinerary.map(day_itinerary => <option key={day_itinerary.id}>{day_itinerary.name}</option>)}
                     </select>
                 </fieldset>

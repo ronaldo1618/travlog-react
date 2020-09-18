@@ -21,6 +21,7 @@ export default function NavBar(props) {
     }
 
     return (
+        <>
         <ul>
         {
             isAuthenticated() ?
@@ -31,9 +32,6 @@ export default function NavBar(props) {
                     <li>
                         <Link to="/trips">Trips</Link>
                     </li>
-                    {/* <li>
-                        <Link to="/tasks">Tasks</Link>
-                    </li> */}
                     <li>
                         <Link to="/profile">Profile</Link>
                     </li>
@@ -44,7 +42,7 @@ export default function NavBar(props) {
                     </li>
                 </>
                 : null}
-        {!isAuthenticated() ?
+        {/* {!isAuthenticated() ?
             <>
                 {props.location.pathname === '/Login' || props.location.pathname === '/login' ? 
                     <></>
@@ -61,7 +59,8 @@ export default function NavBar(props) {
                     </li>
                 }
             </>
-            : null}
+            : null} */}
         </ul>
+        </>
     )
 }

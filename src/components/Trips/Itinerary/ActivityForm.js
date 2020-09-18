@@ -146,7 +146,7 @@ export default function ActivityForm(props) {
                 </fieldset>
                 <fieldset>
                     <select required onChange={handleChange} id="day_itinerary">
-                        <option>{oldActivity.day_itinerary.name || 'Select Itinerary Day'}</option>
+                        <option>{oldActivity.day_itinerary.name || 'Select Itinerary Category'}</option>
                         {itinerary.map(day_itinerary => <option key={day_itinerary.id}>{day_itinerary.name}</option>)}
                     </select>
                 </fieldset>

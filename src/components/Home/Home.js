@@ -3,6 +3,7 @@ import apiManager from '../../modules/apiManager';
 import TripCard from '../Trips/TripCard';
 import ItineraryList from '../Trips/Itinerary/ItineraryList';
 import { Icon } from 'semantic-ui-react';
+import '../Trips/Trip.css'
 
 export default function Home(props) {
 
@@ -60,26 +61,31 @@ export default function Home(props) {
         <>
             {userHomePageTrip.id ?
                 <>
-                <h1><a href={`/trips/${userHomePageTrip.id}`}>{userHomePageTrip.title}</a></h1>
-                <h3>Description: {userHomePageTrip.description}</h3>
-                <h3>Trip Cost: ${totalCost}</h3>
-                <div>
+                <hr/>
+                <div className="flex-center">
+                    <div>
+                        <h1><a href={`/trips/${userHomePageTrip.id}`}>{userHomePageTrip.title}</a></h1>
+                        <h3>Description: {userHomePageTrip.description}</h3>
+                        <h3>Trip Cost: ${totalCost}</h3>
+                    </div>
+                </div>
+                <div className="flex-center">
                     {user === userHomePageTrip.creator_id ?
                         <div className="">
                         <Icon.Group size="big">
-                            <Icon circular link onClick={() => {props.history.push(`/transportations/form/${props.tripId}`)}} className="car"></Icon>
+                            <Icon circular link onClick={() => {props.history.push(`/transportations/form/${userHomePageTrip.id}`)}} className="car"></Icon>
                             <Icon corner name='add'/>
                         </Icon.Group>
                         <Icon.Group size="big">
-                            <Icon circular link onClick={() => {props.history.push(`/foods/form/${props.tripId}`)}} className="food"></Icon>
+                            <Icon circular link onClick={() => {props.history.push(`/foods/form/${userHomePageTrip.id}`)}} className="food"></Icon>
                             <Icon corner name='add'/>
                         </Icon.Group>
                         <Icon.Group size="big">
-                            <Icon circular link onClick={() => {props.history.push(`/activitys/form/${props.tripId}`)}} className="bicycle"></Icon>
+                            <Icon circular link onClick={() => {props.history.push(`/activitys/form/${userHomePageTrip.id}`)}} className="bicycle"></Icon>
                             <Icon corner name='add'/>
                         </Icon.Group>
                         <Icon.Group size="big">
-                            <Icon circular link onClick={() => {props.history.push(`/lodgings/form/${props.tripId}`)}} className="hotel"></Icon>
+                            <Icon circular link onClick={() => {props.history.push(`/lodgings/form/${userHomePageTrip.id}`)}} className="hotel"></Icon>
                             <Icon corner name='add'/>
                         </Icon.Group>
                     </div>
@@ -94,7 +100,7 @@ export default function Home(props) {
                     <>
                         {showItinerary ?
                             <div>
-                                <div onClick={toggle} className="itinerary-toggle">
+                                <div onClick={toggle} className="flex-center itinerary-toggle">
                                     <hr/>
                                     <h2 className=""><Icon className="angle down"></Icon>Itinerary</h2>
                                     <hr/>
@@ -102,7 +108,7 @@ export default function Home(props) {
                                 {itinerary.map((itinerary_day, index) => <ItineraryList key={index} userId={user} itinerary_day={itinerary_day} getTrip={getTrip} creatorId={userHomePageTrip.creator_id} {...props}/>)}
                             </div>
                             :
-                            <div onClick={toggle} className="itinerary-toggle">
+                            <div onClick={toggle} className="flex-center itinerary-toggle">
                                 <hr/>
                                 <h2 className=""><Icon className="angle right"></Icon>Itinerary</h2>
                                 <hr/>
@@ -115,8 +121,10 @@ export default function Home(props) {
                 null
             }
             <hr/>
-            <h1>Explore</h1>
-            <div>
+            <div className="flex-center">
+                <h1>Explore</h1>
+            </div>
+            <div className="trip-cards">
                 <>{trips.map(trip => <TripCard key={trip.id} userId={user} tripId={trip.id} trip={trip} {...props}/>)}</>
             </div>
         </>
