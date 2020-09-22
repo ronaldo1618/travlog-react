@@ -20,7 +20,7 @@ Travlog is a full stack app created for users that like to plan trips out and ke
 ## Initial Setup of Travlog
   Follow these steps to get started:
   1. (*) **Note: this app has a back end that will need to be downloaded as well. Follow this link to do this first https://github.com/ronaldo1618/travlogapi**
-  1. `git clone git@github.com:ronaldo1618/Travlog.git`
+  1. `git clone git@github.com:ronaldo1618/travlog-react.git`
   1. `cd` into Travlog
   1. `npm install` for dependencies
   1. `npm start` Should automatically open in chrome, if not type in 'http://localhost:3000' in your browser.
