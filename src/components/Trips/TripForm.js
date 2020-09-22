@@ -123,6 +123,7 @@ export default function TripForm(props) {
         data.append('upload_preset', 'travlog')
         setLoading(true)
         apiManager.postPhoto(data).then(img => {
+            console.log(img.url)
             setImage(img.url)
             setLoading(false)
         })

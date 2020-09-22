@@ -11,11 +11,13 @@ export default function TripDetails(props) {
     const [trip, setTrip] = useState({})
     const [totalCost, setTotalCost] = useState(Number)
     const [itinerary, setItinerary] = useState([{all_activities: []}])
+    const [creator, setTripCreator] = useState({user:{}})
     const [showItinerary, setShowItinerary] = useState(false)
     const toggle = () => setShowItinerary(!showItinerary)
 
     const getTrip = () => {
         apiManager.getTrip(props.tripId).then(trip => {
+            setTripCreator(trip.creator)
             setTrip(trip)
             setType(trip.url.split('8000/')[1].split('/')[0])
         }).then(getItinerary)
@@ -98,62 +100,111 @@ export default function TripDetails(props) {
 
     return (
         <>
-            <h1>{trip.title}</h1>
-            <h3>{trip.description}</h3>
-            <h3>Trip Cost: ${totalCost}</h3>
-            <div>
-                {user === trip.creator_id ?
-                    <>
+        {/* {trip.overlay_image ?
+        <Card className="test1">
+            <Card.Img alt="" variant="top" src={trip.overlay_image} />
+            <Card.Body>
+                <Card.Text>
+                    cool it works
+                </Card.Text>
+            </Card.Body>
+        </Card>
+        : null
+        } */}
+        <div className="trip-detail-container">
+            <div className="trip-detail-title">
+                <div className="trip-detail-info">
+                    <h1>{trip.title}</h1>
+                    <h3>{trip.description}</h3>
+                    <h3>Trip Cost: ${totalCost}</h3>
+                    {user === trip.creator_id ?
                     <div>
-                        <button type='button' onClick={() => deleteObj(type, trip.id)}>Delete</button>
-                        <button type='button' onClick={() => props.history.push(`/trips/form/${trip.id}`)}>Edit</button>
+                        <button type='button' onClick={() => deleteObj(type, trip.id)}>Delete Trip</button>
+                        <button type='button' onClick={() => props.history.push(`/trips/form/${trip.id}`)}>Edit Trip</button>
                     </div>
-                    <br/>
-                    <div className="">
-                        <Icon.Group size="big">
-                            <Icon circular link onClick={() => {props.history.push(`/transportations/form/${props.tripId}`)}} className="car"></Icon>
-                            <Icon corner name='add'/>
-                        </Icon.Group>
-                        <Icon.Group size="big">
-                            <Icon circular link onClick={() => {props.history.push(`/foods/form/${props.tripId}`)}} className="food"></Icon>
-                            <Icon corner name='add'/>
-                        </Icon.Group>
-                        <Icon.Group size="big">
-                            <Icon circular link onClick={() => {props.history.push(`/activitys/form/${props.tripId}`)}} className="bicycle"></Icon>
-                            <Icon corner name='add'/>
-                        </Icon.Group>
-                        <Icon.Group size="big">
-                            <Icon circular link onClick={() => {props.history.push(`/lodgings/form/${props.tripId}`)}} className="hotel"></Icon>
-                            <Icon corner name='add'/>
-                        </Icon.Group>
-                    </div>
-                    </>
                     :
-                    <>
-                        <input type="button" value="Copy Trip" onClick={copyTrip}/>
-                    </>
+                    <input className="button-group-icons" type="button" value="Copy Trip" onClick={copyTrip}/>
+                    }
+                    <div className="profile-pic-info">
+                        {creator.profile_pic ?
+                        <a className="circular--landscape" href={`/profile/${trip.creator_id}`}><img className="card-creator-img" alt="" src={creator.profile_pic}/></a>
+                        :
+                        null
+                        }
+                        <div>
+                            <a href={`/profile/${trip.creator_id}`}><p>{creator.user.username}</p></a>
+                            <p><small className="text-muted">{trip.date_created}</small></p>
+                        </div>
+                    </div>
+                </div>
+                <div className="trip-detail-btns-container">
+                    {user === trip.creator_id ?
+                    <div className="trip-details-btns">
+                        
+                        <div className="button-group-icons">
+                            <Icon.Group size="big">
+                                <Icon circular link onClick={() => {props.history.push(`/transportations/form/${props.tripId}`)}} className="car"></Icon>
+                                <Icon corner name='add'/>
+                            </Icon.Group>
+                            <Icon.Group size="big">
+                                <Icon circular link onClick={() => {props.history.push(`/foods/form/${props.tripId}`)}} className="food"></Icon>
+                                <Icon corner name='add'/>
+                            </Icon.Group>
+                            <Icon.Group size="big">
+                                <Icon circular link onClick={() => {props.history.push(`/activitys/form/${props.tripId}`)}} className="bicycle"></Icon>
+                                <Icon corner name='add'/>
+                            </Icon.Group>
+                            <Icon.Group size="big">
+                                <Icon circular link onClick={() => {props.history.push(`/lodgings/form/${props.tripId}`)}} className="hotel"></Icon>
+                                <Icon corner name='add'/>
+                            </Icon.Group>
+                        </div> 
+                    </div>
+                    :
+                    null
+                    }
+                </div>
+            </div>
+            </div>
+            <br/>
+            <div className="trip-itinerary">
+                {!showItinerary ?
+                    <div className="">
+                        <div onClick={toggle} className="flex-center itinerary-toggle">
+                            <hr/>
+                            <div>
+                                <h2 className=""><Icon className="angle down"></Icon>Itinerary</h2>
+                                {user === trip.creator_id ?
+                                <div>
+                                    <button type='button' onClick={() => props.history.push(`/day_itinerarys/form/${trip.id}`)}>Add Itinerary Category</button>
+                                </div>
+                                :
+                                null
+                                }
+                            </div>
+                            <hr/>
+                        </div>
+                        <div>
+                        {itinerary.map((itinerary_day, index) => <ItineraryList key={index} userId={user} itinerary_day={itinerary_day} getTrip={getTrip} creatorId={trip.creator_id} {...props}/>)}
+                        </div>
+                    </div>
+                    :
+                    <div onClick={toggle} className="flex-center itinerary-toggle">
+                        <hr/>
+                        <div>
+                            <h2 className=""><Icon className="angle right"></Icon>Itinerary</h2>
+                            {user === trip.creator_id ?
+                            <div>
+                                <button type='button' onClick={() => props.history.push(`/day_itinerarys/form/${trip.id}`)}>Add Itinerary Category</button>
+                            </div>
+                            :
+                            null
+                            }
+                        </div>
+                        <hr/>
+                    </div>
                 }
             </div>
-            <img alt="" src={trip.overlay_image}/>
-            <br/>
-            {!showItinerary ?
-                <div>
-                    <div onClick={toggle} className="itinerary-toggle">
-                        <hr/>
-                        <h2 className=""><Icon className="angle down"></Icon>Itinerary</h2>
-                        <button type='button' onClick={() => props.history.push(`/day_itinerarys/form/${trip.id}`)}>Add Itinerary Category</button>
-                        <hr/>
-                    </div>
-                    {itinerary.map((itinerary_day, index) => <ItineraryList key={index} userId={user} itinerary_day={itinerary_day} getTrip={getTrip} creatorId={trip.creator_id} {...props}/>)}
-                </div>
-                :
-                <div onClick={toggle} className="itinerary-toggle">
-                    <hr/>
-                    <h2 className=""><Icon className="angle right"></Icon>Itinerary</h2>
-                    <button type='button' onClick={() => props.history.push(`/day_itinerarys/form/${trip.id}`)}>Add Itinerary Category</button>
-                    <hr/>
-                </div>
-            }
         </>
     )
 }

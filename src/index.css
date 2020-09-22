@@ -18,11 +18,20 @@
 .login-container {
     display: flex;
     justify-content: center;
+    align-items: center;
+}
+
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .login-box {
-    /* backtr */
-    margin-top: 10px;
-    border: 1px solid red;
-    padding: 20px;
+    text-align: center;
+    margin-top: 30px;
+    background: white;
+    border: 1px solid black;
+    padding: 50px;
+    border-radius: 5px;;
 }

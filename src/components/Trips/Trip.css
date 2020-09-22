@@ -29,11 +29,6 @@
     margin-left: 10px;
 }
 
-.flex-center {
-    display: flex;
-    justify-content: center;
-}
-
 .new-entry-btn {
     display: flex;
     justify-content: center;
@@ -54,29 +49,232 @@
     justify-content: space-around;
 }
 
-.btm-date {
+.profile-pic-info {
     display: flex;
-    justify-content: space-around;
+    margin-top: 1em;
 }
 
 .trip-card-body {
     display: flex;
     flex-direction: column;
-    border: 1px solid green;
 }
 
 .btm-container {
     display: flex;
     flex-direction: column;
     align-self: center;
-    border: 1px solid red;
 }
 
 .hero-image {
-    height: 32em;
+    /* height: 32em; */
     overflow: hidden;
     background-repeat: no-repeat;
     background-size: cover;
     background-color: rgba(0, 0, 0, 0.3); 
     background-image:url('https://s.inspirockcdn.com/partners/visittheusa-home.jpg');
+}
+
+.img-bkgrnd {
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    z-index: -1;
+}
+
+.circular--landscape {
+    position: relative;
+    width: 3vw;
+    height: 3vw;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.card-creator-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.nav-link {
+    padding: 17px 17px;
+    text-align: center;
+}
+  
+/* .nav-link:hover {
+    color: #a50e0e;
+} */
+
+.nav-link.active {
+    color: rgb(0, 122, 112);
+}
+
+@media only screen and (min-width: 991px) {
+    .logout {
+        position: absolute;
+        right: 10px;
+        justify-content: flex-end;
+    }
+}
+
+.search-bar {
+    border: 1px solid gray;
+    border-radius: 3.5px;
+}
+
+.trip-detail-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.trip-detail-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    padding: 10px;
+}
+
+.trip-detail-info {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 2em 0;
+    padding: 10px;
+    width: 50%;
+}
+
+.trip-detail-btns-container {
+}
+
+.trip-details-btns {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-group-icons {
+    margin: 10px 0;
+}
+
+/* .trip-detail-img {
+    height: auto;
+    width: 50%;
+    object-fit: fill;
+}
+
+.trip-detail-img-container {
+    height: auto;
+    width: 1184px;
+} */
+
+
+
+/* Itinerary Styling */
+
+.trip-itinerary {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.test1 {
+    width: 40em;
+}
+
+.itin-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.itin-card {
+    margin-top: 2em;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 50em;
+    margin-top: 30px;
+}
+
+/* .itinerary-header {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid black;
+    width: 80%;
+    border-radius: 5px;
+} */
+
+
+/* HOMEPAGE STYLING */
+
+/* .homepage-trip-details {
+    position: relative;
+} */
+
+/* PROFILE STYLING */
+
+.profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 20em;
+    padding: 20px;
+    margin-top: 30px;
+}
+
+.profile-img-div {
+    margin-top: 10px;
+    position: relative;
+    width: 20vw;
+    height: 20vw;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.profile-img-big {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.trip-history {
+    text-align: center;
+}
+
+/* PROFILE STYLING */
+
+.form {
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 35%;
+    padding: 40px;
+}
+
+.form-container {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
