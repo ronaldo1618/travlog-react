@@ -1,7 +1,7 @@
-import key from '../apiKeys';
 const remoteURL = 'http://localhost:8000';
-const googlePlacesKey = key.googlePlacesKey
-const proxyUrl = 'https://cors-anywhere.herokuapp.com/'
+// import key from '../apiKeys';
+// const googlePlacesKey = key.googlePlacesKey
+// const proxyUrl = 'https://cors-anywhere.herokuapp.com/'
 
 export default {
     getTripsForHomepage() {
@@ -91,6 +91,15 @@ export default {
             }
         }).then(res => res.json())
     },
+    getTripsById(id) {
+        return fetch(`${remoteURL}/trips?profile=${id}`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Authorization': `Token ${localStorage.getItem('travlogapi_token')}`
+            }
+        }).then(res => res.json())
+    },
     deleteObj(type, id) {
         return fetch(`${remoteURL}/${type}/${id}`, {
             method: 'DELETE',
@@ -117,9 +126,18 @@ export default {
             }
         }).then(res => res.json())
     },
-    search(city, value) {
-        const url = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${city}&key=${googlePlacesKey}`
-        return fetch(proxyUrl + url).then(res => res.json())
+    // search(city, value) {
+    //     const url = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${city}&key=${googlePlacesKey}`
+    //     return fetch(proxyUrl + url).then(res => res.json())
+    // },
+    search(title) {
+        return fetch(`${remoteURL}/trips?title=${title}`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Authorization': `Token ${localStorage.getItem('travlogapi_token')}`
+            }
+        }).then(res => res.json())
     },
     postPhoto(data){
         return fetch('https://api.cloudinary.com/v1_1/ddxpoaice/image/upload', {

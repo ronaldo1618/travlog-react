@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Link } from "react-router-dom"
+import React, { useState } from 'react';
+import { Navbar, Nav } from 'react-bootstrap';
 
 export default function NavBar(props) {
     
@@ -22,45 +22,22 @@ export default function NavBar(props) {
 
     return (
         <>
-        <ul>
-        {
-            isAuthenticated() ?
-                <>
-                    <li>
-                        <Link to="/">Home</Link>
-                    </li>
-                    <li>
-                        <Link to="/trips">Trips</Link>
-                    </li>
-                    <li>
-                        <Link to="/profile">Profile</Link>
-                    </li>
-                    <li>
-                        <button
-                            onClick={handleLogout}
-                        >Logout</button>
-                    </li>
-                </>
-                : null}
-        {/* {!isAuthenticated() ?
-            <>
-                {props.location.pathname === '/Login' || props.location.pathname === '/login' ? 
-                    <></>
-                    :
-                    <li >
-                        <Link className="nav-link" to="/login">Login</Link>
-                    </li>
-                }
-                {props.location.pathname === '/register' ?
-                    <></>
-                    :
-                    <li >
-                        <Link className="nav-link" to="/register">Register</Link>
-                    </li>
-                }
-            </>
-            : null} */}
-        </ul>
+        {isAuthenticated() ?
+        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+            <Navbar.Brand href="/">Trav/Log</Navbar.Brand>
+            <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
+            <Navbar.Collapse id="responsive-navbar-nav">
+                <Nav className="mr-auto">
+                    <Nav.Link className={`nav-link ${props.location.pathname === "/" ? 'active' : ''}`} href="/">Home</Nav.Link>
+                    <Nav.Link className={`nav-link ${props.location.pathname === "/trips" ? 'active' : ''}`} href="/trips">Trips</Nav.Link>
+                    <Nav.Link className={`nav-link ${props.location.pathname === "/profile" ? 'active' : ''}`} href="/profile">Profile</Nav.Link>
+                    <Nav.Link className="logout" onClick={handleLogout}>Logout</Nav.Link>
+                </Nav>
+            </Navbar.Collapse>
+        </Navbar>
+        :
+        null
+        }
         </>
     )
 }

@@ -75,6 +75,14 @@ export default function ApplicationViews(props) {
                 }
             }}
             />
+            <Route exact path='/profile/:userProfileId(\d+)' render={props => {
+                if(isAuthenticated()) {
+                    return <Account userProfileId={parseInt(props.match.params.userProfileId)} {...props} />
+                } else {
+                    return <Redirect to="Login"/>
+                }
+            }}
+            />
             <Route exact path='/profile/form' render={props => {
                 if(isAuthenticated()) {
                     return <AccountForm {...props} />
