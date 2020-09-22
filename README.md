@@ -5,11 +5,11 @@ Travlog is a full stack app created for users that like to plan trips out and ke
 ## Getting Started
   To get started:
   * Register an account
-  * To find a trip
+  Find a trip:
   * Search for other users trips
   * Click on a trip you like
   * Now you can view the details of the trip or copy the trip and set it as one of your trips!
-  * To create a trip
+  Create a trip:
   * Go to trips tab and click new trip
   * Fill out the initial trip info(*) ** Note: if you want to save this trip to your homepage for easy editing, click the view on homepage box!**
   * After clicking submit, you will be directed to that trips detail view where you can start planning out the itinerary for it!
