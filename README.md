@@ -3,6 +3,7 @@
 Travlog is a full stack app created for users that like to plan trips out and keep track of all the trips they've been on. Users will register/login with token based authentication with the help of Django. Once the user is logged in, they will be able to get started planning their trips or search for trips created by other users!
 
 ## Getting Started
+    To get started:
   * Register an account
 
   * To find a trip
