@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import apiManager from '../../modules/apiManager';
 import { Modal, ModalHeader } from 'reactstrap';
+import { Form, Button, Col } from 'react-bootstrap';
 
 
 export default function TripForm(props) {
@@ -22,7 +23,9 @@ export default function TripForm(props) {
     const handleHomePageTrip = () => setHomePageTrip(!homepage_trip)
 
     const onSubmitHandler = e => {
+        let img = image
         if (title.current.value === '') return alert('Please fill out the title field!')
+        if(image === '') img = 'https://res.cloudinary.com/ddxpoaice/image/upload/v1600380387/travlog/we5defner2mgy5myshvc.jpg'
         if(!loading) {
             const trip = {
                 title: title.current.value,
@@ -32,7 +35,7 @@ export default function TripForm(props) {
                 end_date: end_date.current.value,
                 is_public: is_public,
                 homepage_trip: homepage_trip,
-                overlay_image: image
+                overlay_image: img
             }
             apiManager.postObj('trips', trip).then(trip => {
                 setNewTrip(trip)
@@ -44,7 +47,7 @@ export default function TripForm(props) {
     const editTrip = (trip) => {
         if (title.current.value === '') return alert('Please fill out the title field!')
         let img = image
-        if(image === '' && trip.overlay_image !== null) img = trip.overlay_image
+        if(image === '' && trip.overlay_image === null) img = 'https://res.cloudinary.com/ddxpoaice/image/upload/v1600380387/travlog/we5defner2mgy5myshvc.jpg'
         const newTrip = {
             id: props.tripId,
             title: title.current.value,
@@ -130,110 +133,106 @@ export default function TripForm(props) {
     }
 
     return (
-        <>
-            <main>
-                <form>
+        <div className="form-container">
+            <div className="trip-form">
+                <Form>
                     <h1>Trip Form</h1>
-                    <fieldset>
-                        <label htmlFor="title"> Title </label>
-                        <input ref={title} type="text"
+                    <Form.Group>
+                        {/* <Form.Label htmlFor="title"> Title </Form.Label> */}
+                        <Form.Control ref={title} type="text"
                             name="title"
                             className="form-control"
                             placeholder="title"
                             defaultValue={trip.title}
                             required autoFocus />
-                    </fieldset>
-                    <fieldset>
-                        <label htmlFor="description"> Description </label>
-                        <input ref={description} type="text"
+                    </Form.Group>
+                    <Form.Group>
+                        {/* <Form.Label htmlFor="description"> Description </Form.Label> */}
+                        <Form.Control ref={description} type="text"
                             name="description"
                             className="form-control"
                             placeholder="description"
                             defaultValue={trip.description}
                             required autoFocus />
-                    </fieldset>
-                    <fieldset>
-                        <label htmlFor="trip_length"> Trip Length </label>
-                        <input ref={trip_length} type="number"
+                    </Form.Group>
+                    <Form.Group>
+                        {/* <Form.Label htmlFor="trip_length"> Trip Length </Form.Label> */}
+                        <Form.Control ref={trip_length} type="number"
                             name="trip_length"
                             className="form-control"
                             placeholder="trip length"
                             defaultValue={trip.trip_length}
                             required />
-                    </fieldset>
-                    <fieldset>
-                        <label htmlFor="start_date"> Start Date </label>
-                        <input ref={start_date} type="date"
-                            name="start_date"
-                            className="form-control"
-                            defaultValue={trip.start_date}
-                            required />
-                    </fieldset>
-                    <fieldset>
-                        <label htmlFor="end_date"> End Date </label>
-                        <input ref={end_date} type="date"
-                            name="end_date"
-                            className="form-control"
-                            defaultValue={trip.end_date}
-                            placeholder="end date"
-                        />
-                    </fieldset>
-                    <fieldset>
-                        <label htmlFor="is_public"> Make Trip Public?</label>
-                        <input onChange={handleClick} type="checkbox"
+                    </Form.Group>
+                    <Form.Row>
+                        <Form.Group as={Col}>
+                            <Form.Label htmlFor="start_date"> Start Date </Form.Label>
+                            <Form.Control ref={start_date} type="date"
+                                name="start_date"
+                                className="form-control"
+                                defaultValue={trip.start_date}
+                                required />
+                        </Form.Group>
+                        <Form.Group as={Col}>
+                            <Form.Label htmlFor="end_date"> End Date </Form.Label>
+                            <Form.Control ref={end_date} type="date"
+                                name="end_date"
+                                className="form-control"
+                                defaultValue={trip.end_date}
+                                placeholder="end date"
+                            />
+                        </Form.Group>
+                    </Form.Row>
+                    <div className="mb-3">
+                        <Form.Check onChange={handleClick} type="checkbox"
                             name="is_public"
-                            className="form-control"
-                            placeholder="is public"
                             defaultValue={trip.is_public}
+                            label="Make trip public?"
                         />
-                    </fieldset>
-                    <fieldset>
-                        <label htmlFor="homepage_trip"> Display Trip On Homepage? </label>
-                        <input onChange={handleHomePageTrip} type="checkbox"
+                        <Form.Check onChange={handleHomePageTrip} type="checkbox"
                             name="homepage_trip"
-                            className="form-control"
-                            placeholder="homepage trip"
                             defaultValue={trip.homepage_trip}
+                            label="Easy access to trip on homepage?"
                         />
-                    </fieldset>
-                    <fieldset>
-                        <label htmlFor="upload_image"> Upload Image</label>
-                        <input onChange={uploadImage} type="file"
-                            name="file"
-                            className="form-control"
-                            placeholder="Upload Image"
-                            defaultValue={trip.overlay_image}
-                        />
-                    </fieldset>
-                    <fieldset>
+                    </div>
+                    <div>
+                        <Form.Group>
+                            <Form.File onChange={uploadImage} type="file"
+                                name="file"
+                                defaultValue={trip.overlay_image}
+                                label="Upload Image"
+                            />
+                        </Form.Group>
+                    </div>
+                    <Form.Group>
                         {
                             props.tripId ?
                             <>
-                            <button disabled={loading} type="button" onClick={() => editTrip(trip)}>
+                            <Button disabled={loading} type="button" onClick={() => editTrip(trip)}>
                                 Update Trip
-                            </button>
+                            </Button>
                             {loading ? <p>Loading image...</p>:null}
                             </>
                             :
                             <>
-                                <button disabled={loading} type="button" onClick={onSubmitHandler}>
+                                <Button disabled={loading} type="button" onClick={onSubmitHandler}>
                                     Create Trip
-                                </button>
+                                </Button>
                                 {loading ? <p>Loading image...</p>:null}
                             </>
                         }
-                    </fieldset>
-                </form>
+                    </Form.Group>
+                </Form>
                 <Modal isOpen={modal} toggle={toggle}>
                     <ModalHeader toggle={toggle}>Would you like to plan out each day for your trip?</ModalHeader>
                     <form>
                         <div>
-                            <button type="button" onClick={createForEachDay}>Yes</button>
-                            <button type="button" onClick={createForEachActivity}>No</button>
+                            <Button type="button" onClick={createForEachDay}>Yes</Button>
+                            <Button type="button" onClick={createForEachActivity}>No</Button>
                         </div>
                     </form>
                 </Modal>
-            </main>
-        </>
+            </div>
+        </div>
     )
 }

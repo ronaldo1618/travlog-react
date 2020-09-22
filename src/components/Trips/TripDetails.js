@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import apiManager from '../../modules/apiManager';
 import ItineraryList from './Itinerary/ItineraryList';
-import { Icon } from 'semantic-ui-react'; 
+import { Icon } from 'semantic-ui-react';
+import { Button } from 'react-bootstrap';
+import moment from 'moment';
 import './Trip.css';
 
 export default function TripDetails(props) {
@@ -119,8 +121,8 @@ export default function TripDetails(props) {
                     <h3>Trip Cost: ${totalCost}</h3>
                     {user === trip.creator_id ?
                     <div>
-                        <button type='button' onClick={() => deleteObj(type, trip.id)}>Delete Trip</button>
-                        <button type='button' onClick={() => props.history.push(`/trips/form/${trip.id}`)}>Edit Trip</button>
+                        <Button type='button' onClick={() => deleteObj(type, trip.id)}>Delete Trip</Button>
+                        <Button type='button' onClick={() => props.history.push(`/trips/form/${trip.id}`)}>Edit Trip</Button>
                     </div>
                     :
                     <input className="button-group-icons" type="button" value="Copy Trip" onClick={copyTrip}/>
@@ -133,7 +135,7 @@ export default function TripDetails(props) {
                         }
                         <div>
                             <a href={`/profile/${trip.creator_id}`}><p>{creator.user.username}</p></a>
-                            <p><small className="text-muted">{trip.date_created}</small></p>
+                            <p><small className="text-muted">{moment(trip.date_created, 'YYYY-MM-DD').format("MMM Do YYYY")}</small></p>
                         </div>
                     </div>
                 </div>
@@ -176,7 +178,7 @@ export default function TripDetails(props) {
                                 <h2 className=""><Icon className="angle down"></Icon>Itinerary</h2>
                                 {user === trip.creator_id ?
                                 <div>
-                                    <button type='button' onClick={() => props.history.push(`/day_itinerarys/form/${trip.id}`)}>Add Itinerary Category</button>
+                                    <Button type='button' onClick={() => props.history.push(`/day_itinerarys/form/${trip.id}`)}>Add Itinerary Category</Button>
                                 </div>
                                 :
                                 null
@@ -195,7 +197,7 @@ export default function TripDetails(props) {
                             <h2 className=""><Icon className="angle right"></Icon>Itinerary</h2>
                             {user === trip.creator_id ?
                             <div>
-                                <button type='button' onClick={() => props.history.push(`/day_itinerarys/form/${trip.id}`)}>Add Itinerary Category</button>
+                                <Button type='button' onClick={() => props.history.push(`/day_itinerarys/form/${trip.id}`)}>Add Itinerary Category</Button>
                             </div>
                             :
                             null

@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import { Card, CardTitle, CardText, CardBody, Button, CardImg } from 'reactstrap';
 // import { Header, Image } from 'semantic-ui-react';
 
@@ -35,7 +36,7 @@ export default function TripCard(props) {
                             }
                             <div>
                                 <a href={`/profile/${props.trip.creator_id}`}><CardText>{props.creator.user.username}</CardText></a>
-                                <CardText><small className="text-muted">{props.trip.date_created}</small></CardText>
+                                <CardText><small className="text-muted">{moment(props.trip.date_created, 'YYYY-MM-DD').format("MMM Do YYYY")}</small></CardText>
                             </div>
                         </div>
                     </div>

@@ -5,6 +5,7 @@ import ItineraryList from '../Trips/Itinerary/ItineraryList';
 import { Icon } from 'semantic-ui-react';
 import { InputGroup, InputGroupAddon } from 'reactstrap';
 import { Button } from 'reactstrap';
+import moment from 'moment';
 import '../Trips/Trip.css';
 
 export default function Home(props) {
@@ -113,7 +114,7 @@ export default function Home(props) {
                         }
                         <div>
                             <a href={`/profile/${userHomePageTrip.creator_id}`}><p>{traveler.user.username}</p></a>
-                            <p><small className="text-muted">{userHomePageTrip.date_created}</small></p>
+                            <p><small className="text-muted">{moment(userHomePageTrip.date_created).format('MMM Do YYYY')}</small></p>
                         </div>
                     </div>
                 </div>

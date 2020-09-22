@@ -6,10 +6,12 @@ import { Button } from 'reactstrap';
 export default function TripList(props) {
 
     const [user, setUser] = useState(Number)
+    const [loading, setLoading] = useState(false)
     const [trips, setTrips] = useState([])
     const [tripCreators, setTripCreators] = useState([{user:{}}])
 
     const getTrips = () => {
+        setLoading(true)
         apiManager.getTrips().then(trips => {
             let creators = []
             trips.sort((a,b) => b.id - a.id)
@@ -18,6 +20,7 @@ export default function TripList(props) {
             });
             setTripCreators(creators)
             setTrips(trips)
+            setLoading(false)
         })
     }
 
@@ -42,9 +45,13 @@ export default function TripList(props) {
             <div className="new-entry-btn">
                 <Button color="primary" type="button" onClick={() => {props.history.push("/trips/form")}}>New Trip</Button>
             </div>
+            {!loading ?
             <div className="trip-cards">
                 {trips.map((trip, index) => <TripCard key={trip.id} userId={user} tripId={trip.id} trip={trip} deleteObj={deleteObj} creator={tripCreators[index]} {...props}/>)}
             </div>
+            :
+            null
+            }
         </>
     )
 }

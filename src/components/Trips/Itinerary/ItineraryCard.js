@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
+import moment from 'moment';
 import '../Trip.css';
 
 
@@ -8,18 +9,16 @@ export default function ItineraryCard(props) {
     const type = props.activity.url.split('8000/')[1].split('/')[0]
 
     return (
-        <>
+        <div className="itin-card-container">
             {type === 'transportations' ? 
-                <Card className="itin-card" style={{ width: '18rem'}}>
+                <Card className="itin-card">
                     <Card.Header>Transportation Icon</Card.Header>
                     <Card.Body>
                     <Card.Text>Name: {props.activity.name}</Card.Text>
                     <Card.Text>Notes: {props.activity.notes}</Card.Text>
                     <Card.Text>Cost: ${props.activity.cost}</Card.Text>
-                    <Card.Text>Departure Date: {props.activity.dep_datetime.slice(0, 10)}</Card.Text>
-                    <Card.Text>Departure Info: {props.activity.dep_info}</Card.Text>
-                    <Card.Text>Arrival Date: {props.activity.datetime.slice(0, 10)}</Card.Text>
-                    <Card.Text>Arrival Info: {props.activity.arr_info}</Card.Text>
+                    <Card.Text>Departure Date: {moment(props.activity.dep_datetime).format('MMM Do YYYY, h:mm a')}</Card.Text>
+                    <Card.Text>Arrival Date: {moment(props.activity.datetime.slice(0, 10)).format('MMM Do YYYY, h:mm a')}</Card.Text>
                     {props.userId === props.creatorId ?
                         <>
                             <button type='button' onClick={() => props.deleteObj(type, props.activity.id)}>Delete</button>
@@ -33,14 +32,14 @@ export default function ItineraryCard(props) {
             : null
             }
             {type === 'activitys' ? 
-                <Card className="itin-card" style={{ width: '18rem'}}>
+                <Card className="itin-card">
                     <Card.Header>Activity Icon</Card.Header>
                     <Card.Body>
                     <Card.Text>Name: {props.activity.name}</Card.Text>
                     <Card.Text>Notes: {props.activity.notes}</Card.Text>
                     <Card.Text>Cost: ${props.activity.cost}</Card.Text>
                     <Card.Text>Address: {props.activity.address}</Card.Text>
-                    <Card.Text>Date: {props.activity.datetime.slice(0, 10)}</Card.Text>
+                    <Card.Text>Date: {moment(props.activity.datetime.slice(0, 10), 'YYYY-MM-DD').format('MMM Do YYYY')}</Card.Text>
                     {props.userId === props.creatorId ?
                         <>
                             <button type='button' onClick={() => props.deleteObj(type, props.activity.id)}>Delete</button>
@@ -54,7 +53,7 @@ export default function ItineraryCard(props) {
             : null
             }
             {type === 'foods' ? 
-                <Card className="itin-card" style={{ width: '18rem'}}>
+                <Card className="itin-card">
                     <Card.Header>Food Icon</Card.Header>
                     <Card.Body>
 
@@ -62,7 +61,7 @@ export default function ItineraryCard(props) {
                     <Card.Text>Notes: {props.activity.notes}</Card.Text>
                     <Card.Text>Cost: ${props.activity.cost}</Card.Text>
                     <Card.Text>Address: {props.activity.address}</Card.Text>
-                    <Card.Text>Date: {props.activity.datetime.slice(0, 10)}</Card.Text>
+                    <Card.Text>Date: {moment(props.activity.datetime.slice(0, 10), 'YYYY-MM-DD').format('MMM Do YYYY')}</Card.Text>
                     {props.userId === props.creatorId ?
                         <>
                             <button type='button' onClick={() => props.deleteObj(type, props.activity.id)}>Delete</button>
@@ -76,7 +75,7 @@ export default function ItineraryCard(props) {
             : null
             }
             {type === 'lodgings' ? 
-                <Card className="itin-card" style={{ width: '18rem'}}>
+                <Card className="itin-card">
                     <Card.Header>Lodging Icon</Card.Header>
                     <Card.Body>
 
@@ -84,10 +83,10 @@ export default function ItineraryCard(props) {
                     <Card.Text>Notes: {props.activity.notes}</Card.Text>
                     <Card.Text>Cost: ${props.activity.cost}</Card.Text>
                     <Card.Text>Address: {props.activity.address}</Card.Text>
-                    <Card.Text>Check-in: {props.activity.check_in.slice(0, 10)}</Card.Text>
-                    <Card.Text>Check-out: {props.activity.datetime.slice(0, 10)}</Card.Text>
+                    <Card.Text>Check-in: {moment(props.activity.check_in.slice(0, 10)).format('MMM Do YYYY, h:mm a')}</Card.Text>
+                    <Card.Text>Check-out: {moment(props.activity.datetime.slice(0, 10)).format('MMM Do YYYY, h:mm a')}</Card.Text>
                     <Card.Text>Phone-number: {props.activity.phone_number}</Card.Text>
-                    <a rel="noopener noreferrer" href={props.activity.website} target="_blank">{props.activity.website}</a>
+                    <Card.Text><a rel="noopener noreferrer" href={props.activity.website} target="_blank">{props.activity.website}</a></Card.Text>
                     <Card.Text>Address: {props.activity.address}</Card.Text>
                     {props.userId === props.creatorId ?
                         <>
@@ -101,7 +100,6 @@ export default function ItineraryCard(props) {
                 </Card>
             : null
             }
-            <hr/>
-        </>
+        </div>
     )
 }
