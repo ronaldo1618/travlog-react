@@ -13,7 +13,7 @@ export default function ItineraryList(props) {
     }
 
     return (
-        <div className="">
+        <div className=''>
             {!showItinerary ?
                 <div className="itin-list">
                     <div onClick={toggle} className="flex-center itinerary-toggle">

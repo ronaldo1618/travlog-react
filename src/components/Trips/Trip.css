@@ -192,8 +192,13 @@
     align-items: center;
 }
 
-.itin-card {
+.itin-card-container {
     margin-top: 2em;
+    width: 400px;
+}
+
+.itin-card {
+    text-align: center;
 }
 
 .flex-center {

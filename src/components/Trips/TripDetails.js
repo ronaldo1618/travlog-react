@@ -3,6 +3,7 @@ import apiManager from '../../modules/apiManager';
 import ItineraryList from './Itinerary/ItineraryList';
 import { Icon } from 'semantic-ui-react';
 import { Button } from 'react-bootstrap';
+import moment from 'moment';
 import './Trip.css';
 
 export default function TripDetails(props) {
@@ -134,7 +135,7 @@ export default function TripDetails(props) {
                         }
                         <div>
                             <a href={`/profile/${trip.creator_id}`}><p>{creator.user.username}</p></a>
-                            <p><small className="text-muted">{trip.date_created}</small></p>
+                            <p><small className="text-muted">{moment(trip.date_created, 'YYYY-MM-DD').format("MMM Do YYYY")}</small></p>
                         </div>
                     </div>
                 </div>

@@ -5,7 +5,6 @@ import apiManager from '../../modules/apiManager';
 import { Button, Form } from 'react-bootstrap';
 import '../../index.css';
 
-
 function Register(props) {
     const email = useRef()
     const userName = useRef()
@@ -65,7 +64,6 @@ function Register(props) {
         <img className="img-bkgrnd" alt="" src='https://s.inspirockcdn.com/partners/visittheusa-home.jpg'/>
         <div>
         <div className="register-container">
-
         <div className="login-box">
             <Form className="" onSubmit={handleRegister}>
                 <h1 className="h3 mb-3 font-weight-normal">Register to use TravLog!</h1>
