@@ -1,16 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
 import apiManager from '../../../modules/apiManager';
-import { Form } from 'reactstrap';
+import { Form, Col, Button} from 'react-bootstrap';
 
 export default function TransportationForm(props) {
 
     const name = useRef()
     const notes = useRef()
-    const cost = useRef()
+    const [cost, setCost] = useState(0)
     const dep_datetime = useRef()
     const datetime = useRef()
-    const dep_info = useRef()
-    const arr_info = useRef()
+    // const dep_info = useRef()
+    // const arr_info = useRef()
     const [ dayItinerary, setDayItinerary ] = useState({})
     const [ itinerary, setItinerary ] = useState([])
     const [ oldTransportation, setTransportation ] = useState({day_itinerary: {}})
@@ -24,11 +24,11 @@ export default function TransportationForm(props) {
         const transportation = {
             name: name.current.value,
             notes: notes.current.value,
-            cost: cost.current.value,
+            cost: cost,
             dep_datetime: dep_datetime.current.value,
             datetime: datetime.current.value,
-            dep_info: dep_info.current.value,
-            arr_info: arr_info.current.value,
+            // dep_info: dep_info.current.value,
+            // arr_info: arr_info.current.value,
             day_itinerary_id: dayItinerary.id
         }
         apiManager.postObj('transportations', transportation)
@@ -45,11 +45,11 @@ export default function TransportationForm(props) {
             id: props.transportationId,
             name: name.current.value,
             notes: notes.current.value,
-            cost: cost.current.value,
+            cost: cost,
             dep_datetime: dep_datetime.current.value,
             datetime: datetime.current.value,
-            dep_info: dep_info.current.value,
-            arr_info: arr_info.current.value,
+            // dep_info: dep_info.current.value,
+            // arr_info: arr_info.current.value,
             day_itinerary_id: dayItinerary.id
         }
         apiManager.putObj('transportations', transportation)
@@ -81,101 +81,110 @@ export default function TransportationForm(props) {
         setDayItinerary(itinerary_day[0])
     }
 
+    const handleCost = e => {
+        setCost(e.target.value)
+    }
+
     useEffect(getItinerary, [])
     useEffect(() => {
         if(props.transportationId){
             apiManager.getById('transportations', props.transportationId).then(obj => {
                 obj.datetime = obj.datetime.slice(0, 16)
                 obj.dep_datetime = obj.dep_datetime.slice(0, 16)
+                setCost(obj.cost)
                 setTransportation(obj)
             })
         }
     },[props.transportationId])
 
     return (
-         <main>
-            <Form>
+         <div className="register-container">
+            <Form className="login-box">
                 <h1>Transportation Form</h1>
-                <fieldset>
-                    <label htmlFor="name"> Name </label>
-                    <input ref={name} type="text"
+                <Form.Group>
+                    {/* <Form.Label htmlFor="name"> Name </Form.Label> */}
+                    <Form.Control ref={name} type="text"
                         name="name"
                         className="form-control"
                         placeholder="name"
                         defaultValue={oldTransportation.name || ''}
                         required autoFocus/>
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="notes"> Notes </label>
-                    <input ref={notes} type="text"
+                </Form.Group>
+                {/* <Form.Group>
+                    <Form.Label htmlFor="notes"> Notes </Form.Label>
+                    <Form.Control ref={notes} type="text"
                         name="notes"
                         className="form-control"
                         placeholder="notes"
                         defaultValue={oldTransportation.notes || ''}
                         required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="cost"> Cost </label>
-                    <input ref={cost} type="number"
+                </Form.Group> */}
+                <Form.Group>
+                    <Form.Label htmlFor="cost"> Cost </Form.Label>
+                    <Form.Control onChange={handleCost} type="number"
                         name="cost"
                         className="form-control"
                         placeholder="cost"
-                        defaultValue={oldTransportation.cost || 0}
+                        value={cost || 'cost'}
                         required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="dep_datetime"> Departure Date </label>
-                    <input ref={dep_datetime} type="datetime-local"
-                        name="dep_datetime"
-                        className="form-control"
-                        defaultValue={oldTransportation.dep_datetime || 'yyyy-mm-dd'}
-                        required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="dep_info"> Departure Info </label>
-                    <input ref={dep_info} type="text"
+                </Form.Group>
+                <Form.Row>
+                    <Form.Group as={Col}>
+                        <Form.Label htmlFor="dep_datetime"> Departure Date </Form.Label>
+                        <Form.Control ref={dep_datetime} type="datetime-local"
+                            name="dep_datetime"
+                            className="form-control"
+                            defaultValue={oldTransportation.dep_datetime || 'yyyy-mm-dd'}
+                            required />
+                    </Form.Group>
+                    <Form.Group as={Col}>
+                        <Form.Label htmlFor="datetime"> Arrival Date </Form.Label>
+                        <Form.Control ref={datetime} type="datetime-local"
+                            name="datetime"
+                            className="form-control"
+                            placeholder="datetime"
+                            defaultValue={oldTransportation.datetime || ""}
+                        />
+                    </Form.Group>
+                </Form.Row>
+                {/* <Form.Group>
+                    <Form.Label htmlFor="dep_info"> Departure Info </Form.Label>
+                    <Form.Control ref={dep_info} as="textarea"
+                        rows={3}
                         name="dep_info"
                         className="form-control"
                         placeholder="departure info"
                         defaultValue={oldTransportation.dep_info || ''}
                         required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="datetime"> Arrival Date </label>
-                    <input ref={datetime} type="datetime-local"
-                        name="datetime"
-                        className="form-control"
-                        placeholder="datetime"
-                        defaultValue={oldTransportation.datetime || ""}
-                    />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="arr_info"> Arrival Info </label>
-                    <input ref={arr_info} type="text"
+                </Form.Group> */}
+                <Form.Group>
+                    {/* <Form.Label htmlFor="arr_info"> Arrival Info </Form.Label> */}
+                    <Form.Control ref={notes} as="textarea"
+                        rows={3}
                         name="arr_info"
                         className="form-control"
-                        placeholder="arrival info"
+                        placeholder="arrival info or departure info"
                         defaultValue={oldTransportation.arr_info || ''}
                         required />
-                </fieldset>
-                <fieldset>
+                </Form.Group>
+                <Form.Group>
                     <select required onChange={handleChange} id="day_itinerary">
                         <option>{oldTransportation.day_itinerary.name || 'Select Itinerary Category'}</option>
                         {itinerary.map(day_itinerary => <option key={day_itinerary.id}>{day_itinerary.name}</option>)}
                     </select>
-                </fieldset>
-                <fieldset>
+                </Form.Group>
+                <Form.Group>
                     {props.transportationId ? 
-                        <button type="button" onClick={() => editTransportation(oldTransportation)}>
+                        <Button type="button" onClick={() => editTransportation(oldTransportation)}>
                             Update Transportation
-                        </button>
+                        </Button>
                         :
-                        <button type="button" onClick={onSubmitHandler}>
+                        <Button type="button" onClick={onSubmitHandler}>
                             Add Transportation
-                        </button>
+                        </Button>
                     }
-                </fieldset>
+                </Form.Group>
             </Form>
-        </main>
+        </div>
     )
 }

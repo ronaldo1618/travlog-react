@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
+import { Form, Button } from 'react-bootstrap';
 import apiManager from '../../modules/apiManager';
 
 export default function DayItineraryForm(props) {
@@ -41,39 +42,39 @@ export default function DayItineraryForm(props) {
     },[props.transportationId, props.day_itinerary_id])
 
     return (
-         <main>
-            <form>
+         <div className="form-container">
+            <Form className="form">
                 <h1>Itinerary Day Form</h1>
-                <fieldset>
-                    <label htmlFor="name"> name </label>
-                    <input ref={name} type="text"
+                <Form.Group>
+                    {/* <Form.Label htmlFor="name"> Name </Form.Label> */}
+                    <Form.Control ref={name} type="text"
                         name="name"
                         className="form-control"
                         placeholder="name"
                         defaultValue={day_itinerary.name}
                         required autoFocus />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="description"> Description </label>
-                    <input ref={description} type="text"
+                </Form.Group>
+                <Form.Group>
+                    {/* <Form.Label htmlFor="description"> Description </Form.Label> */}
+                    <Form.Control ref={description} type="text"
                         name="description"
                         className="form-control"
                         placeholder="description"
                         defaultValue={day_itinerary.description}
                         required autoFocus />
-                </fieldset>
-                <fieldset>
+                </Form.Group>
+                <Form.Group>
                     {props.day_itinerary_id ? 
-                        <button type="button" onClick={editDayItinerary}>
+                        <Button type="button" onClick={editDayItinerary}>
                             Update Itinerary Day
-                        </button>
+                        </Button>
                         :
-                        <button type="button" onClick={onSubmitHandler}>
+                        <Button type="button" onClick={onSubmitHandler}>
                             Create Itinerary Day
-                        </button>
+                        </Button>
                     }
-                </fieldset>
-            </form>
-        </main>
+                </Form.Group>
+            </Form>
+        </div>
     )
 }
