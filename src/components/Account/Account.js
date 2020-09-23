@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import apiManager from '../../modules/apiManager';
+import { Button } from 'react-bootstrap';
 import TripCard from '../Trips/TripCard';
 
 export default function Account(props) {
@@ -70,7 +71,7 @@ export default function Account(props) {
                 <h2>{tripCreators[0].user.username}</h2>
                 <p>{tripCreators[0].bio}</p>
                 {traveler.id === props.userProfileId || !props.userProfileId ?
-                <button type="button" onClick={() => props.history.push(`/profile/form`)}>Edit Account</button>
+                <Button type="button" onClick={() => props.history.push(`/profile/form`)}>Edit Account</Button>
                 :
                 null
                 }

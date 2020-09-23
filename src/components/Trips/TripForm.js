@@ -23,6 +23,7 @@ export default function TripForm(props) {
     const handleHomePageTrip = () => setHomePageTrip(!homepage_trip)
 
     const onSubmitHandler = e => {
+        console.log(image)
         let img = image
         if (title.current.value === '') return alert('Please fill out the title field!')
         if(image === '') img = 'https://res.cloudinary.com/ddxpoaice/image/upload/v1600380387/travlog/we5defner2mgy5myshvc.jpg'
@@ -47,7 +48,13 @@ export default function TripForm(props) {
     const editTrip = (trip) => {
         if (title.current.value === '') return alert('Please fill out the title field!')
         let img = image
-        if(image === '' && trip.overlay_image === null) img = 'https://res.cloudinary.com/ddxpoaice/image/upload/v1600380387/travlog/we5defner2mgy5myshvc.jpg'
+        if(image === '') {
+            if(trip.overlay_image !== '') {
+                img = trip.overlay_image
+            } else {
+                img = 'https://res.cloudinary.com/ddxpoaice/image/upload/v1600380387/travlog/we5defner2mgy5myshvc.jpg'
+            }
+        }
         const newTrip = {
             id: props.tripId,
             title: title.current.value,
@@ -221,6 +228,7 @@ export default function TripForm(props) {
                                 {loading ? <p>Loading image...</p>:null}
                             </>
                         }
+                        <Button type="button" onClick={() => props.history.push(`/trips`)}>Cancel</Button>
                     </Form.Group>
                 </Form>
                 <Modal isOpen={modal} toggle={toggle}>

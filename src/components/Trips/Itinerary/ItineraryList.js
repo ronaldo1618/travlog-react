@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import apiManager from '../../../modules/apiManager';
 import ItineraryCard from './ItineraryCard';
+import { Button } from 'react-bootstrap';
 import { Icon } from 'semantic-ui-react';
 
 export default function ItineraryList(props) {
@@ -25,8 +26,8 @@ export default function ItineraryList(props) {
                         </div>
                         {props.userId === props.creatorId ?
                         <div>
-                            <button type='button' onClick={() => deleteObj('day_itinerarys', props.itinerary_day.id)}>Delete</button>
-                            <button type='button' onClick={() => props.history.push(`/day_itinerarys/form/${props.itinerary_day.trip_id}/${props.itinerary_day.id}`)}>Edit</button>
+                            <Button type='button' onClick={() => deleteObj('day_itinerarys', props.itinerary_day.id)}>Delete</Button>
+                            <Button type='button' onClick={() => props.history.push(`/day_itinerarys/form/${props.itinerary_day.trip_id}/${props.itinerary_day.id}`)}>Edit</Button>
                         </div>
                         :
                         null
@@ -46,8 +47,8 @@ export default function ItineraryList(props) {
                     </div>
                     {props.userId === props.creatorId ?
                     <div>
-                        <button type='button' onClick={() => deleteObj('day_itinerarys', props.itinerary_day.id)}>Delete</button>
-                        <button type='button' onClick={() => props.history.push(`/day_itinerarys/form/${props.itinerary_day.trip_id}/${props.itinerary_day.id}`)}>Edit</button>
+                        <Button type='button' onClick={() => deleteObj('day_itinerarys', props.itinerary_day.id)}>Delete</Button>
+                        <Button type='button' onClick={() => props.history.push(`/day_itinerarys/form/${props.itinerary_day.trip_id}/${props.itinerary_day.id}`)}>Edit</Button>
                     </div>
                     :
                     null

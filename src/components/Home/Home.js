@@ -83,9 +83,9 @@ export default function Home(props) {
         apiManager.getTraveler().then(user => setTraveler(user[0]))
     }
 
-    const deleteObj = (type, id) => {
-        apiManager.deleteObj(type, id).then(getTrips)
-    }
+    // const deleteObj = (type, id) => {
+    //     apiManager.deleteObj(type, id).then(getTrips)
+    // }
 
     useEffect(getUser, [])
     useEffect(getTrip, [])
@@ -181,7 +181,7 @@ export default function Home(props) {
             </div>
             <div className="trip-cards">
                 {!loading ?
-                <>{trips.map((trip, index) => <TripCard key={trip.id} userId={user} tripId={trip.id} trip={trip} deleteObj={deleteObj} creator={tripCreators[index]} {...props}/>)}</>
+                <>{trips.map((trip, index) => <TripCard key={trip.id} userId={user} tripId={trip.id} trip={trip} deleteObj={false} creator={tripCreators[index]} {...props}/>)}</>
                 :
                 null
                 }

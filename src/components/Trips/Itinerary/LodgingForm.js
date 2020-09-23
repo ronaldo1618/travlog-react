@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Form, Button, Col } from 'react-bootstrap';
 import apiManager from '../../../modules/apiManager';
 
 export default function LodgingForm(props) {
 
     const name = useRef()
     const notes = useRef()
-    const cost = useRef()
+    const [cost, setCost] = useState(0)
     const address = useRef() 
     const website = useRef()
     const phone_number = useRef()
@@ -22,7 +23,7 @@ export default function LodgingForm(props) {
         const lodging = {
             name: name.current.value,
             notes: notes.current.value,
-            cost: cost.current.value,
+            cost: cost,
             address: address.current.value,
             datetime: datetime.current.value,
             check_in: check_in.current.value,
@@ -43,7 +44,7 @@ export default function LodgingForm(props) {
             id: props.lodgingId,
             name: name.current.value,
             notes: notes.current.value,
-            cost: cost.current.value,
+            cost: cost,
             address: address.current.value,
             datetime: datetime.current.value,
             check_in: check_in.current.value,
@@ -86,102 +87,111 @@ export default function LodgingForm(props) {
             apiManager.getById('lodgings', props.lodgingId).then(obj => {
                 obj.datetime = obj.datetime.slice(0, 16)
                 obj.check_in = obj.check_in.slice(0, 16)
+                setCost(obj.cost)
                 setLodging(obj)
             })
         }
     },[props.lodgingId])
 
     return (
-         <main>
-            <form>
+         <div className="register-container">
+            <Form className="login-box">
                 <h1>Lodging Form</h1>
-                <fieldset>
-                    <label htmlFor="name"> Name </label>
-                    <input ref={name} type="text"
+                <Form.Group>
+                    {/* <Form.Label htmlFor="name"> Name </Form.Label> */}
+                    <Form.Control ref={name} type="text"
                         name="name"
                         className="form-control"
                         placeholder="name"
                         defaultValue={oldLodging.name || ''}
                         required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="notes"> Notes </label>
-                    <input ref={notes} type="text"
+                </Form.Group>
+                <Form.Group>
+                    {/* <Form.Label htmlFor="notes"> Notes </Form.Label> */}
+                    <Form.Control ref={notes} type="text"
                         name="notes"
                         className="form-control"
                         placeholder="notes"
                         defaultValue={oldLodging.notes || ''}
                         required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="cost"> Cost </label>
-                    <input ref={cost} type="number"
-                        name="cost"
-                        className="form-control"
-                        placeholder="cost"
-                        defaultValue={oldLodging.cost || 0}
-                        required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="address"> Address </label>
-                    <input ref={address} type="text"
+                </Form.Group>
+                <Form.Row>
+                    <Form.Group as={Col}>
+                        {/* <Form.Label htmlFor="cost"> Cost </Form.Label> */}
+                        <Form.Control onChange={e => setCost(e.target.value)} type="number"
+                            name="cost"
+                            className="form-control"
+                            placeholder="cost"
+                            value={cost || 'cost'}
+                            required />
+                    </Form.Group>
+                    <Form.Group as={Col}>
+                        {/* <Form.Label htmlFor="phone_number"> Phone Number </Form.Label> */}
+                        <Form.Control ref={phone_number} type="text"
+                            name="phone_number"
+                            className="form-control"
+                            placeholder="phone-number"
+                            defaultValue={oldLodging.phone_number || ''}
+                            required />
+                    </Form.Group>
+                </Form.Row>
+                <Form.Group>
+                    {/* <Form.Label htmlFor="address"> Address </Form.Label> */}
+                    <Form.Control ref={address} type="text"
                         name="address"
                         className="form-control"
+                        placeholder="address"
                         defaultValue={oldLodging.address || ''}
                         required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="phone_number"> Phone Number </label>
-                    <input ref={phone_number} type="text"
-                        name="phone_number"
-                        className="form-control"
-                        defaultValue={oldLodging.phone_number || ''}
-                        required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="website"> Website </label>
-                    <input ref={website} type="text"
+                </Form.Group>
+                <Form.Group>
+                    {/* <Form.Label htmlFor="website"> Website </Form.Label> */}
+                    <Form.Control ref={website} type="text"
                         name="website"
                         className="form-control"
+                        placeholder="website"
                         defaultValue={oldLodging.website || ''}
                         required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="check_in"> Check In </label>
-                    <input ref={check_in} type="datetime-local"
-                        name="check_in"
-                        className="form-control"
-                        placeholder="check-in"
-                        defaultValue={oldLodging.check_in || ""}
-                    />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="datetime"> Check Out </label>
-                    <input ref={datetime} type="datetime-local"
-                        name="datetime"
-                        className="form-control"
-                        placeholder="check-out"
-                        defaultValue={oldLodging.datetime || ""}
-                    />
-                </fieldset>
-                <fieldset>
+                </Form.Group>
+                <Form.Row>
+                    <Form.Group as={Col}>
+                        <Form.Label htmlFor="check_in"> Check In </Form.Label>
+                        <Form.Control ref={check_in} type="datetime-local"
+                            name="check_in"
+                            className="form-control"
+                            placeholder="check-in"
+                            defaultValue={oldLodging.check_in || ""}
+                        />
+                    </Form.Group>
+                    <Form.Group as={Col}>
+                        <Form.Label htmlFor="datetime"> Check Out </Form.Label>
+                        <Form.Control ref={datetime} type="datetime-local"
+                            name="datetime"
+                            className="form-control"
+                            placeholder="check-out"
+                            defaultValue={oldLodging.datetime || ""}
+                        />
+                    </Form.Group>
+                </Form.Row>
+                <Form.Group>
                     <select required onChange={handleChange} id="day_itinerary">
                         <option>{oldLodging.day_itinerary.name || 'Select Itinerary Category'}</option>
                         {itinerary.map(day_itinerary => <option key={day_itinerary.id}>{day_itinerary.name}</option>)}
                     </select>
-                </fieldset>
-                <fieldset>
+                </Form.Group>
+                <Form.Group>
                     {props.lodgingId ? 
-                        <button type="button" onClick={() => editLodging(oldLodging)}>
+                        <Button type="button" onClick={() => editLodging(oldLodging)}>
                             Update Lodging
-                        </button>
+                        </Button>
                         :
-                        <button type="button" onClick={onSubmitHandler}>
+                        <Button type="button" onClick={onSubmitHandler}>
                             Add Lodging
-                        </button>
+                        </Button>
                     }
-                </fieldset>
-            </form>
-        </main>
+                    <Button type="button" onClick={() => props.history.push(`/trips/${props.tripId}`)}>Cancel</Button>
+                </Form.Group>
+            </Form>
+        </div>
     )
 }
