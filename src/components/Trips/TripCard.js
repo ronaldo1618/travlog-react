@@ -9,7 +9,7 @@ export default function TripCard(props) {
     
     return (
         <div className="trip-card">
-            <Card>
+            <Card className="effect-shadow">
                 <div className="img-container">
                     <a href={`/trips/${props.tripId}`}><CardImg className="overlay-img" src={props.trip.overlay_image} alt="Card image cap"/></a>
                 </div>

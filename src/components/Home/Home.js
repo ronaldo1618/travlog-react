@@ -102,10 +102,14 @@ export default function Home(props) {
                         <h3>Trip Cost: ${totalCost}</h3>
                     </div>
                 </div> */}
-                <div className="trip-detail-info">
+                <div className="trip-detail-info effect-shadow">
                     <a href={`/trips/${userHomePageTrip.id}`}><h1>{userHomePageTrip.title}</h1></a>
                     <h3>{userHomePageTrip.description}</h3>
+                    {totalCost > 0 ?
                     <h3>Trip Cost: ${totalCost}</h3>
+                    :
+                    null
+                    }
                     <div className="profile-pic-info">
                         {traveler.profile_pic ?
                         <a className="circular--landscape" href={`/profile/${userHomePageTrip.creator_id}`}><img className="card-creator-img" alt="" src={traveler.profile_pic}/></a>
@@ -120,26 +124,26 @@ export default function Home(props) {
                 </div>
                 <div className="button-group-icons">
                     {user === userHomePageTrip.creator_id ?
-                        <div className="">
-                        <Icon.Group size="big">
+                        <div className="trip-details-btn-container">
+                        <Icon.Group className="icon-btn" size="big">
                             <Icon circular link onClick={() => {props.history.push(`/transportations/form/${userHomePageTrip.id}`)}} className="car"></Icon>
                             <Icon corner name='add'/>
                         </Icon.Group>
-                        <Icon.Group size="big">
+                        <Icon.Group className="icon-btn" size="big">
                             <Icon circular link onClick={() => {props.history.push(`/foods/form/${userHomePageTrip.id}`)}} className="food"></Icon>
                             <Icon corner name='add'/>
                         </Icon.Group>
-                        <Icon.Group size="big">
+                        <Icon.Group className="icon-btn" size="big">
                             <Icon circular link onClick={() => {props.history.push(`/activitys/form/${userHomePageTrip.id}`)}} className="bicycle"></Icon>
                             <Icon corner name='add'/>
                         </Icon.Group>
-                        <Icon.Group size="big">
+                        <Icon.Group className="icon-btn" size="big">
                             <Icon circular link onClick={() => {props.history.push(`/lodgings/form/${userHomePageTrip.id}`)}} className="hotel"></Icon>
                             <Icon corner name='add'/>
                         </Icon.Group>
                     </div>
                         :
-                        <input type="button" value="Copy Trip" onClick={() => {props.history.push(`/day_itinerarys/form/${userHomePageTrip.id}`)}}/>
+                        <Button variant="outline-primary" type="button" value="Copy Trip" onClick={() => {props.history.push(`/day_itinerarys/form/${userHomePageTrip.id}`)}}/>
                     }
                 </div>
             
@@ -149,7 +153,7 @@ export default function Home(props) {
                 <>
                     {showItinerary ?
                         <div>
-                            <div onClick={toggle} className="flex-center itinerary-toggle">
+                            <div onClick={toggle} className="flex-center itinerary-toggle effect-shadow">
                                 <hr/>
                                 <h2 className=""><Icon className="angle down"></Icon>Itinerary</h2>
                                 <hr/>
@@ -157,7 +161,7 @@ export default function Home(props) {
                             {itinerary.map((itinerary_day, index) => <ItineraryList key={index} userId={user} itinerary_day={itinerary_day} getTrip={getTrip} creatorId={userHomePageTrip.creator_id} {...props}/>)}
                         </div>
                         :
-                        <div onClick={toggle} className="flex-center itinerary-toggle">
+                        <div onClick={toggle} className="flex-center itinerary-toggle effect-shadow">
                             <hr/>
                             <h2 className=""><Icon className="angle right"></Icon>Itinerary</h2>
                             <hr/>

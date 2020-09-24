@@ -23,6 +23,17 @@
     width: 100%;
 }
 
+.itinerary-btn-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
+}
+
+.itinerary-btn-container div {
+    align-self: center;
+}
+
 /* .profile-pic-info-detail {
     display: flex;
 } */
@@ -32,6 +43,7 @@
         display: flex;
         justify-content: center;
         flex-flow: row wrap;
+        /* margin-left: 15em; */
     }
     
     .trip-card {
@@ -177,6 +189,7 @@
 }
 
 .effect-shadow {
+    transition: transform 0.3s;
     box-shadow: 0 10px 20px rgba(0,0,0,.5);
 }
 
@@ -198,7 +211,7 @@
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     border-radius: 5px;
     margin: 2em 0;
     padding: 20px 40px;
@@ -208,6 +221,7 @@
 .icon-btn {
     transition: transform .4s ease-in-out;
     margin-left: 5px;
+    color: #0074D9;
 }
 
 .icon-btn:hover {
@@ -254,6 +268,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    /* margin-left: 15em; */
 }
 
 .itin-card-container {
@@ -270,10 +285,10 @@
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    border: 1px solid black;
     border-radius: 5px;
     width: 50em;
     margin-top: 30px;
+    margin-bottom: 20px;
 }
 
 /* .itinerary-header {
@@ -306,11 +321,11 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    border: 1px solid black;
     border-radius: 5px;
-    width: 20em;
+    width: 25em;
     padding: 20px;
     margin-top: 30px;
+    margin-bottom: 10px;
 }
 
 .profile-img-div {
@@ -320,6 +335,14 @@
     height: 20vw;
     overflow: hidden;
     border-radius: 50%;
+    transition: transform .2s;
+    box-shadow: 0 10px 20px rgba(0,0,0,.5);
+}
+
+.profile-img-div:hover {
+    box-shadow: 0 15px 30px rgba(0,0,0,.5);
+    transform: scale(1.01);
+    /* filter: blur(0.666px); */
 }
 
 .profile-img-big {
@@ -355,3 +378,47 @@
     padding: 40px;
 }
 
+
+
+.nav-bar {
+    width: 18em;
+    height: 100vh;
+    position: fixed;
+    background-color: black;
+}
+
+.navbar-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+.nav-item {
+    width: 100%;
+}
+
+.nav-item:last-child {
+    margin-top: auto;
+}
+
+.nav-linkin {
+    display: flex;
+    align-items: center;
+    height: 5em;
+    text-decoration: none;
+    color: red;
+}
+
+.link-text {
+    /* display: none; */
+    margin-left: 1rem;
+}
+
+.nav-link svg {
+    min-width: 2rem;
+    margin: 0 1.5rem;
+}

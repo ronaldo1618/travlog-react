@@ -175,17 +175,16 @@ export default function TripDetails(props) {
                 </div>
             </div>
             </div>
-            <br/>
             <div className="trip-itinerary">
                 {!showItinerary ?
                     <div className="">
-                        <div onClick={toggle} className="flex-center itinerary-toggle">
+                        <div onClick={toggle} className="flex-center itinerary-toggle effect-shadow">
                             <hr/>
                             <div>
                                 <h2 className=""><Icon className="angle down"></Icon>Itinerary</h2>
                                 {user === trip.creator_id ?
                                 <div>
-                                    <Button type='button' onClick={() => props.history.push(`/day_itinerarys/form/${trip.id}`)}>Add Itinerary Category</Button>
+                                    <Button variant="outline-primary" type='button' onClick={() => props.history.push(`/day_itinerarys/form/${trip.id}`)}>Add Itinerary Category</Button>
                                 </div>
                                 :
                                 null
@@ -198,7 +197,7 @@ export default function TripDetails(props) {
                         </div>
                     </div>
                     :
-                    <div onClick={toggle} className="flex-center itinerary-toggle">
+                    <div onClick={toggle} className="flex-center itinerary-toggle effect-shadow">
                         <hr/>
                         <div>
                             <h2 className=""><Icon className="angle right"></Icon>Itinerary</h2>
