@@ -3,14 +3,15 @@
 Travlog is a full stack app created for users that like to plan trips out and keep track of all the trips they've been on. Users will register/login with token based authentication with the help of Django. Once the user is logged in, they will be able to get started planning their trips or search for trips created by other users!
 
 ## Getting Started
-To get started:
+  To get started:
   * Register an account
+  
   Find a trip:
   * Search for other users trips
   * Click on a trip you like
   * Now you can view the details of the trip or copy the trip and set it as one of your trips!
+  
   Create a trip:
-  * To create a trip
   * Go to trips tab and click new trip
   * Fill out the initial trip info(*) ** Note: if you want to save this trip to your homepage for easy editing, click the view on homepage box!**
   * After clicking submit, you will be directed to that trips detail view where you can start planning out the itinerary for it!
@@ -19,7 +20,7 @@ To get started:
 ## Initial Setup of Travlog
   Follow these steps to get started:
   1. (*) **Note: this app has a back end that will need to be downloaded as well. Follow this link to do this first https://github.com/ronaldo1618/travlogapi**
-  1. `git clone git@github.com:ronaldo1618/Travlog.git`
+  1. `git clone git@github.com:ronaldo1618/travlog-react.git`
   1. `cd` into Travlog
   1. `npm install` for dependencies
   1. `npm start` Should automatically open in chrome, if not type in 'http://localhost:3000' in your browser.
