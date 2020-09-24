@@ -86,7 +86,6 @@ export default function FoodForm(props) {
             <Form className="form">
                 <h1>Food Form</h1>
                 <Form.Group>
-                    {/* <Form.Label htmlFor="name"> Name </Form.Label> */}
                     <Form.Control ref={name} type="text"
                         name="name"
                         className="form-control"
@@ -95,7 +94,6 @@ export default function FoodForm(props) {
                         required />
                 </Form.Group>
                 <Form.Group>
-                    {/* <Form.Label htmlFor="notes"> Notes </Form.Label> */}
                     <Form.Control ref={notes} type="text"
                         name="notes"
                         className="form-control"
@@ -104,7 +102,6 @@ export default function FoodForm(props) {
                         required />
                 </Form.Group>
                 <Form.Group>
-                    {/* <Form.Label htmlFor="cost"> Cost </Form.Label> */}
                     <Form.Control onChange={e => setCost(e.target.value)} type="number"
                         name="cost"
                         className="form-control"
@@ -113,7 +110,6 @@ export default function FoodForm(props) {
                         required />
                 </Form.Group>
                 <Form.Group>
-                    {/* <Form.Label htmlFor="address"> Address </Form.Label> */}
                     <Form.Control ref={address} type="text"
                         name="address"
                         className="form-control"

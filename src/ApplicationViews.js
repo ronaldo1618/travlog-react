@@ -14,37 +14,11 @@ import DayItineraryForm from './components/Trips/DayItineraryForm';
 import Account from './components/Account/Account';
 import AccountForm from './components/Account/AccountForm';
 import NotFound from './components/404/NotFound';
-import apiManager from './modules/apiManager';
 
 export default function ApplicationViews(props) {
 
     const isAuthenticated = () =>
         false || localStorage.getItem('travlogapi_token') !== null
-
-    async function isCreator(tripId) {
-        try {
-            apiManager.getTraveler().then(user => {
-                apiManager.getTrip(parseInt(tripId)).then(trip => {
-                    if(user[0].id === trip.creator_id) return true;
-                    return false;
-                })
-            })
-        } catch (e) {
-            console.error(e.message);
-        }
-    }
-
-    // const isCreator = (tripId) => {
-    //     apiManager.getTraveler().then(user => {
-    //         apiManager.getTrip(parseInt(tripId)).then(trip => {
-    //             console.log('user', user)
-    //             console.log('trip', trip)
-    //             console.log('trip_id', tripId)
-    //             if(user[0].id === trip.creator_id) return true;
-    //             else return false;
-    //         })
-    //     })
-    // }
 
     const setCurrentUser = props.setCurrentUser
 
@@ -117,8 +91,7 @@ export default function ApplicationViews(props) {
             />
             <Route exact path='/trips/form/:tripId' render={props => {
                 if(isAuthenticated()) {
-                    if(isCreator(props.match.params.tripId)) return <TripForm tripId={parseInt(props.match.params.tripId)} {...props} />
-                    else return <Redirect to="/"/>
+                    return <TripForm tripId={parseInt(props.match.params.tripId)} {...props} />
                 } else {
                     return <Redirect to="Login"/>
                 }
@@ -126,8 +99,7 @@ export default function ApplicationViews(props) {
             />
             <Route exact path='/day_itinerarys/form/:tripId' render={props => {
                 if(isAuthenticated()) {
-                    if(isCreator(props.match.params.tripId)) return <DayItineraryForm tripId={parseInt(props.match.params.tripId)} {...props} />
-                    else return <Redirect to="/"/>
+                    return <DayItineraryForm tripId={parseInt(props.match.params.tripId)} {...props} />
                 } else {
                     return <Redirect to="Login"/>
                 }
@@ -135,8 +107,7 @@ export default function ApplicationViews(props) {
             />
             <Route exact path='/day_itinerarys/form/:tripId/:day_itinerary_id(\d+)' render={props => {
                 if(isAuthenticated()) {
-                    if(isCreator(props.match.params.tripId)) return <DayItineraryForm tripId={parseInt(props.match.params.tripId)} day_itinerary_id={parseInt(props.match.params.day_itinerary_id)} {...props} />
-                    else return <Redirect to="/"/>
+                    return <DayItineraryForm tripId={parseInt(props.match.params.tripId)} day_itinerary_id={parseInt(props.match.params.day_itinerary_id)} {...props} />
                 } else {
                     return <Redirect to="Login"/>
                 }
@@ -144,8 +115,7 @@ export default function ApplicationViews(props) {
             />
             <Route exact path='/transportations/form/:tripId' render={props => {
                 if(isAuthenticated()) {
-                    if(isCreator(props.match.params.tripId)) return <TransportationForm tripId={parseInt(props.match.params.tripId)} {...props} />
-                    else return <Redirect to="/"/>
+                    return <TransportationForm tripId={parseInt(props.match.params.tripId)} {...props} />
                 } else {
                     return <Redirect to="Login"/>
                 }
@@ -153,8 +123,7 @@ export default function ApplicationViews(props) {
             />
             <Route exact path='/transportations/form/:tripId/:transportationId(\d+)' render={props => {
                 if(isAuthenticated()) {
-                    if(isCreator(props.match.params.tripId)) return <TransportationForm tripId={parseInt(props.match.params.tripId)} transportationId={parseInt(props.match.params.transportationId)} {...props} />
-                    else return <Redirect to="/"/>
+                    return <TransportationForm tripId={parseInt(props.match.params.tripId)} transportationId={parseInt(props.match.params.transportationId)} {...props} />
                 } else {
                     return <Redirect to="Login"/>
                 }
@@ -162,8 +131,7 @@ export default function ApplicationViews(props) {
             />
             <Route exact path='/foods/form/:tripId' render={props => {
                 if(isAuthenticated()) {
-                    if(isCreator(props.match.params.tripId)) return <FoodForm tripId={parseInt(props.match.params.tripId)} {...props} />
-                    else return <Redirect to="/"/>
+                    return <FoodForm tripId={parseInt(props.match.params.tripId)} {...props} />
                 } else {
                     return <Redirect to="Login"/>
                 }
@@ -171,8 +139,7 @@ export default function ApplicationViews(props) {
             />
             <Route exact path='/foods/form/:tripId/:foodId(\d+)' render={props => {
                 if(isAuthenticated()) {
-                    if(isCreator(props.match.params.tripId)) return <FoodForm tripId={parseInt(props.match.params.tripId)} foodId={parseInt(props.match.params.foodId)} {...props} />
-                    else return <Redirect to="/"/>
+                    return <FoodForm tripId={parseInt(props.match.params.tripId)} foodId={parseInt(props.match.params.foodId)} {...props} />
                 } else {
                     return <Redirect to="Login"/>
                 }
@@ -180,8 +147,7 @@ export default function ApplicationViews(props) {
             />
             <Route exact path='/activitys/form/:tripId' render={props => {
                 if(isAuthenticated()) {
-                    if(isCreator(props.match.params.tripId)) return <ActivityForm tripId={parseInt(props.match.params.tripId)} {...props} />
-                    else return <Redirect to="/"/>
+                    return <ActivityForm tripId={parseInt(props.match.params.tripId)} {...props} />
                 } else {
                     return <Redirect to="Login"/>
                 }
@@ -189,8 +155,7 @@ export default function ApplicationViews(props) {
             />
             <Route exact path='/activitys/form/:tripId/:activityId(\d+)' render={props => {
                 if(isAuthenticated()) {
-                    if(isCreator(props.match.params.tripId)) return <ActivityForm tripId={parseInt(props.match.params.tripId)} activityId={parseInt(props.match.params.activityId)} {...props} />
-                    else return <Redirect to="/"/>
+                    return <ActivityForm tripId={parseInt(props.match.params.tripId)} activityId={parseInt(props.match.params.activityId)} {...props} />
                 } else {
                     return <Redirect to="Login"/>
                 }
@@ -198,8 +163,7 @@ export default function ApplicationViews(props) {
             />
             <Route exact path='/lodgings/form/:tripId' render={props => {
                 if(isAuthenticated()) {
-                    if(isCreator(props.match.params.tripId)) return <LodgingForm tripId={parseInt(props.match.params.tripId)} {...props} />
-                    else return <Redirect to="/"/>
+                    return <LodgingForm tripId={parseInt(props.match.params.tripId)} {...props} />
                 } else {
                     return <Redirect to="Login"/>
                 }
@@ -207,8 +171,7 @@ export default function ApplicationViews(props) {
             />
             <Route exact path='/lodgings/form/:tripId/:lodgingId(\d+)' render={props => {
                 if(isAuthenticated()) {
-                    if(isCreator(props.match.params.tripId)) return <LodgingForm tripId={parseInt(props.match.params.tripId)} lodgingId={parseInt(props.match.params.lodgingId)} {...props} />
-                    else return <Redirect to="/"/>
+                    return <LodgingForm tripId={parseInt(props.match.params.tripId)} lodgingId={parseInt(props.match.params.lodgingId)} {...props} />
                 } else {
                     return <Redirect to="Login"/>
                 }

@@ -33,14 +33,12 @@ export default function Login(props) {
                         <h2>Welcome to TravLog!</h2>
                         <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
                         <fieldset>
-                            {/* <label htmlFor="inputEmail"> Username </label> */}
                             <input ref={username} type="username"
                                 className="form-control"
                                 placeholder="Username"
                                 required autoFocus />
                         </fieldset>
                         <fieldset>
-                            {/* <label htmlFor="inputPassword"> Password </label> */}
                             <input ref={password} type="password"
                                 id="password"
                                 className="form-control"

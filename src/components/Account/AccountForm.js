@@ -5,8 +5,6 @@ import apiManager from '../../modules/apiManager';
 export default function AccountForm(props) {
 
     const username = useRef()
-    // const first_name = useRef()
-    // const last_name = useRef()
     const bio = useRef()
     const [traveler, setTraveler] = useState({user:{}})
     const [image, setImage] = useState('')
@@ -25,8 +23,6 @@ export default function AccountForm(props) {
             const newTraveler = {
                 id: traveler.id,
                 bio: bio.current.value,
-                // first_name: first_name.current.value,
-                // last_name: last_name.current.value,
                 username: username.current.value,
                 profile_pic: img
             }
@@ -47,7 +43,6 @@ export default function AccountForm(props) {
         setLoading(true)
         apiManager.postPhoto(data).then(img => {
             setImage(img.url)
-            console.log(img.url)
             setLoading(false)
         })
     }
@@ -64,22 +59,6 @@ export default function AccountForm(props) {
                         ref={username}
                         defaultValue={traveler.user.username}/>
                     </Form.Group>
-                    {/* <Form.Group>
-                        <Form.Label>First Name</Form.Label>
-                        <Form.Control type="text"
-                        className="form-control"
-                        id="first-name"
-                        ref={first_name}
-                        defaultValue={traveler.user.first_name}/>
-                    </Form.Group>
-                    <Form.Group>
-                        <Form.Label>Last Name</Form.Label>
-                        <Form.Control type="text"
-                        className="form-control"
-                        id="last-name"
-                        ref={last_name}
-                        defaultValue={traveler.user.last_name}/>
-                    </Form.Group> */}
                     <Form.Group>
                         <Form.Label>Bio</Form.Label>
                         <Form.Control type="text"

@@ -98,7 +98,6 @@ export default function LodgingForm(props) {
             <Form className="login-box">
                 <h1>Lodging Form</h1>
                 <Form.Group>
-                    {/* <Form.Label htmlFor="name"> Name </Form.Label> */}
                     <Form.Control ref={name} type="text"
                         name="name"
                         className="form-control"
@@ -107,7 +106,6 @@ export default function LodgingForm(props) {
                         required />
                 </Form.Group>
                 <Form.Group>
-                    {/* <Form.Label htmlFor="notes"> Notes </Form.Label> */}
                     <Form.Control ref={notes} type="text"
                         name="notes"
                         className="form-control"
@@ -117,7 +115,6 @@ export default function LodgingForm(props) {
                 </Form.Group>
                 <Form.Row>
                     <Form.Group as={Col}>
-                        {/* <Form.Label htmlFor="cost"> Cost </Form.Label> */}
                         <Form.Control onChange={e => setCost(e.target.value)} type="number"
                             name="cost"
                             className="form-control"
@@ -126,7 +123,6 @@ export default function LodgingForm(props) {
                             required />
                     </Form.Group>
                     <Form.Group as={Col}>
-                        {/* <Form.Label htmlFor="phone_number"> Phone Number </Form.Label> */}
                         <Form.Control ref={phone_number} type="text"
                             name="phone_number"
                             className="form-control"
@@ -136,7 +132,6 @@ export default function LodgingForm(props) {
                     </Form.Group>
                 </Form.Row>
                 <Form.Group>
-                    {/* <Form.Label htmlFor="address"> Address </Form.Label> */}
                     <Form.Control ref={address} type="text"
                         name="address"
                         className="form-control"
@@ -145,7 +140,6 @@ export default function LodgingForm(props) {
                         required />
                 </Form.Group>
                 <Form.Group>
-                    {/* <Form.Label htmlFor="website"> Website </Form.Label> */}
                     <Form.Control ref={website} type="text"
                         name="website"
                         className="form-control"

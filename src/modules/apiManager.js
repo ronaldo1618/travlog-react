@@ -1,7 +1,4 @@
 const remoteURL = 'http://localhost:8000';
-// import key from '../apiKeys';
-// const googlePlacesKey = key.googlePlacesKey
-// const proxyUrl = 'https://cors-anywhere.herokuapp.com/'
 
 export default {
     getTripsForHomepage() {
@@ -126,10 +123,6 @@ export default {
             }
         }).then(res => res.json())
     },
-    // search(city, value) {
-    //     const url = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${city}&key=${googlePlacesKey}`
-    //     return fetch(proxyUrl + url).then(res => res.json())
-    // },
     search(title) {
         return fetch(`${remoteURL}/trips?title=${title}`, {
             method: 'GET',

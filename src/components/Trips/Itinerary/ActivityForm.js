@@ -9,8 +9,6 @@ export default function ActivityForm(props) {
     const [cost, setCost] = useState(0)
     const address = useRef()
     const datetime = useRef()
-    // const searchValue = useRef()
-    // const city = useRef()
     const [ dayItinerary, setDayItinerary ] = useState({})
     const [ itinerary, setItinerary ] = useState([])
     const [ oldActivity, setActivity ] = useState({day_itinerary: {}})
@@ -74,12 +72,6 @@ export default function ActivityForm(props) {
         setDayItinerary(itinerary_day[0])
     }
 
-    // const search = () => {
-    //     apiManager.search(city.current.value, searchValue.current.value).then(result => {
-    //         console.log(result)
-    //     })
-    // }
-
     useEffect(getItinerary, [])
     useEffect(() => {
         if(props.activityId){
@@ -93,19 +85,9 @@ export default function ActivityForm(props) {
 
     return (
          <div className="form-container">
-            {/* <div>
-                <Form.Control ref={searchValue} type="text"
-                    name="search"
-                    placeholder="search"/>
-                <Form.Control ref={city} type="text"
-                    name="search"
-                    placeholder="search"/>
-                <button type="button" onClick={search}/>
-            </div> */}
             <Form className="form">
                 <h1>Activity Form</h1>
                 <Form.Group>
-                    {/* <Form.Label htmlFor="name"> Name </Form.Label> */}
                     <Form.Control ref={name} type="text"
                         name="name"
                         className="form-control"
@@ -114,7 +96,6 @@ export default function ActivityForm(props) {
                         required />
                 </Form.Group>
                 <Form.Group>
-                    {/* <Form.Label htmlFor="notes"> Notes </Form.Label> */}
                     <Form.Control ref={notes} type="text"
                         name="notes"
                         className="form-control"
@@ -123,7 +104,6 @@ export default function ActivityForm(props) {
                         required />
                 </Form.Group>
                 <Form.Group>
-                    {/* <Form.Label htmlFor="cost"> Cost </Form.Label> */}
                     <Form.Control onChange={e => setCost(e.target.value)} type="number"
                         name="cost"
                         className="form-control"
@@ -132,7 +112,6 @@ export default function ActivityForm(props) {
                         required />
                 </Form.Group>
                 <Form.Group>
-                    {/* <Form.Label htmlFor="address"> Address </Form.Label> */}
                     <Form.Control ref={address} type="text"
                         name="address"
                         className="form-control"

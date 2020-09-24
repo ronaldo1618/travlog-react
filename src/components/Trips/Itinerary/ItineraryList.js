@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import apiManager from '../../../modules/apiManager';
 import ItineraryCard from './ItineraryCard';
-import { Button } from 'react-bootstrap';
 import { Icon } from 'semantic-ui-react';
 
 export default function ItineraryList(props) {
@@ -28,7 +27,7 @@ export default function ItineraryList(props) {
                             <Icon size="large" link onClick={() => props.history.push(`/day_itinerarys/form/${props.itinerary_day.trip_id}/${props.itinerary_day.id}`)} className="edit trash-edit"></Icon>
                         </div>
                         :
-                        <div>
+                        <div className="itinerary-container">
                             <h2><Icon className="angle down"></Icon>{props.itinerary_day.name}</h2>
                             <h4>{props.itinerary_day.description}</h4>
                         </div>
@@ -50,7 +49,7 @@ export default function ItineraryList(props) {
                         <Icon size="large" link onClick={() => props.history.push(`/day_itinerarys/form/${props.itinerary_day.trip_id}/${props.itinerary_day.id}`)} className="edit trash-edit"></Icon>
                     </div>
                     :
-                    <div>
+                    <div className="itinerary-container">
                         <h2><Icon className="angle right"></Icon>{props.itinerary_day.name}</h2>
                         <h4>{props.itinerary_day.description}</h4>
                     </div>

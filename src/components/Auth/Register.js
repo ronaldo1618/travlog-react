@@ -9,8 +9,6 @@ function Register(props) {
     const email = useRef()
     const userName = useRef()
     const password = useRef()
-    // const lastName = useRef()
-    // const firstName = useRef()
     const bio = useRef()
     const verifyPassword = useRef()
     const { register } = UseSimpleAuth()
@@ -28,8 +26,6 @@ function Register(props) {
         if(!loading) {
             const newUser = {
                 "username": userName.current.value,
-                // "first_name": firstName.current.value,
-                // "last_name": lastName.current.value,
                 "email": email.current.value,
                 "password": password.current.value,
                 "bio": bio.current.value,
@@ -68,31 +64,13 @@ function Register(props) {
             <Form className="" onSubmit={handleRegister}>
                 <h1 className="h3 mb-3 font-weight-normal">Register to use TravLog!</h1>
                 <Form.Group>
-                    {/* <label htmlFor="userName"> Username </label>     */}
                     <Form.Control ref={userName} type="text"
                         name="userName"
                         className="form-control"
                         placeholder="Username"
                         required autoFocus />
                 </Form.Group>
-                {/* <Form.Group>
-                    <label htmlFor="firstName"> First Name </label>
-                    <Form.Control ref={firstName} type="text"
-                        name="firstName"
-                        className="form-control"
-                        placeholder="First name"
-                        required autoFocus />
-                </Form.Group>
                 <Form.Group>
-                    <label htmlFor="lastName"> Last Name </label>
-                    <Form.Control ref={lastName} type="text"
-                        name="lastName"
-                        className="form-control"
-                        placeholder="Last name"
-                        required />
-                </Form.Group> */}
-                <Form.Group>
-                    {/* <label htmlFor="Form.ControlEmail"> Email address </label> */}
                     <Form.Control ref={email} type="email"
                         name="email"
                         className="form-control"
@@ -100,14 +78,12 @@ function Register(props) {
                         required />
                 </Form.Group>
                 <Form.Group>
-                    {/* <label htmlFor="bio"> Bio </label> */}
                     <Form.Control ref={bio} type="text"
                         name="bio"
                         className="form-control"
                         placeholder="Bio"/>
                 </Form.Group>
                 <Form.Group>
-                    {/* <label htmlFor="Form.ControlPassword"> Password </label> */}
                     <Form.Control ref={password} type="password"
                         name="password"
                         className="form-control"
@@ -115,7 +91,6 @@ function Register(props) {
                         required />
                 </Form.Group>
                 <Form.Group>
-                    {/* <label htmlFor="verifyPassword"> Verify Password </label> */}
                     <Form.Control ref={verifyPassword} type="password"
                         name="verifyPassword"
                         className="form-control"

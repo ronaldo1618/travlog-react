@@ -3,19 +3,8 @@
 }
 
 .itinerary-toggle:hover {
-    background-color: aliceblue;
+    background-color: #0074d907;
 }
-
-/* .btn-new {
-    border: 1px solid #4BB187;
-    width: 4em;
-    color: #4BB187;
-    text-align: center;
-    outline: none;
-    margin-bottom: 5px;
-    margin-top: 5px;
-    margin-left: -10px;
-} */
 
 .trip-details-btn-container {
     display: flex;
@@ -30,20 +19,19 @@
     padding: 10px;
 }
 
+.itinerary-container {
+    padding: 10px;
+}
+
 .itinerary-btn-container div {
     align-self: center;
 }
-
-/* .profile-pic-info-detail {
-    display: flex;
-} */
 
 @media only screen and (min-width: 850px) {
     .trip-cards {
         display: flex;
         justify-content: center;
         flex-flow: row wrap;
-        /* margin-left: 15em; */
     }
     
     .trip-card {
@@ -61,19 +49,6 @@
 .edit-btn {
     margin-left: 10px;
 }
-
-/* .overlay {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 100%;
-    width: 100%;
-    opacity: 0;
-    transition: .5s ease;
-    background-color: #008CBA;
-} */
 
 .new-entry-btn {
     display: flex;
@@ -118,14 +93,11 @@
 .btm-container {
     display: flex;
     flex-direction: column;
-    /* align-self: center; */
     justify-content: space-between;
-    /* align-items: flex-end; */
     border: 1px solid red;
 }
 
 .hero-image {
-    /* height: 32em; */
     overflow: hidden;
     background-repeat: no-repeat;
     background-size: cover;
@@ -160,10 +132,6 @@
     padding: 17px 17px;
     text-align: center;
 }
-  
-/* .nav-link:hover {
-    color: #a50e0e;
-} */
 
 .nav-link.active {
     color: rgb(0, 122, 112);
@@ -211,7 +179,6 @@
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    /* border: 1px solid black; */
     border-radius: 5px;
     margin: 2em 0;
     padding: 20px 40px;
@@ -239,19 +206,6 @@
     margin: 10px 0;
 }
 
-/* .trip-detail-img {
-    height: auto;
-    width: 50%;
-    object-fit: fill;
-}
-
-.trip-detail-img-container {
-    height: auto;
-    width: 1184px;
-} */
-
-
-
 /* Itinerary Styling */
 
 .trip-itinerary {
@@ -268,15 +222,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* margin-left: 15em; */
 }
 
 .itin-card-container {
     margin-top: 2em;
-    width: 400px;
+    width: 500px;
 }
 
-.itin-card {
+.itin-card h2 {
     text-align: center;
 }
 
@@ -290,23 +243,6 @@
     margin-top: 30px;
     margin-bottom: 20px;
 }
-
-/* .itinerary-header {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    border: 1px solid black;
-    width: 80%;
-    border-radius: 5px;
-} */
-
-
-/* HOMEPAGE STYLING */
-
-/* .homepage-trip-details {
-    position: relative;
-} */
 
 /* PROFILE STYLING */
 
@@ -342,7 +278,6 @@
 .profile-img-div:hover {
     box-shadow: 0 15px 30px rgba(0,0,0,.5);
     transform: scale(1.01);
-    /* filter: blur(0.666px); */
 }
 
 .profile-img-big {
@@ -378,8 +313,6 @@
     padding: 40px;
 }
 
-
-
 .nav-bar {
     width: 18em;
     height: 100vh;
@@ -414,7 +347,6 @@
 }
 
 .link-text {
-    /* display: none; */
     margin-left: 1rem;
 }
 
