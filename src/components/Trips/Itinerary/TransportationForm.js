@@ -10,8 +10,6 @@ export default function TransportationForm(props) {
     const [cost, setCost] = useState(0)
     const dep_datetime = useRef()
     const datetime = useRef()
-    // const dep_info = useRef()
-    // const arr_info = useRef()
     const [ dayItinerary, setDayItinerary ] = useState({})
     const [ itinerary, setItinerary ] = useState([])
     const [ oldTransportation, setTransportation ] = useState({day_itinerary: {}})
@@ -27,8 +25,6 @@ export default function TransportationForm(props) {
             cost: cost,
             dep_datetime: dep_datetime.current.value,
             datetime: datetime.current.value,
-            // dep_info: dep_info.current.value,
-            // arr_info: arr_info.current.value,
             day_itinerary_id: dayItinerary.id
         }
         apiManager.postObj('transportations', transportation)
@@ -48,8 +44,6 @@ export default function TransportationForm(props) {
             cost: cost,
             dep_datetime: dep_datetime.current.value,
             datetime: datetime.current.value,
-            // dep_info: dep_info.current.value,
-            // arr_info: arr_info.current.value,
             day_itinerary_id: dayItinerary.id
         }
         apiManager.putObj('transportations', transportation)
@@ -98,7 +92,6 @@ export default function TransportationForm(props) {
             <Form className="login-box">
                 <h1>Transportation Form</h1>
                 <Form.Group>
-                    {/* <Form.Label htmlFor="name"> Name </Form.Label> */}
                     <Form.Control ref={name} type="text"
                         name="name"
                         className="form-control"
@@ -106,15 +99,6 @@ export default function TransportationForm(props) {
                         defaultValue={oldTransportation.name || ''}
                         required autoFocus/>
                 </Form.Group>
-                {/* <Form.Group>
-                    <Form.Label htmlFor="notes"> Notes </Form.Label>
-                    <Form.Control ref={notes} type="text"
-                        name="notes"
-                        className="form-control"
-                        placeholder="notes"
-                        defaultValue={oldTransportation.notes || ''}
-                        required />
-                </Form.Group> */}
                 <Form.Group>
                     <Form.Label htmlFor="cost"> Cost </Form.Label>
                     <Form.Control onChange={e => setCost(e.target.value)} type="number"
@@ -143,18 +127,7 @@ export default function TransportationForm(props) {
                         />
                     </Form.Group>
                 </Form.Row>
-                {/* <Form.Group>
-                    <Form.Label htmlFor="dep_info"> Departure Info </Form.Label>
-                    <Form.Control ref={dep_info} as="textarea"
-                        rows={3}
-                        name="dep_info"
-                        className="form-control"
-                        placeholder="departure info"
-                        defaultValue={oldTransportation.dep_info || ''}
-                        required />
-                </Form.Group> */}
                 <Form.Group>
-                    {/* <Form.Label htmlFor="arr_info"> Arrival Info </Form.Label> */}
                     <Form.Control ref={notes} as="textarea"
                         rows={3}
                         name="arr_info"

@@ -83,10 +83,6 @@ export default function Home(props) {
         apiManager.getTraveler().then(user => setTraveler(user[0]))
     }
 
-    // const deleteObj = (type, id) => {
-    //     apiManager.deleteObj(type, id).then(getTrips)
-    // }
-
     useEffect(getUser, [])
     useEffect(getTrip, [])
     useEffect(getTrips, [])
@@ -95,13 +91,6 @@ export default function Home(props) {
         <>
             {userHomePageTrip.id ?
             <div className="itin-list">
-                {/* <div className="flex-center">
-                    <div>
-                        <h1><a href={`/trips/${userHomePageTrip.id}`}>{userHomePageTrip.title}</a></h1>
-                        <h3>Description: {userHomePageTrip.description}</h3>
-                        <h3>Trip Cost: ${totalCost}</h3>
-                    </div>
-                </div> */}
                 <div className="trip-detail-info effect-shadow">
                     <a href={`/trips/${userHomePageTrip.id}`}><h1>{userHomePageTrip.title}</h1></a>
                     <h3>{userHomePageTrip.description}</h3>
@@ -178,7 +167,7 @@ export default function Home(props) {
                 <h1>Explore</h1>
                 <div>
                     <InputGroup>
-                        <input className="search-bar" ref={searchTerm} type="text" placeholder="   search by trip name"/>
+                        <input className="search-bar" ref={searchTerm} type="text" placeholder="search"/>
                         <InputGroupAddon addonType="append"><Button onClick={getTrips}>Search</Button></InputGroupAddon>
                     </InputGroup>
                 </div>

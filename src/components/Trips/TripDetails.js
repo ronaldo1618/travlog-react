@@ -102,17 +102,6 @@ export default function TripDetails(props) {
 
     return (
         <>
-        {/* {trip.overlay_image ?
-        <Card className="test1">
-            <Card.Img alt="" variant="top" src={trip.overlay_image} />
-            <Card.Body>
-                <Card.Text>
-                    cool it works
-                </Card.Text>
-            </Card.Body>
-        </Card>
-        : null
-        } */}
         <div className="trip-detail-container">
             <div className="trip-detail-title">
                 <div className="trip-detail-info effect-shadow">
@@ -125,7 +114,7 @@ export default function TripDetails(props) {
                     :
                     <>
                     <h1>{trip.title}</h1>
-                    <input className="button-group-icons" type="button" value="Copy Trip" onClick={copyTrip}/>
+                    <Button variant="outline-primary" className="button-group-icons" type="button" onClick={copyTrip}>Copy Trip</Button>
                     </>
                     }
                     <h3>{trip.description}</h3>

@@ -21,11 +21,6 @@ export default function TripCard(props) {
                     </div>
                     : null}
                     <CardTitle><a href={`/trips/${props.tripId}`}>{props.trip.title}</a></CardTitle>
-                    {/* {props.trip.description.length > 65 ?
-                    <CardText>{props.trip.description.slice(0, 65)}<a href={`/trips/${props.tripId}`}>...read more</a></CardText>
-                    :
-                    <CardText>{props.trip.description}</CardText>
-                    } */}
                     <div className="profile-pic-info">
                         {props.creator.profile_pic ?
                         <a className="circular--landscape" href={`/profile/${props.trip.creator_id}`}><img className="card-creator-img" alt="" src={props.creator.profile_pic}/></a>

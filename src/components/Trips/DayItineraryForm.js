@@ -35,7 +35,6 @@ export default function DayItineraryForm(props) {
     useEffect(() => {
         if(props.day_itinerary_id){
             apiManager.getById('day_itinerarys', props.day_itinerary_id).then(obj => {
-                console.log(obj)
                 setDayItinerary(obj)
             })
         }
@@ -46,7 +45,6 @@ export default function DayItineraryForm(props) {
             <Form className="form">
                 <h1>Itinerary Day Form</h1>
                 <Form.Group>
-                    {/* <Form.Label htmlFor="name"> Name </Form.Label> */}
                     <Form.Control ref={name} type="text"
                         name="name"
                         className="form-control"
@@ -55,7 +53,6 @@ export default function DayItineraryForm(props) {
                         required autoFocus />
                 </Form.Group>
                 <Form.Group>
-                    {/* <Form.Label htmlFor="description"> Description </Form.Label> */}
                     <Form.Control ref={description} type="text"
                         name="description"
                         className="form-control"

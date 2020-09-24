@@ -1,5 +1,4 @@
 import React from "react";
-// Customize this more
 const NotFound = () => {
   return (
     <h3>

@@ -23,7 +23,6 @@ export default function TripForm(props) {
     const handleHomePageTrip = () => setHomePageTrip(!homepage_trip)
 
     const onSubmitHandler = e => {
-        console.log(image)
         let img = image
         if (title.current.value === '') return alert('Please fill out the title field!')
         if(image === '') img = 'https://res.cloudinary.com/ddxpoaice/image/upload/v1600380387/travlog/we5defner2mgy5myshvc.jpg'
@@ -133,7 +132,6 @@ export default function TripForm(props) {
         data.append('upload_preset', 'travlog')
         setLoading(true)
         apiManager.postPhoto(data).then(img => {
-            console.log(img.url)
             setImage(img.url)
             setLoading(false)
         })
@@ -145,7 +143,6 @@ export default function TripForm(props) {
                 <Form>
                     <h1>Trip Form</h1>
                     <Form.Group>
-                        {/* <Form.Label htmlFor="title"> Title </Form.Label> */}
                         <Form.Control ref={title} type="text"
                             name="title"
                             className="form-control"
@@ -154,7 +151,6 @@ export default function TripForm(props) {
                             required autoFocus />
                     </Form.Group>
                     <Form.Group>
-                        {/* <Form.Label htmlFor="description"> Description </Form.Label> */}
                         <Form.Control ref={description} type="text"
                             name="description"
                             className="form-control"
@@ -163,7 +159,6 @@ export default function TripForm(props) {
                             required autoFocus />
                     </Form.Group>
                     <Form.Group>
-                        {/* <Form.Label htmlFor="trip_length"> Trip Length </Form.Label> */}
                         <Form.Control ref={trip_length} type="number"
                             name="trip_length"
                             className="form-control"
