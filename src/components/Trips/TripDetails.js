@@ -115,17 +115,24 @@ export default function TripDetails(props) {
         } */}
         <div className="trip-detail-container">
             <div className="trip-detail-title">
-                <div className="trip-detail-info">
-                    <h1>{trip.title}</h1>
-                    <h3>{trip.description}</h3>
-                    <h3>Trip Cost: ${totalCost}</h3>
+                <div className="trip-detail-info effect-shadow">
                     {user === trip.creator_id ?
-                    <div>
-                        <Button type='button' onClick={() => deleteObj(type, trip.id)}>Delete Trip</Button>
-                        <Button type='button' onClick={() => props.history.push(`/trips/form/${trip.id}`)}>Edit Trip</Button>
+                    <div className="trip-details-btn-container">
+                        <Icon size="large" link onClick={() => deleteObj(type, trip.id)} className="trash trash-edit"></Icon>
+                        <h1>{trip.title}</h1>
+                        <Icon size="large" link onClick={() => props.history.push(`/trips/form/${trip.id}`)} className="edit trash-edit"></Icon>
                     </div>
                     :
+                    <>
+                    <h1>{trip.title}</h1>
                     <input className="button-group-icons" type="button" value="Copy Trip" onClick={copyTrip}/>
+                    </>
+                    }
+                    <h3>{trip.description}</h3>
+                    {totalCost > 0 ?
+                    <h3>Trip Cost: ${totalCost}</h3>
+                    :
+                    null
                     }
                     <div className="profile-pic-info">
                         {creator.profile_pic ?
@@ -144,19 +151,19 @@ export default function TripDetails(props) {
                     <div className="trip-details-btns">
                         
                         <div className="button-group-icons">
-                            <Icon.Group size="big">
+                            <Icon.Group className="icon-btn" size="big">
                                 <Icon circular link onClick={() => {props.history.push(`/transportations/form/${props.tripId}`)}} className="car"></Icon>
                                 <Icon corner name='add'/>
                             </Icon.Group>
-                            <Icon.Group size="big">
+                            <Icon.Group className="icon-btn" size="big">
                                 <Icon circular link onClick={() => {props.history.push(`/foods/form/${props.tripId}`)}} className="food"></Icon>
                                 <Icon corner name='add'/>
                             </Icon.Group>
-                            <Icon.Group size="big">
+                            <Icon.Group className="icon-btn" size="big">
                                 <Icon circular link onClick={() => {props.history.push(`/activitys/form/${props.tripId}`)}} className="bicycle"></Icon>
                                 <Icon corner name='add'/>
                             </Icon.Group>
-                            <Icon.Group size="big">
+                            <Icon.Group className="icon-btn" size="big">
                                 <Icon circular link onClick={() => {props.history.push(`/lodgings/form/${props.tripId}`)}} className="hotel"></Icon>
                                 <Icon corner name='add'/>
                             </Icon.Group>
@@ -168,17 +175,16 @@ export default function TripDetails(props) {
                 </div>
             </div>
             </div>
-            <br/>
             <div className="trip-itinerary">
                 {!showItinerary ?
                     <div className="">
-                        <div onClick={toggle} className="flex-center itinerary-toggle">
+                        <div onClick={toggle} className="flex-center itinerary-toggle effect-shadow">
                             <hr/>
                             <div>
                                 <h2 className=""><Icon className="angle down"></Icon>Itinerary</h2>
                                 {user === trip.creator_id ?
                                 <div>
-                                    <Button type='button' onClick={() => props.history.push(`/day_itinerarys/form/${trip.id}`)}>Add Itinerary Category</Button>
+                                    <Button variant="outline-primary" type='button' onClick={() => props.history.push(`/day_itinerarys/form/${trip.id}`)}>Add Itinerary Category</Button>
                                 </div>
                                 :
                                 null
@@ -191,7 +197,7 @@ export default function TripDetails(props) {
                         </div>
                     </div>
                     :
-                    <div onClick={toggle} className="flex-center itinerary-toggle">
+                    <div onClick={toggle} className="flex-center itinerary-toggle effect-shadow">
                         <hr/>
                         <div>
                             <h2 className=""><Icon className="angle right"></Icon>Itinerary</h2>

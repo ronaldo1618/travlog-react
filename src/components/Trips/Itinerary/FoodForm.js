@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Form, Button } from 'react-bootstrap';
 import apiManager from '../../../modules/apiManager';
 
 export default function FoodForm(props) {
 
     const name = useRef()
     const notes = useRef()
-    const cost = useRef()
+    const [cost, setCost] = useState(0)
     const address = useRef()
     const datetime = useRef()
     const [ dayItinerary, setDayItinerary ] = useState({})
@@ -18,7 +19,7 @@ export default function FoodForm(props) {
         const food = {
             name: name.current.value,
             notes: notes.current.value,
-            cost: cost.current.value,
+            cost: cost,
             address: address.current.value,
             datetime: datetime.current.value,
             day_itinerary_id: dayItinerary.id
@@ -35,7 +36,7 @@ export default function FoodForm(props) {
             id: props.foodId,
             name: name.current.value,
             notes: notes.current.value,
-            cost: cost.current.value,
+            cost: cost,
             address: address.current.value,
             datetime: datetime.current.value,
             day_itinerary_id: dayItinerary.id
@@ -74,77 +75,80 @@ export default function FoodForm(props) {
         if(props.foodId){
             apiManager.getById('foods', props.foodId).then(obj => {
                 obj.datetime = obj.datetime.slice(0, 16)
+                setCost(obj.cost)
                 setFood(obj)
             })
         }
     },[props.foodId])
 
     return (
-         <main>
-            <form>
+         <div className="form-container">
+            <Form className="form">
                 <h1>Food Form</h1>
-                <fieldset>
-                    <label htmlFor="name"> Name </label>
-                    <input ref={name} type="text"
+                <Form.Group>
+                    {/* <Form.Label htmlFor="name"> Name </Form.Label> */}
+                    <Form.Control ref={name} type="text"
                         name="name"
                         className="form-control"
                         placeholder="name"
                         defaultValue={oldFood.name || ''}
                         required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="notes"> Notes </label>
-                    <input ref={notes} type="text"
+                </Form.Group>
+                <Form.Group>
+                    {/* <Form.Label htmlFor="notes"> Notes </Form.Label> */}
+                    <Form.Control ref={notes} type="text"
                         name="notes"
                         className="form-control"
                         placeholder="notes"
                         defaultValue={oldFood.notes || ''}
                         required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="cost"> Cost </label>
-                    <input ref={cost} type="number"
+                </Form.Group>
+                <Form.Group>
+                    {/* <Form.Label htmlFor="cost"> Cost </Form.Label> */}
+                    <Form.Control onChange={e => setCost(e.target.value)} type="number"
                         name="cost"
                         className="form-control"
                         placeholder="cost"
-                        defaultValue={oldFood.cost || 0}
+                        value={cost || 'cost'}
                         required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="address"> Address </label>
-                    <input ref={address} type="text"
+                </Form.Group>
+                <Form.Group>
+                    {/* <Form.Label htmlFor="address"> Address </Form.Label> */}
+                    <Form.Control ref={address} type="text"
                         name="address"
                         className="form-control"
+                        placeholder="address"
                         defaultValue={oldFood.address || ''}
                         required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="datetime"> Arrival Date </label>
-                    <input ref={datetime} type="datetime-local"
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label htmlFor="datetime"> Arrival Date </Form.Label>
+                    <Form.Control ref={datetime} type="datetime-local"
                         name="datetime"
                         className="form-control"
                         placeholder="datetime"
                         defaultValue={oldFood.datetime || ""}
                     />
-                </fieldset>
-                <fieldset>
+                </Form.Group>
+                <Form.Group>
                     <select required onChange={handleChange} id="day_itinerary">
                         <option>{oldFood.day_itinerary.name || 'Select Itinerary Category'}</option>
                         {itinerary.map(day_itinerary => <option key={day_itinerary.id}>{day_itinerary.name}</option>)}
                     </select>
-                </fieldset>
-                <fieldset>
+                </Form.Group>
+                <Form.Group>
                     {props.foodId ? 
-                        <button type="button" onClick={() => editFood(oldFood)}>
+                        <Button type="button" onClick={() => editFood(oldFood)}>
                             Update Food
-                        </button>
+                        </Button>
                         :
-                        <button type="button" onClick={onSubmitHandler}>
+                        <Button type="button" onClick={onSubmitHandler}>
                             Add Food
-                        </button>
+                        </Button>
                     }
-                </fieldset>
-            </form>
-        </main>
+                    <Button type="button" onClick={() => props.history.push(`/trips/${props.tripId}`)}>Cancel</Button>
+                </Form.Group>
+            </Form>
+        </div>
     )
 }

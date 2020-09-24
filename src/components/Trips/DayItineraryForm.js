@@ -73,6 +73,7 @@ export default function DayItineraryForm(props) {
                             Create Itinerary Day
                         </Button>
                     }
+                    <Button type="button" onClick={() => props.history.push(`/trips/${props.tripId}`)}>Cancel</Button>
                 </Form.Group>
             </Form>
         </div>

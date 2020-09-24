@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Form, Button } from 'react-bootstrap';
 import apiManager from '../../../modules/apiManager';
 
 export default function ActivityForm(props) {
 
     const name = useRef()
     const notes = useRef()
-    const cost = useRef()
+    const [cost, setCost] = useState(0)
     const address = useRef()
     const datetime = useRef()
     // const searchValue = useRef()
@@ -17,10 +18,12 @@ export default function ActivityForm(props) {
     const onSubmitHandler = e => {
         if (name.current.value === '') return alert('Please fill out the name field!')
         if (datetime.current.value === '') datetime.current.value = new Date().toISOString().slice(0, 16)
+        let price = cost
+        if (cost === '') price = 0
         const activity = {
             name: name.current.value,
             notes: notes.current.value,
-            cost: cost.current.value,
+            cost: price,
             address: address.current.value,
             datetime: datetime.current.value,
             day_itinerary_id: dayItinerary.id
@@ -37,7 +40,7 @@ export default function ActivityForm(props) {
             id: props.activityId,
             name: name.current.value,
             notes: notes.current.value,
-            cost: cost.current.value,
+            cost: cost,
             address: address.current.value,
             datetime: datetime.current.value,
             day_itinerary_id: dayItinerary.id
@@ -82,86 +85,89 @@ export default function ActivityForm(props) {
         if(props.activityId){
             apiManager.getById('activitys', props.activityId).then(obj => {
                 obj.datetime = obj.datetime.slice(0, 16)
+                setCost(obj.cost)
                 setActivity(obj)
             })
         }
     },[props.activityId])
 
     return (
-         <main>
+         <div className="form-container">
             {/* <div>
-                <input ref={searchValue} type="text"
+                <Form.Control ref={searchValue} type="text"
                     name="search"
                     placeholder="search"/>
-                <input ref={city} type="text"
+                <Form.Control ref={city} type="text"
                     name="search"
                     placeholder="search"/>
                 <button type="button" onClick={search}/>
             </div> */}
-            <form>
+            <Form className="form">
                 <h1>Activity Form</h1>
-                <fieldset>
-                    <label htmlFor="name"> Name </label>
-                    <input ref={name} type="text"
+                <Form.Group>
+                    {/* <Form.Label htmlFor="name"> Name </Form.Label> */}
+                    <Form.Control ref={name} type="text"
                         name="name"
                         className="form-control"
                         placeholder="name"
                         defaultValue={oldActivity.name || ''}
                         required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="notes"> Notes </label>
-                    <input ref={notes} type="text"
+                </Form.Group>
+                <Form.Group>
+                    {/* <Form.Label htmlFor="notes"> Notes </Form.Label> */}
+                    <Form.Control ref={notes} type="text"
                         name="notes"
                         className="form-control"
                         placeholder="notes"
                         defaultValue={oldActivity.notes || ''}
                         required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="cost"> Cost </label>
-                    <input ref={cost} type="number"
+                </Form.Group>
+                <Form.Group>
+                    {/* <Form.Label htmlFor="cost"> Cost </Form.Label> */}
+                    <Form.Control onChange={e => setCost(e.target.value)} type="number"
                         name="cost"
                         className="form-control"
                         placeholder="cost"
-                        defaultValue={oldActivity.cost || 0}
+                        value={cost || 'cost'}
                         required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="address"> Address </label>
-                    <input ref={address} type="text"
+                </Form.Group>
+                <Form.Group>
+                    {/* <Form.Label htmlFor="address"> Address </Form.Label> */}
+                    <Form.Control ref={address} type="text"
                         name="address"
                         className="form-control"
+                        placeholder="address"
                         defaultValue={oldActivity.address || ''}
                         required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="datetime"> Arrival Date </label>
-                    <input ref={datetime} type="datetime-local"
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label htmlFor="datetime"> Arrival Date </Form.Label>
+                    <Form.Control ref={datetime} type="datetime-local"
                         name="datetime"
                         className="form-control"
                         placeholder="datetime"
                         defaultValue={oldActivity.datetime || ""}
                     />
-                </fieldset>
-                <fieldset>
+                </Form.Group>
+                <Form.Group>
                     <select required onChange={handleChange} id="day_itinerary">
                         <option>{oldActivity.day_itinerary.name || 'Select Itinerary Category'}</option>
                         {itinerary.map(day_itinerary => <option key={day_itinerary.id}>{day_itinerary.name}</option>)}
                     </select>
-                </fieldset>
-                <fieldset>
+                </Form.Group>
+                <Form.Group>
                     {props.activityId ? 
-                        <button type="button" onClick={() => editActivity(oldActivity)}>
+                        <Button type="button" onClick={() => editActivity(oldActivity)}>
                             Update Activity
-                        </button>
+                        </Button>
                         :
-                        <button type="button" onClick={onSubmitHandler}>
+                        <Button type="button" onClick={onSubmitHandler}>
                             Add Activity
-                        </button>
+                        </Button>
                     }
-                </fieldset>
-            </form>
-        </main>
+                    <Button type="button" onClick={() => props.history.push(`/trips/${props.tripId}`)}>Cancel</Button>
+                </Form.Group>
+            </Form>
+        </div>
     )
 }

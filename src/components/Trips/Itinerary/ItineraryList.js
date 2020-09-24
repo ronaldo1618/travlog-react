@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import apiManager from '../../../modules/apiManager';
 import ItineraryCard from './ItineraryCard';
+import { Button } from 'react-bootstrap';
 import { Icon } from 'semantic-ui-react';
 
 export default function ItineraryList(props) {
@@ -16,20 +17,21 @@ export default function ItineraryList(props) {
         <div className=''>
             {!showItinerary ?
                 <div className="itin-list">
-                    <div onClick={toggle} className="flex-center itinerary-toggle">
-                        <div>
-                            <h2><Icon className="angle down"></Icon>{props.itinerary_day.name}</h2>
-                        </div>
-                        <div>
-                            <h4>{props.itinerary_day.description}</h4>
-                        </div>
+                    <div onClick={toggle} className="flex-center itinerary-toggle effect-shadow">
                         {props.userId === props.creatorId ?
-                        <div>
-                            <button type='button' onClick={() => deleteObj('day_itinerarys', props.itinerary_day.id)}>Delete</button>
-                            <button type='button' onClick={() => props.history.push(`/day_itinerarys/form/${props.itinerary_day.trip_id}/${props.itinerary_day.id}`)}>Edit</button>
+                        <div className="itinerary-btn-container">
+                            <Icon size="large" link onClick={() => deleteObj('day_itinerarys', props.itinerary_day.id)} className="trash trash-edit"></Icon>
+                            <div>
+                                <h2><Icon className="angle down"></Icon>{props.itinerary_day.name}</h2>
+                                <h4>{props.itinerary_day.description}</h4>
+                            </div>
+                            <Icon size="large" link onClick={() => props.history.push(`/day_itinerarys/form/${props.itinerary_day.trip_id}/${props.itinerary_day.id}`)} className="edit trash-edit"></Icon>
                         </div>
                         :
-                        null
+                        <div>
+                            <h2><Icon className="angle down"></Icon>{props.itinerary_day.name}</h2>
+                            <h4>{props.itinerary_day.description}</h4>
+                        </div>
                         }
                     </div>
                     {
@@ -37,20 +39,21 @@ export default function ItineraryList(props) {
                     }
                 </div>
                 :
-                <div onClick={toggle} className="flex-center itinerary-toggle">
-                    <div className="itin-dropdown">
-                        <h2><Icon className="angle right"></Icon>{props.itinerary_day.name}</h2>
-                    </div>
-                    <div>
-                        <h4>{props.itinerary_day.description}</h4>
-                    </div>
+                <div onClick={toggle} className="flex-center itinerary-toggle effect-shadow">
                     {props.userId === props.creatorId ?
-                    <div>
-                        <button type='button' onClick={() => deleteObj('day_itinerarys', props.itinerary_day.id)}>Delete</button>
-                        <button type='button' onClick={() => props.history.push(`/day_itinerarys/form/${props.itinerary_day.trip_id}/${props.itinerary_day.id}`)}>Edit</button>
+                    <div className="itinerary-btn-container">
+                        <Icon size="large" link onClick={() => deleteObj('day_itinerarys', props.itinerary_day.id)} className="trash trash-edit"></Icon>
+                        <div>
+                            <h2><Icon className="angle right"></Icon>{props.itinerary_day.name}</h2>
+                            <h4>{props.itinerary_day.description}</h4>
+                        </div>
+                        <Icon size="large" link onClick={() => props.history.push(`/day_itinerarys/form/${props.itinerary_day.trip_id}/${props.itinerary_day.id}`)} className="edit trash-edit"></Icon>
                     </div>
                     :
-                    null
+                    <div>
+                        <h2><Icon className="angle right"></Icon>{props.itinerary_day.name}</h2>
+                        <h4>{props.itinerary_day.description}</h4>
+                    </div>
                     }
                 </div>
             }

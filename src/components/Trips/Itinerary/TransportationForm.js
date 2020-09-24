@@ -17,7 +17,6 @@ export default function TransportationForm(props) {
     const [ oldTransportation, setTransportation ] = useState({day_itinerary: {}})
 
     const onSubmitHandler = e => {
-        console.log(name.current.value)
         if (name.current.value === '') return alert('Please fill out the name field!')
         if (!dayItinerary.id) return alert('Please select a day itinerary!')
         if (dep_datetime.current.value === '') dep_datetime.current.value = new Date().toISOString().slice(0, 16)
@@ -82,10 +81,6 @@ export default function TransportationForm(props) {
         setDayItinerary(itinerary_day[0])
     }
 
-    const handleCost = e => {
-        setCost(e.target.value)
-    }
-
     useEffect(getItinerary, [])
     useEffect(() => {
         if(props.transportationId){
@@ -122,7 +117,7 @@ export default function TransportationForm(props) {
                 </Form.Group> */}
                 <Form.Group>
                     <Form.Label htmlFor="cost"> Cost </Form.Label>
-                    <Form.Control onChange={handleCost} type="number"
+                    <Form.Control onChange={e => setCost(e.target.value)} type="number"
                         name="cost"
                         className="form-control"
                         placeholder="cost"
@@ -184,6 +179,7 @@ export default function TransportationForm(props) {
                             Add Transportation
                         </Button>
                     }
+                    <Button type="button" onClick={() => props.history.push(`/trips/${props.tripId}`)}>Cancel</Button>
                 </Form.Group>
             </Form>
         </div>
