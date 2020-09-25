@@ -125,7 +125,7 @@ export default function TripDetails(props) {
                     }
                     <div className="profile-pic-info">
                         {creator.profile_pic ?
-                        <a className="circular--landscape" href={`/profile/${trip.creator_id}`}><img className="card-creator-img" alt="" src={creator.profile_pic}/></a>
+                        <a className="circular--landscape-detail" href={`/profile/${trip.creator_id}`}><img className="card-creator-img" alt="" src={creator.profile_pic}/></a>
                         :
                         null
                         }

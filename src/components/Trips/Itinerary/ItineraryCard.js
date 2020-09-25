@@ -12,17 +12,20 @@ export default function ItineraryCard(props) {
     return (
         <div className="itin-card-container">
             {type === 'transportations' ? 
-                <Card className="itin-card">
+                <Card className="itin-card effect-shadow">
                     <Card.Body>
                     <Card.Title>{props.activity.name}</Card.Title>
                     <Card.Text>{props.activity.notes}</Card.Text>
-                    <Card.Text>{props.activity.cost === 0 ? null : <Icon className="dollar"></Icon> + props.activity.cost}</Card.Text>
+                    {props.activity.cost > 0 ?
+                    <Card.Text><Icon className="dollar"></Icon>{props.activity.cost.toFixed(2)}</Card.Text>
+                    : null
+                    }
                     <Card.Text><Icon className="calendar check"></Icon>{moment(props.activity.dep_datetime).format('MMM Do YYYY, h:mm a')}</Card.Text>
                     <Card.Text><Icon className="calendar times"></Icon>{moment(props.activity.datetime.slice(0, 10)).format('MMM Do YYYY, h:mm a')}</Card.Text>
                     {props.userId === props.creatorId ?
                         <>
-                            <Button type='button' onClick={() => props.deleteObj(type, props.activity.id)}>Delete</Button>
-                            <Button type='button' onClick={() => props.history.push(`/transportations/form/${props.tripId}/${props.activity.id}`)}>Edit</Button>
+                            <Button variant="danger" className="danger-btn" type='button' onClick={() => props.deleteObj(type, props.activity.id)}>Delete</Button>
+                            <Button variant="outline-primary" type='button' onClick={() => props.history.push(`/transportations/form/${props.tripId}/${props.activity.id}`)}>Edit</Button>
                         </>
                         :
                         null
@@ -32,17 +35,20 @@ export default function ItineraryCard(props) {
             : null
             }
             {type === 'activitys' ? 
-                <Card className="itin-card">
+                <Card className="itin-card effect-shadow">
                     <Card.Body>
                     <Card.Title>{props.activity.name}</Card.Title>
                     <Card.Text>{props.activity.notes}</Card.Text>
-                    <Card.Text>{props.activity.cost === 0 ? null : <Icon className="dollar"></Icon> + props.activity.cost}</Card.Text>
+                    {props.activity.cost > 0 ?
+                    <Card.Text><Icon className="dollar"></Icon>{props.activity.cost.toFixed(2)}</Card.Text>
+                    : null
+                    }
                     <Card.Text><Icon className="map marker alternate"></Icon>{props.activity.address}</Card.Text>
                     <Card.Text><Icon className="calendar check"></Icon>{moment(props.activity.datetime.slice(0, 10), 'YYYY-MM-DD').format('MMM Do YYYY')}</Card.Text>
                     {props.userId === props.creatorId ?
                         <>
-                            <Button type='button' onClick={() => props.deleteObj(type, props.activity.id)}>Delete</Button>
-                            <Button type='button' onClick={() => props.history.push(`/activitys/form/${props.tripId}/${props.activity.id}`)}>Edit</Button>
+                            <Button variant="danger" className="danger-btn" type='button' onClick={() => props.deleteObj(type, props.activity.id)}>Delete</Button>
+                            <Button variant="outline-primary" type='button' onClick={() => props.history.push(`/activitys/form/${props.tripId}/${props.activity.id}`)}>Edit</Button>
                         </>
                         :
                         null
@@ -52,18 +58,21 @@ export default function ItineraryCard(props) {
             : null
             }
             {type === 'foods' ? 
-                <Card className="itin-card">
+                <Card className="itin-card effect-shadow">
                     <Card.Body>
 
                     <Card.Title>{props.activity.name}</Card.Title>
                     <Card.Text>{props.activity.notes}</Card.Text>
-                    <Card.Text>{props.activity.cost === 0 ? null : <Icon className="dollar"></Icon> + props.activity.cost}</Card.Text>
+                    {props.activity.cost > 0 ?
+                    <Card.Text><Icon className="dollar"></Icon>{props.activity.cost.toFixed(2)}</Card.Text>
+                    : null
+                    }
                     <Card.Text><Icon className="map marker alternate"></Icon>{props.activity.address}</Card.Text>
                     <Card.Text><Icon className="calendar check"></Icon>{moment(props.activity.datetime.slice(0, 10), 'YYYY-MM-DD').format('MMM Do YYYY')}</Card.Text>
                     {props.userId === props.creatorId ?
                         <>
-                            <Button type='button' onClick={() => props.deleteObj(type, props.activity.id)}>Delete</Button>
-                            <Button type='button' onClick={() => props.history.push(`/foods/form/${props.tripId}/${props.activity.id}`)}>Edit</Button>
+                            <Button variant="danger" className="danger-btn" type='button' onClick={() => props.deleteObj(type, props.activity.id)}>Delete</Button>
+                            <Button variant="outline-primary" type='button' onClick={() => props.history.push(`/foods/form/${props.tripId}/${props.activity.id}`)}>Edit</Button>
                         </>
                         :
                         null
@@ -73,12 +82,15 @@ export default function ItineraryCard(props) {
             : null
             }
             {type === 'lodgings' ? 
-                <Card className="itin-card">
+                <Card className="itin-card effect-shadow">
                     <Card.Body>
 
                     <Card.Title>{props.activity.name}</Card.Title>
                     <Card.Text>{props.activity.notes}</Card.Text>
-                    <Card.Text>{props.activity.cost === 0 ? null : <Icon className="dollar"></Icon> + props.activity.cost}</Card.Text>
+                    {props.activity.cost > 0 ?
+                    <Card.Text><Icon className="dollar"></Icon>{props.activity.cost.toFixed(2)}</Card.Text>
+                    : null
+                    }
                     <Card.Text><Icon className="calendar check"></Icon>{moment(props.activity.check_in.slice(0, 10)).format('MMM Do YYYY, h:mm a')}</Card.Text>
                     <Card.Text><Icon className="calendar times"></Icon>{moment(props.activity.datetime.slice(0, 10)).format('MMM Do YYYY, h:mm a')}</Card.Text>
                     <Card.Text><Icon className="phone"></Icon>{props.activity.phone_number}</Card.Text>
@@ -86,8 +98,8 @@ export default function ItineraryCard(props) {
                     <Card.Text><Icon className="map marker alternate"></Icon>{props.activity.address}</Card.Text>
                     {props.userId === props.creatorId ?
                         <>
-                            <Button type='button' onClick={() => props.deleteObj(type, props.activity.id)}>Delete</Button>
-                            <Button type='button' onClick={() => props.history.push(`/lodgings/form/${props.tripId}/${props.activity.id}`)}>Edit</Button>
+                            <Button variant="danger" className="danger-btn" type='button' onClick={() => props.deleteObj(type, props.activity.id)}>Delete</Button>
+                            <Button variant="outline-primary" type='button' onClick={() => props.history.push(`/lodgings/form/${props.tripId}/${props.activity.id}`)}>Edit</Button>
                         </>
                         :
                         null

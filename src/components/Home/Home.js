@@ -88,7 +88,7 @@ export default function Home(props) {
     useEffect(getTrips, [])
 
     return (
-        <>
+        <div className="home-container">
             {userHomePageTrip.id ?
             <div className="itin-list">
                 <div className="trip-detail-info effect-shadow">
@@ -168,7 +168,7 @@ export default function Home(props) {
                 <div>
                     <InputGroup>
                         <input className="search-bar" ref={searchTerm} type="text" placeholder="search"/>
-                        <InputGroupAddon addonType="append"><Button onClick={getTrips}>Search</Button></InputGroupAddon>
+                        <InputGroupAddon addonType="append"><Button onClick={getTrips}><Icon className="search"></Icon></Button></InputGroupAddon>
                     </InputGroup>
                 </div>
             </div>
@@ -179,6 +179,6 @@ export default function Home(props) {
                 null
                 }
             </div>
-        </>
+        </div>
     )
 }

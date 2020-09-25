@@ -38,35 +38,6 @@ export default function NavBar(props) {
         :
         null
         }
-        {/* <nav className="nav-bar">
-            <ul className="navbar-nav">
-                <li className="nav-item">
-                    <a href="#" className="nav-linkin">
-                        <span className="link-text">Trav/Log</span>
-                    </a>
-                </li>
-                <li className="nav-item">
-                    <a href="#" className="nav-linkin">
-                        <span className="link-text">Home</span>
-                    </a>
-                </li>
-                <li className="nav-item">
-                    <a href="#" className="nav-linkin">
-                        <span className="link-text">Trips</span>
-                    </a>
-                </li>
-                <li className="nav-item">
-                    <a href="#" className="nav-linkin">
-                        <span className="link-text">Profile</span>
-                    </a>
-                </li>
-                <li className="nav-item">
-                    <a href="#" className="nav-linkin">
-                        <span className="link-text">Logout</span>
-                    </a>
-                </li>
-            </ul>
-        </nav> */}
         </>
     )
 }
