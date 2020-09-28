@@ -15,13 +15,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: -4em;
 }
 
 .login-box {
     text-align: center;
-    margin-top: 30px;
+    margin-top: 10em;
     background: white;
-    border: 1px solid black;
     padding: 50px;
     border-radius: 5px;
 }

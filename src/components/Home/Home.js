@@ -164,7 +164,7 @@ export default function Home(props) {
             }
             <hr/>
             <div className="itin-list">
-                <h1>Explore</h1>
+                <h1 className="header-title">Explore</h1>
                 <div>
                     <InputGroup>
                         <input className="search-bar" ref={searchTerm} type="text" placeholder="search"/>

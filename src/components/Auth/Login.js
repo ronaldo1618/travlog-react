@@ -1,6 +1,7 @@
 import React, { useRef } from 'react'
 import UseSimpleAuth from '../../hooks/UseSimpleAuth'
 import { Button } from 'react-bootstrap';
+import { Icon } from 'semantic-ui-react';
 
 export default function Login(props) {
     const username = useRef()
@@ -25,10 +26,15 @@ export default function Login(props) {
 
     return (
         <>
-        <img className="img-bkgrnd" alt="" src='https://s.inspirockcdn.com/partners/visittheusa-home.jpg'/>
-        <div className="">
+        <img className="img-bkgrnd" alt="" src='https://res.cloudinary.com/ddxpoaice/image/upload/v1601266397/travlog/kg1moejl15jps7kz0mha.jpg'/>
+        <div className="login__container">
+            <div className="travlog-title">
+                <h1><span className="trav">TravLog</span><span className="log"><Icon className="compass outline" size="mini"></Icon></span></h1>
+                {/* <hr className="travlog-title-hr"/> */}
+                <p>Start tracking your trips</p>
+            </div>
             <div className="login-container">
-                <div className="login-box">
+                <div className="login-box effect-shadow">
                     <form className="form--login" onSubmit={handleLogin}>
                         <h2>Welcome to TravLog!</h2>
                         <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>

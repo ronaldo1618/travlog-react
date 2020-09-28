@@ -49,7 +49,7 @@ export default function AccountForm(props) {
 
     return (
         <div className="form-container">
-            <div className="form">  
+            <div className="form effect-shadow">  
                 <Form onSubmit={editTraveler}>
                     <Form.Group>
                         <Form.Label>Username</Form.Label>
@@ -77,7 +77,7 @@ export default function AccountForm(props) {
                     <div>
                         {loading ? <p>Loading image...</p>:null}
                         <Button disabled={loading} type="submit" color="primary">Update Profile</Button>
-                        <Button disabled={loading} type="button" onClick={() => props.history.push(`/profile`)}>Cancel</Button>
+                        <Button variant="outline-danger" className="outline-dngr-btn" disabled={loading} type="button" onClick={() => props.history.push(`/profile`)}>Cancel</Button>
                     </div>
                 </Form>
             </div>

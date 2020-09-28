@@ -302,7 +302,6 @@
 /* PROFILE STYLING */
 
 .form {
-    border: 1px solid black;
     border-radius: 5px;
     width: 35%;
     padding: 40px;
@@ -316,10 +315,53 @@
 }
 
 .trip-form {
-    border: 1px solid black;
     border-radius: 5px;
     width: 50%;
     padding: 40px;
+}
+
+.travlog-title {
+    margin-left: 5em;
+    margin-top: 18em;
+    display: flex;
+    height: 10em;
+    flex-direction: column;
+    transition: transform .2s;
+}
+
+.travlog-title:hover {
+    transform: scale(1.01);
+}
+
+.travlog-title h1 {
+    font-size: 5em;
+}
+
+.trav {
+    color: #976301;
+}
+
+.compass {
+    color: #498001;
+}
+
+.travlog-title hr {
+    margin-top: -12px;
+    height: 8px;
+    /* background-color: #967171; */
+}
+
+.travlog-title p {
+    font-size: 1.5em;
+    margin-top: -24px;
+    color: #498001;
+    align-self: flex-end;
+    margin-right: 10px;
+}
+
+.login__container {
+    display: flex;
+    justify-content: space-around;
 }
 
 .nav-bar {
@@ -370,4 +412,12 @@
 
 .danger-btn {
     margin-right: 7px;
+}
+
+.outline-dngr-btn {
+    margin-left: 7px;
+}
+
+.header-title {
+    font-size: 50px;
 }

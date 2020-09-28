@@ -83,7 +83,7 @@ export default function FoodForm(props) {
 
     return (
          <div className="form-container">
-            <Form className="form">
+            <Form className="form effect-shadow">
                 <h1>Food Form</h1>
                 <Form.Group>
                     <Form.Control ref={name} type="text"
@@ -142,7 +142,7 @@ export default function FoodForm(props) {
                             Add Food
                         </Button>
                     }
-                    <Button type="button" onClick={() => props.history.push(`/trips/${props.tripId}`)}>Cancel</Button>
+                    <Button variant="outline-danger" className="outline-dngr-btn" type="button" onClick={() => props.history.push(`/trips/${props.tripId}`)}>Cancel</Button>
                 </Form.Group>
             </Form>
         </div>

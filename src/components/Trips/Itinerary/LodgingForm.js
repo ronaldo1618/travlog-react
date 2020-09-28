@@ -95,7 +95,7 @@ export default function LodgingForm(props) {
 
     return (
          <div className="register-container">
-            <Form className="login-box">
+            <Form className="login-box effect-shadow">
                 <h1>Lodging Form</h1>
                 <Form.Group>
                     <Form.Control ref={name} type="text"
@@ -183,7 +183,7 @@ export default function LodgingForm(props) {
                             Add Lodging
                         </Button>
                     }
-                    <Button type="button" onClick={() => props.history.push(`/trips/${props.tripId}`)}>Cancel</Button>
+                    <Button variant="outline-danger" className="outline-dngr-btn" type="button" onClick={() => props.history.push(`/trips/${props.tripId}`)}>Cancel</Button>
                 </Form.Group>
             </Form>
         </div>
