@@ -59,38 +59,38 @@ export default function Account(props) {
     useEffect(getTraveler, [])
 
     return (
-        <>
-        <div className="profile-container">
-            <div className="profile effect-shadow">
-                {tripCreators[0].profile_pic ?
-                <div className="profile-img-div">
-                    <img className="profile-img-big" alt="" src={tripCreators[0].profile_pic}/>
+        <div className="bg-color">
+            <div className="profile-container">
+                <div className="profile effect-shadow">
+                    {tripCreators[0].profile_pic ?
+                    <div className="profile-img-div">
+                        <img className="profile-img-big" alt="" src={tripCreators[0].profile_pic}/>
+                    </div>
+                    : null
+                    }
+                    <h2>{tripCreators[0].user.username}</h2>
+                    <p>{tripCreators[0].bio}</p>
+                    {traveler.id === props.userProfileId || !props.userProfileId ?
+                    <Button variant="outline-primary" type="button" onClick={() => props.history.push(`/profile/form`)}>Edit Account</Button>
+                    :
+                    null
+                    }
                 </div>
-                : null
-                }
-                <h2>{tripCreators[0].user.username}</h2>
-                <p>{tripCreators[0].bio}</p>
-                {traveler.id === props.userProfileId || !props.userProfileId ?
-                <Button variant="outline-primary" type="button" onClick={() => props.history.push(`/profile/form`)}>Edit Account</Button>
+            </div>
+            <hr/>
+            <div className="trip-history">
+                <h1>Trip History</h1>
+            </div>
+            <hr/>
+            <div className="trip-cards">
+                {!loading ?
+                <>
+                {trips.map((trip, index) => <TripCard key={trip.id} userId={traveler.id} tripId={trip.id} trip={trip} deleteObj={deleteObj} creator={tripCreators[index]} {...props}/>)}
+                </>
                 :
                 null
                 }
             </div>
         </div>
-        <hr/>
-        <div className="trip-history">
-            <h1>Trip History</h1>
-        </div>
-        <hr/>
-        <div className="trip-cards">
-            {!loading ?
-            <>
-            {trips.map((trip, index) => <TripCard key={trip.id} userId={traveler.id} tripId={trip.id} trip={trip} deleteObj={deleteObj} creator={tripCreators[index]} {...props}/>)}
-            </>
-            :
-            null
-            }
-        </div>
-        </>
     )
 }

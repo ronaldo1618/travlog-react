@@ -89,7 +89,8 @@ export default function TransportationForm(props) {
 
     return (
          <div className="register-container">
-            <Form className="login-box">
+            <img className="img-bkgrnd" alt="" src='https://res.cloudinary.com/ddxpoaice/image/upload/v1601266397/travlog/kg1moejl15jps7kz0mha.jpg'/>
+            <Form className="login-box effect-shadow">
                 <h1>Transportation Form</h1>
                 <Form.Group>
                     <Form.Control ref={name} type="text"
@@ -152,7 +153,7 @@ export default function TransportationForm(props) {
                             Add Transportation
                         </Button>
                     }
-                    <Button type="button" onClick={() => props.history.push(`/trips/${props.tripId}`)}>Cancel</Button>
+                    <Button variant="outline-danger" className="outline-dngr-btn" type="button" onClick={() => props.history.push(`/trips/${props.tripId}`)}>Cancel</Button>
                 </Form.Group>
             </Form>
         </div>

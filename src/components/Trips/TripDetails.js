@@ -4,7 +4,7 @@ import ItineraryList from './Itinerary/ItineraryList';
 import { Icon } from 'semantic-ui-react';
 import { Button } from 'react-bootstrap';
 import moment from 'moment';
-import './Trip.css';
+import '../../index.css';
 
 export default function TripDetails(props) {
 
@@ -101,7 +101,7 @@ export default function TripDetails(props) {
     }
 
     return (
-        <>
+        <div className="bg-color">
         <div className="trip-detail-container">
             <div className="trip-detail-title">
                 <div className="trip-detail-info effect-shadow">
@@ -202,6 +202,6 @@ export default function TripDetails(props) {
                     </div>
                 }
             </div>
-        </>
+        </div>
     )
 }

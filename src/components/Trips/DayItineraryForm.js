@@ -42,8 +42,9 @@ export default function DayItineraryForm(props) {
 
     return (
          <div className="form-container">
+            <img className="img-bkgrnd" alt="" src='https://res.cloudinary.com/ddxpoaice/image/upload/v1601266397/travlog/kg1moejl15jps7kz0mha.jpg'/>
             <Form className="form">
-                <h1>Itinerary Day Form</h1>
+                <h3>Itinerary Category Form</h3>
                 <Form.Group>
                     <Form.Control ref={name} type="text"
                         name="name"
@@ -63,14 +64,14 @@ export default function DayItineraryForm(props) {
                 <Form.Group>
                     {props.day_itinerary_id ? 
                         <Button type="button" onClick={editDayItinerary}>
-                            Update Itinerary Day
+                            Update Category
                         </Button>
                         :
                         <Button type="button" onClick={onSubmitHandler}>
-                            Create Itinerary Day
+                            Create Category
                         </Button>
                     }
-                    <Button type="button" onClick={() => props.history.push(`/trips/${props.tripId}`)}>Cancel</Button>
+                    <Button variant="outline-danger" className="outline-dngr-btn" type="button" onClick={() => props.history.push(`/trips/${props.tripId}`)}>Cancel</Button>
                 </Form.Group>
             </Form>
         </div>

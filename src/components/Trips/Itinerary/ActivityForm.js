@@ -85,7 +85,8 @@ export default function ActivityForm(props) {
 
     return (
          <div className="form-container">
-            <Form className="form">
+            <img className="img-bkgrnd" alt="" src='https://res.cloudinary.com/ddxpoaice/image/upload/v1601266397/travlog/kg1moejl15jps7kz0mha.jpg'/>
+            <Form className="form effect-shadow">
                 <h1>Activity Form</h1>
                 <Form.Group>
                     <Form.Control ref={name} type="text"
@@ -144,7 +145,7 @@ export default function ActivityForm(props) {
                             Add Activity
                         </Button>
                     }
-                    <Button type="button" onClick={() => props.history.push(`/trips/${props.tripId}`)}>Cancel</Button>
+                    <Button variant="outline-danger" className="outline-dngr-btn" type="button" onClick={() => props.history.push(`/trips/${props.tripId}`)}>Cancel</Button>
                 </Form.Group>
             </Form>
         </div>

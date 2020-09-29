@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Button } from 'react-bootstrap';
 import { Icon } from 'semantic-ui-react';
 import moment from 'moment';
-import '../Trip.css';
+import '../../../index.css';
 
 
 export default function ItineraryCard(props) {
@@ -11,9 +11,10 @@ export default function ItineraryCard(props) {
 
     return (
         <div className="itin-card-container">
+            <Card className="itin-card border-0">
+                <Card.Body className="itin-card-body">
             {type === 'transportations' ? 
-                <Card className="itin-card effect-shadow">
-                    <Card.Body>
+            <>
                     <Card.Title>{props.activity.name}</Card.Title>
                     <Card.Text>{props.activity.notes}</Card.Text>
                     {props.activity.cost > 0 ?
@@ -30,13 +31,11 @@ export default function ItineraryCard(props) {
                         :
                         null
                     }
-                    </Card.Body>
-                </Card>
+                    </>
             : null
             }
-            {type === 'activitys' ? 
-                <Card className="itin-card effect-shadow">
-                    <Card.Body>
+            {type === 'activitys' ?
+            <>
                     <Card.Title>{props.activity.name}</Card.Title>
                     <Card.Text>{props.activity.notes}</Card.Text>
                     {props.activity.cost > 0 ?
@@ -53,14 +52,11 @@ export default function ItineraryCard(props) {
                         :
                         null
                     }
-                    </Card.Body>
-                </Card>
+                    </>
             : null
             }
-            {type === 'foods' ? 
-                <Card className="itin-card effect-shadow">
-                    <Card.Body>
-
+            {type === 'foods' ?
+            <> 
                     <Card.Title>{props.activity.name}</Card.Title>
                     <Card.Text>{props.activity.notes}</Card.Text>
                     {props.activity.cost > 0 ?
@@ -77,14 +73,11 @@ export default function ItineraryCard(props) {
                         :
                         null
                     }
-                    </Card.Body>
-                </Card>
+                    </>
             : null
             }
-            {type === 'lodgings' ? 
-                <Card className="itin-card effect-shadow">
-                    <Card.Body>
-
+            {type === 'lodgings' ?
+            <>
                     <Card.Title>{props.activity.name}</Card.Title>
                     <Card.Text>{props.activity.notes}</Card.Text>
                     {props.activity.cost > 0 ?
@@ -104,10 +97,11 @@ export default function ItineraryCard(props) {
                         :
                         null
                     }
-                    </Card.Body>
-                </Card>
+                    </>
             : null
             }
+                </Card.Body>
+            </Card>
         </div>
     )
 }

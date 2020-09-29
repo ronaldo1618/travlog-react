@@ -138,7 +138,8 @@ export default function TripForm(props) {
     }
 
     return (
-        <div className="form-container">
+        <div className="form-container bg-col">
+        <img className="img-bkgrnd" alt="" src='https://res.cloudinary.com/ddxpoaice/image/upload/v1601266397/travlog/kg1moejl15jps7kz0mha.jpg'/>
             <div className="trip-form">
                 <Form>
                     <h1>Trip Form</h1>
@@ -210,20 +211,20 @@ export default function TripForm(props) {
                         {
                             props.tripId ?
                             <>
+                            {loading ? <p>Loading image...</p>:null}
                             <Button disabled={loading} type="button" onClick={() => editTrip(trip)}>
                                 Update Trip
                             </Button>
-                            {loading ? <p>Loading image...</p>:null}
                             </>
                             :
                             <>
+                                {loading ? <p>Loading image...</p>:null}
                                 <Button disabled={loading} type="button" onClick={onSubmitHandler}>
                                     Create Trip
                                 </Button>
-                                {loading ? <p>Loading image...</p>:null}
                             </>
                         }
-                        <Button type="button" onClick={() => props.history.push(`/trips`)}>Cancel</Button>
+                        <Button variant="outline-danger" className="outline-dngr-btn" type="button" onClick={() => props.history.push(`/trips`)}>Cancel</Button>
                     </Form.Group>
                 </Form>
                 <Modal isOpen={modal} toggle={toggle}>
@@ -231,7 +232,7 @@ export default function TripForm(props) {
                     <form>
                         <div>
                             <Button type="button" onClick={createForEachDay}>Yes</Button>
-                            <Button type="button" onClick={createForEachActivity}>No</Button>
+                            <Button variant="outline-danger" className="outline-dngr-btn" type="button" onClick={createForEachActivity}>No</Button>
                         </div>
                     </form>
                 </Modal>

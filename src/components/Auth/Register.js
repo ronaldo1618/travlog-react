@@ -3,6 +3,7 @@ import { withRouter } from "react-router-dom"
 import UseSimpleAuth from '../../hooks/UseSimpleAuth'
 import apiManager from '../../modules/apiManager';
 import { Button, Form } from 'react-bootstrap';
+import { Icon } from 'semantic-ui-react';
 import '../../index.css';
 
 function Register(props) {
@@ -57,60 +58,67 @@ function Register(props) {
 
     return (
         <>
-        <img className="img-bkgrnd" alt="" src='https://s.inspirockcdn.com/partners/visittheusa-home.jpg'/>
-        <div>
-        <div className="register-container">
-        <div className="login-box">
-            <Form className="" onSubmit={handleRegister}>
-                <h1 className="h3 mb-3 font-weight-normal">Register to use TravLog!</h1>
-                <Form.Group>
-                    <Form.Control ref={userName} type="text"
-                        name="userName"
-                        className="form-control"
-                        placeholder="Username"
-                        required autoFocus />
-                </Form.Group>
-                <Form.Group>
-                    <Form.Control ref={email} type="email"
-                        name="email"
-                        className="form-control"
-                        placeholder="Email address"
-                        required />
-                </Form.Group>
-                <Form.Group>
-                    <Form.Control ref={bio} type="text"
-                        name="bio"
-                        className="form-control"
-                        placeholder="Bio"/>
-                </Form.Group>
-                <Form.Group>
-                    <Form.Control ref={password} type="password"
-                        name="password"
-                        className="form-control"
-                        placeholder="Password"
-                        required />
-                </Form.Group>
-                <Form.Group>
-                    <Form.Control ref={verifyPassword} type="password"
-                        name="verifyPassword"
-                        className="form-control"
-                        placeholder="Verify password"
-                        required />
-                </Form.Group>
-                <Form.Group>
-                        <Form.File onChange={uploadImage} type="file"
-                        name="file"
-                        className="form-control"
-                        placeholder="Upload Image"/>
-                </Form.Group>
-                <p>Already a user? <a href={`/login`}>Login Here.</a></p>
-                <Form.Group>
-                    {loading ? <p>Loading image...</p>:null}
-                    <Button disabled={loading} type="submit">Register</Button>
-                </Form.Group>
-            </Form>
-        </div>
-        </div>
+        <img className="img-bkgrnd" alt="" src='https://res.cloudinary.com/ddxpoaice/image/upload/v1601266397/travlog/kg1moejl15jps7kz0mha.jpg'/>
+        <div className="login__container">
+            <div className="travlog-title">
+                <h1><span className="trav">TravLog</span><span className="log"><Icon className="compass outline" size="mini"></Icon></span></h1>
+                {/* <hr className="travlog-title-hr"/> */}
+                <p>Start tracking your trips</p>
+            </div>
+            <div className="register-container">
+                <div className="login-box effect-shadow">
+                    <Form className="" onSubmit={handleRegister}>
+                        <h1 className="h3 mb-3 font-weight-normal">Register to use <span className="trav">TravLog!</span></h1>
+                        <Form.Group>
+                            <Form.Control ref={userName} type="text"
+                                name="userName"
+                                className="form-control"
+                                placeholder="Username"
+                                required autoFocus />
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Control ref={email} type="email"
+                                name="email"
+                                className="form-control"
+                                placeholder="Email address"
+                                required />
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Control ref={bio} type="text"
+                                name="bio"
+                                className="form-control"
+                                placeholder="Bio"/>
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Control ref={password} type="password"
+                                name="password"
+                                className="form-control"
+                                placeholder="Password"
+                                required />
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Control ref={verifyPassword} type="password"
+                                name="verifyPassword"
+                                className="form-control"
+                                placeholder="Verify password"
+                                required />
+                        </Form.Group>
+                        <Form.Group>
+                                <Form.Label>Upload Profile Pic</Form.Label>
+                                <Form.File onChange={uploadImage} type="file"
+                                name="file"
+                                className="form-control"
+                                placeholder="Upload Image"
+                                />
+                        </Form.Group>
+                        <p>Already a user? <a href={`/login`}>Login Here.</a></p>
+                        <Form.Group>
+                            {loading ? <p>Loading image...</p>:null}
+                            <Button disabled={loading} type="submit">Register</Button>
+                        </Form.Group>
+                    </Form>
+                </div>
+            </div>
         </div>
         </>
     )

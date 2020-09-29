@@ -3,10 +3,8 @@ import apiManager from '../../modules/apiManager';
 import TripCard from '../Trips/TripCard';
 import ItineraryList from '../Trips/Itinerary/ItineraryList';
 import { Icon } from 'semantic-ui-react';
-import { InputGroup, InputGroupAddon } from 'reactstrap';
-import { Button } from 'reactstrap';
 import moment from 'moment';
-import '../Trips/Trip.css';
+import { InputGroup, FormControl, Button } from 'react-bootstrap';
 
 export default function Home(props) {
 
@@ -91,7 +89,7 @@ export default function Home(props) {
         <div className="home-container">
             {userHomePageTrip.id ?
             <div className="itin-list">
-                <div className="trip-detail-info effect-shadow">
+                <div className="trip-detail-info tdi-home">
                     <a href={`/trips/${userHomePageTrip.id}`}><h1>{userHomePageTrip.title}</h1></a>
                     <h3>{userHomePageTrip.description}</h3>
                     {totalCost > 0 ?
@@ -113,7 +111,7 @@ export default function Home(props) {
                 </div>
                 <div className="button-group-icons">
                     {user === userHomePageTrip.creator_id ?
-                        <div className="trip-details-btn-container">
+                    <div className="trip-details-btn-container">
                         <Icon.Group className="icon-btn" size="big">
                             <Icon circular link onClick={() => {props.history.push(`/transportations/form/${userHomePageTrip.id}`)}} className="car"></Icon>
                             <Icon corner name='add'/>
@@ -131,11 +129,10 @@ export default function Home(props) {
                             <Icon corner name='add'/>
                         </Icon.Group>
                     </div>
-                        :
-                        <Button variant="outline-primary" type="button" value="Copy Trip" onClick={() => {props.history.push(`/day_itinerarys/form/${userHomePageTrip.id}`)}}/>
+                    :
+                    <Button variant="outline-primary" type="button" value="Copy Trip" onClick={() => {props.history.push(`/day_itinerarys/form/${userHomePageTrip.id}`)}}/>
                     }
                 </div>
-            
                 {itinerary.length === 0 ?
                 null
                 :
@@ -158,17 +155,17 @@ export default function Home(props) {
                     }
                 </>
                 }
+                <hr/>
             </div>
             :
             null
             }
-            <hr/>
             <div className="itin-list">
-                <h1>Explore</h1>
+                <h1 className="header-title">Explore</h1>
                 <div>
                     <InputGroup>
-                        <input className="search-bar" ref={searchTerm} type="text" placeholder="search"/>
-                        <InputGroupAddon addonType="append"><Button onClick={getTrips}><Icon className="search"></Icon></Button></InputGroupAddon>
+                        <FormControl ref={searchTerm} type="text" placeholder="search"/>
+                        <InputGroup.Append><Button onClick={getTrips}><Icon size="small" className="search"></Icon></Button></InputGroup.Append>
                     </InputGroup>
                 </div>
             </div>
