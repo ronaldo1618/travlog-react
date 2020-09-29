@@ -83,6 +83,7 @@ export default function FoodForm(props) {
 
     return (
          <div className="form-container">
+            <img className="img-bkgrnd" alt="" src='https://res.cloudinary.com/ddxpoaice/image/upload/v1601266397/travlog/kg1moejl15jps7kz0mha.jpg'/>
             <Form className="form effect-shadow">
                 <h1>Food Form</h1>
                 <Form.Group>

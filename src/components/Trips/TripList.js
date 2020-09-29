@@ -36,8 +36,7 @@ export default function TripList(props) {
     useEffect(getTrips, [])
 
     return (
-        <>
-            <hr/>
+        <div className="trip-list-view">
             <div className="itin-list">
                 <h1 className="header-title">Trips</h1>
             </div>
@@ -52,6 +51,6 @@ export default function TripList(props) {
             :
             null
             }
-        </>
+        </div>
     )
 }

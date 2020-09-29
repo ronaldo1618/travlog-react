@@ -138,8 +138,9 @@ export default function TripForm(props) {
     }
 
     return (
-        <div className="form-container">
-            <div className="trip-form effect-shadow">
+        <div className="form-container bg-col">
+        <img className="img-bkgrnd" alt="" src='https://res.cloudinary.com/ddxpoaice/image/upload/v1601266397/travlog/kg1moejl15jps7kz0mha.jpg'/>
+            <div className="trip-form">
                 <Form>
                     <h1>Trip Form</h1>
                     <Form.Group>

@@ -68,7 +68,7 @@ function Register(props) {
             <div className="register-container">
                 <div className="login-box effect-shadow">
                     <Form className="" onSubmit={handleRegister}>
-                        <h1 className="h3 mb-3 font-weight-normal">Register to use TravLog!</h1>
+                        <h1 className="h3 mb-3 font-weight-normal">Register to use <span className="trav">TravLog!</span></h1>
                         <Form.Group>
                             <Form.Control ref={userName} type="text"
                                 name="userName"

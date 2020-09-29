@@ -89,6 +89,7 @@ export default function TransportationForm(props) {
 
     return (
          <div className="register-container">
+            <img className="img-bkgrnd" alt="" src='https://res.cloudinary.com/ddxpoaice/image/upload/v1601266397/travlog/kg1moejl15jps7kz0mha.jpg'/>
             <Form className="login-box effect-shadow">
                 <h1>Transportation Form</h1>
                 <Form.Group>

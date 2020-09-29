@@ -42,8 +42,9 @@ export default function DayItineraryForm(props) {
 
     return (
          <div className="form-container">
-            <Form className="form effect-shadow">
-                <h1>Itinerary Category Form</h1>
+            <img className="img-bkgrnd" alt="" src='https://res.cloudinary.com/ddxpoaice/image/upload/v1601266397/travlog/kg1moejl15jps7kz0mha.jpg'/>
+            <Form className="form">
+                <h3>Itinerary Category Form</h3>
                 <Form.Group>
                     <Form.Control ref={name} type="text"
                         name="name"

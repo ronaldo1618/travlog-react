@@ -9,9 +9,9 @@ export default function TripCard(props) {
     
     return (
         <div className="trip-card">
-            <Card className="effect-shadow">
+            <Card className="border-0 effect-shadow">
                 <div className="img-container">
-                    <a href={`/trips/${props.tripId}`}><CardImg className="overlay-img" src={props.trip.overlay_image} alt="Card image cap"/></a>
+                    <a href={`/trips/${props.tripId}`}><CardImg className="overlay-img" src={props.trip.overlay_image} alt=""/></a>
                 </div>
                 <CardBody className="trip-card-body">
                     {props.userId === props.trip.creator_id && props.deleteObj ?
