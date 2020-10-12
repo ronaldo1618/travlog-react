@@ -249,6 +249,7 @@
 
 .bg-color {
     background-color: #333;
+    height: auto;
 }
 
 .effect-shadow {
@@ -378,7 +379,7 @@
 .form {
     border-radius: 5px;
     width: 35%;
-    padding: 40px;
+    padding: 35px;
     background-color: #434343;
     color: white;
 }
