@@ -6,7 +6,7 @@ import '../../../index.css';
 
 
 export default function ItineraryCard(props) {
-
+    
     const type = props.activity.url.split('8000/')[1].split('/')[0]
 
     return (

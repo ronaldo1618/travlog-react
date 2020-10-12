@@ -37,7 +37,7 @@ export default function ApplicationViews(props) {
                 if(isAuthenticated()) {
                     return <Home {...props} />
                 } else {
-                    return <Redirect to="Login"/>
+                    return <Redirect to="login"/>
                 }
             }}
             />
@@ -45,7 +45,7 @@ export default function ApplicationViews(props) {
                 if(isAuthenticated()) {
                     return <Account {...props} />
                 } else {
-                    return <Redirect to="Login"/>
+                    return <Redirect to="login"/>
                 }
             }}
             />
@@ -53,7 +53,7 @@ export default function ApplicationViews(props) {
                 if(isAuthenticated()) {
                     return <Account userProfileId={parseInt(props.match.params.userProfileId)} {...props} />
                 } else {
-                    return <Redirect to="Login"/>
+                    return <Redirect to="login"/>
                 }
             }}
             />
@@ -61,7 +61,7 @@ export default function ApplicationViews(props) {
                 if(isAuthenticated()) {
                     return <AccountForm {...props} />
                 } else {
-                    return <Redirect to="Login"/>
+                    return <Redirect to="login"/>
                 }
             }}
             />
@@ -69,7 +69,7 @@ export default function ApplicationViews(props) {
                 if(isAuthenticated()) {
                     return <TripList {...props} />
                 } else {
-                    return <Redirect to="Login"/>
+                    return <Redirect to="login"/>
                 }
             }}
             />
@@ -77,7 +77,7 @@ export default function ApplicationViews(props) {
                 if(isAuthenticated()) {
                     return <TripDetails tripId={parseInt(props.match.params.tripId)} {...props} />
                 } else {
-                    return <Redirect to="Login"/>
+                    return <Redirect to="login"/>
                 }
             }}
             />
@@ -85,7 +85,7 @@ export default function ApplicationViews(props) {
                 if(isAuthenticated()) {
                     return <TripForm {...props} />
                 } else {
-                    return <Redirect to="Login"/>
+                    return <Redirect to="login"/>
                 }
             }}
             />
@@ -93,7 +93,7 @@ export default function ApplicationViews(props) {
                 if(isAuthenticated()) {
                     return <TripForm tripId={parseInt(props.match.params.tripId)} {...props} />
                 } else {
-                    return <Redirect to="Login"/>
+                    return <Redirect to="login"/>
                 }
             }}
             />
@@ -101,7 +101,7 @@ export default function ApplicationViews(props) {
                 if(isAuthenticated()) {
                     return <DayItineraryForm tripId={parseInt(props.match.params.tripId)} {...props} />
                 } else {
-                    return <Redirect to="Login"/>
+                    return <Redirect to="login"/>
                 }
             }}
             />
@@ -109,7 +109,7 @@ export default function ApplicationViews(props) {
                 if(isAuthenticated()) {
                     return <DayItineraryForm tripId={parseInt(props.match.params.tripId)} day_itinerary_id={parseInt(props.match.params.day_itinerary_id)} {...props} />
                 } else {
-                    return <Redirect to="Login"/>
+                    return <Redirect to="login"/>
                 }
             }}
             />
@@ -117,7 +117,7 @@ export default function ApplicationViews(props) {
                 if(isAuthenticated()) {
                     return <TransportationForm tripId={parseInt(props.match.params.tripId)} {...props} />
                 } else {
-                    return <Redirect to="Login"/>
+                    return <Redirect to="login"/>
                 }
             }}
             />
@@ -125,7 +125,7 @@ export default function ApplicationViews(props) {
                 if(isAuthenticated()) {
                     return <TransportationForm tripId={parseInt(props.match.params.tripId)} transportationId={parseInt(props.match.params.transportationId)} {...props} />
                 } else {
-                    return <Redirect to="Login"/>
+                    return <Redirect to="login"/>
                 }
             }}
             />
@@ -133,7 +133,7 @@ export default function ApplicationViews(props) {
                 if(isAuthenticated()) {
                     return <FoodForm tripId={parseInt(props.match.params.tripId)} {...props} />
                 } else {
-                    return <Redirect to="Login"/>
+                    return <Redirect to="login"/>
                 }
             }}
             />
@@ -141,7 +141,7 @@ export default function ApplicationViews(props) {
                 if(isAuthenticated()) {
                     return <FoodForm tripId={parseInt(props.match.params.tripId)} foodId={parseInt(props.match.params.foodId)} {...props} />
                 } else {
-                    return <Redirect to="Login"/>
+                    return <Redirect to="login"/>
                 }
             }}
             />
@@ -149,7 +149,7 @@ export default function ApplicationViews(props) {
                 if(isAuthenticated()) {
                     return <ActivityForm tripId={parseInt(props.match.params.tripId)} {...props} />
                 } else {
-                    return <Redirect to="Login"/>
+                    return <Redirect to="login"/>
                 }
             }}
             />
@@ -157,7 +157,7 @@ export default function ApplicationViews(props) {
                 if(isAuthenticated()) {
                     return <ActivityForm tripId={parseInt(props.match.params.tripId)} activityId={parseInt(props.match.params.activityId)} {...props} />
                 } else {
-                    return <Redirect to="Login"/>
+                    return <Redirect to="login"/>
                 }
             }}
             />
@@ -165,7 +165,7 @@ export default function ApplicationViews(props) {
                 if(isAuthenticated()) {
                     return <LodgingForm tripId={parseInt(props.match.params.tripId)} {...props} />
                 } else {
-                    return <Redirect to="Login"/>
+                    return <Redirect to="login"/>
                 }
             }}
             />
@@ -173,7 +173,7 @@ export default function ApplicationViews(props) {
                 if(isAuthenticated()) {
                     return <LodgingForm tripId={parseInt(props.match.params.tripId)} lodgingId={parseInt(props.match.params.lodgingId)} {...props} />
                 } else {
-                    return <Redirect to="Login"/>
+                    return <Redirect to="login"/>
                 }
             }}
             />
